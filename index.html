@@ -304,6 +304,211 @@
     @media (max-width: 480px) {
       .hero__title { letter-spacing: -0.02em; }
     }
+
+    /* ─── Scroll-reveal utility ──────────────────────────────── */
+    .fade-up {
+      opacity   : 0;
+      transform : translateY(32px);
+      transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
+    }
+    .fade-up.is-visible {
+      opacity   : 1;
+      transform : translateY(0);
+    }
+    .fade-up[data-delay="1"] { transition-delay: 0.10s; }
+    .fade-up[data-delay="2"] { transition-delay: 0.20s; }
+    .fade-up[data-delay="3"] { transition-delay: 0.30s; }
+    .fade-up[data-delay="4"] { transition-delay: 0.40s; }
+    .fade-up[data-delay="5"] { transition-delay: 0.50s; }
+    .fade-up[data-delay="6"] { transition-delay: 0.60s; }
+    .fade-up[data-delay="7"] { transition-delay: 0.70s; }
+    .fade-up[data-delay="8"] { transition-delay: 0.80s; }
+
+    /* ─────────────────────────────────────────────────────────────
+       §3  SETTING
+    ───────────────────────────────────────────────────────────── */
+    #setting {
+      background : var(--dark-green);
+      padding    : clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+      text-align : center;
+    }
+
+    .setting__label {
+      font-family    : var(--font-sans);
+      font-size      : 0.62rem;
+      font-weight    : 400;
+      letter-spacing : 0.28em;
+      text-transform : uppercase;
+      color          : var(--sage);
+      display        : block;
+      margin-bottom  : 1.4rem;
+    }
+
+    .setting__title {
+      font-family  : var(--font-serif);
+      font-weight  : 300;
+      font-size    : clamp(2.2rem, 5vw, 4rem);
+      color        : var(--cream);
+      line-height  : 1.15;
+      margin-bottom: clamp(3.5rem, 7vw, 5.5rem);
+    }
+
+    /* 1 px gap grid achieved via background on the wrapper */
+    .setting__stats {
+      display              : grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap                  : 1px;
+      max-width            : 700px;
+      margin               : 0 auto clamp(3.5rem, 7vw, 5rem);
+      background           : rgba(196, 118, 58, 0.2);
+    }
+
+    .stat {
+      background  : var(--dark-green);
+      padding     : clamp(2rem, 4vw, 3.2rem) 1.5rem;
+    }
+
+    .stat__number {
+      font-family  : var(--font-serif);
+      font-weight  : 300;
+      font-size    : clamp(3.8rem, 9vw, 6.5rem);
+      line-height  : 1;
+      color        : var(--gold);
+      display      : block;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat__label {
+      font-family    : var(--font-sans);
+      font-size      : 0.6rem;
+      font-weight    : 400;
+      letter-spacing : 0.22em;
+      text-transform : uppercase;
+      color          : rgba(244, 239, 228, 0.45);
+    }
+
+    .setting__desc {
+      font-family : var(--font-sans);
+      font-size   : clamp(0.88rem, 1.6vw, 1rem);
+      font-weight : 300;
+      line-height : 1.85;
+      color       : rgba(244, 239, 228, 0.55);
+      max-width   : 540px;
+      margin      : 0 auto;
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       §4  PROGRAM
+    ───────────────────────────────────────────────────────────── */
+    #program {
+      background : var(--cream);
+      padding    : clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+    }
+
+    .program__header {
+      text-align   : center;
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+
+    .program__label {
+      font-family    : var(--font-sans);
+      font-size      : 0.62rem;
+      font-weight    : 400;
+      letter-spacing : 0.28em;
+      text-transform : uppercase;
+      color          : var(--sage);
+      display        : block;
+      margin-bottom  : 1.4rem;
+    }
+
+    .program__title {
+      font-family : var(--font-serif);
+      font-weight : 300;
+      font-size   : clamp(2rem, 4.5vw, 3.6rem);
+      color       : var(--dark-green);
+      line-height : 1.15;
+    }
+
+    /* 1 px hairline gap grid */
+    .program__grid {
+      display              : grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap                  : 1px;
+      max-width            : 1200px;
+      margin               : 0 auto;
+      background           : rgba(28, 58, 42, 0.1);
+    }
+
+    .modality {
+      background : #fff;
+      padding    : clamp(1.8rem, 3vw, 2.6rem) clamp(1.4rem, 2.5vw, 2rem);
+      position   : relative;
+      overflow   : hidden;
+    }
+
+    /* Gold underline sweep on hover */
+    .modality::after {
+      content          : '';
+      position         : absolute;
+      bottom           : 0;
+      left             : 0;
+      right            : 0;
+      height           : 2px;
+      background       : var(--gold);
+      transform        : scaleX(0);
+      transform-origin : left center;
+      transition       : transform 0.4s var(--ease-out);
+    }
+
+    .modality:hover {
+      background: #fdfaf5;
+    }
+
+    .modality:hover::after {
+      transform: scaleX(1);
+    }
+
+    .modality__numeral {
+      font-family    : var(--font-serif);
+      font-style     : italic;
+      font-weight    : 300;
+      font-size      : 0.88rem;
+      color          : var(--gold);
+      display        : block;
+      margin-bottom  : 1rem;
+      letter-spacing : 0.06em;
+    }
+
+    .modality__name {
+      font-family  : var(--font-serif);
+      font-weight  : 400;
+      font-size    : clamp(1.1rem, 1.8vw, 1.35rem);
+      color        : var(--dark-green);
+      line-height  : 1.2;
+      margin-bottom: 0.7rem;
+    }
+
+    .modality__desc {
+      font-family : var(--font-sans);
+      font-size   : 0.78rem;
+      font-weight : 300;
+      line-height : 1.65;
+      color       : rgba(26, 26, 26, 0.55);
+    }
+
+    /* ─── §3 + §4 Responsive ─────────────────────────────────── */
+    @media (max-width: 900px) {
+      .program__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .setting__stats {
+        grid-template-columns: 1fr;
+        max-width             : 220px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -370,6 +575,123 @@
     </div>
 
   </section>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       §3  SETTING
+  ════════════════════════════════════════════════════════ -->
+  <section id="setting" aria-label="The Setting">
+
+    <span class="setting__label fade-up">The Setting</span>
+
+    <h2 class="setting__title fade-up" data-delay="1">
+      A private estate in the<br />heart of the Riviera Maya.
+    </h2>
+
+    <div class="setting__stats" aria-label="Key figures">
+      <div class="stat fade-up" data-delay="2">
+        <span class="stat__number">9</span>
+        <span class="stat__label">Suites Privadas</span>
+      </div>
+      <div class="stat fade-up" data-delay="3">
+        <span class="stat__number">18</span>
+        <span class="stat__label">Máximo Huéspedes</span>
+      </div>
+      <div class="stat fade-up" data-delay="4">
+        <span class="stat__number">4</span>
+        <span class="stat__label">Días &amp; Noches</span>
+      </div>
+    </div>
+
+    <p class="setting__desc fade-up" data-delay="5">
+      A private, gated colonial estate inside the Hacienda at Xcaret —
+      palms, stonework, a natural cenote-style pool. Walking distance to
+      Río Secreto, ten minutes from the Caribbean coast.
+    </p>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §4  PROGRAM
+  ════════════════════════════════════════════════════════ -->
+  <section id="program" aria-label="Program">
+
+    <div class="program__header">
+      <span class="program__label fade-up">The Program</span>
+      <h2 class="program__title fade-up" data-delay="1">Eight Modalities. One Arc.</h2>
+    </div>
+
+    <div class="program__grid">
+
+      <article class="modality fade-up" data-delay="1">
+        <span class="modality__numeral">i</span>
+        <h3 class="modality__name">Temazcal</h3>
+        <p class="modality__desc">A Mayan sweat-lodge ceremony led by a curandero.</p>
+      </article>
+
+      <article class="modality fade-up" data-delay="2">
+        <span class="modality__numeral">ii</span>
+        <h3 class="modality__name">Sound Healing</h3>
+        <p class="modality__desc">Crystal bowls, gong, and voice. A nervous-system reset.</p>
+      </article>
+
+      <article class="modality fade-up" data-delay="3">
+        <span class="modality__numeral">iii</span>
+        <h3 class="modality__name">Breathwork</h3>
+        <p class="modality__desc">The fastest route back to the body.</p>
+      </article>
+
+      <article class="modality fade-up" data-delay="4">
+        <span class="modality__numeral">iv</span>
+        <h3 class="modality__name">Yoga</h3>
+        <p class="modality__desc">Daily morning practice in the jungle pavilion.</p>
+      </article>
+
+      <article class="modality fade-up" data-delay="1">
+        <span class="modality__numeral">v</span>
+        <h3 class="modality__name">Memory Workshop</h3>
+        <p class="modality__desc">Evidence-based attention and recall frameworks.</p>
+      </article>
+
+      <article class="modality fade-up" data-delay="2">
+        <span class="modality__numeral">vi</span>
+        <h3 class="modality__name">Longevity Workshop</h3>
+        <p class="modality__desc">Sleep, metabolic health, recovery protocols.</p>
+      </article>
+
+      <article class="modality fade-up" data-delay="3">
+        <span class="modality__numeral">vii</span>
+        <h3 class="modality__name">Stand-Up Paddle</h3>
+        <p class="modality__desc">Quiet morning paddles on the Caribbean.</p>
+      </article>
+
+      <article class="modality fade-up" data-delay="4">
+        <span class="modality__numeral">viii</span>
+        <h3 class="modality__name">Catamaran Sail</h3>
+        <p class="modality__desc">A private luxury sail on open turquoise water.</p>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- ─── Intersection Observer — scroll-reveal ─────────────── -->
+  <script>
+    (function () {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.fade-up').forEach(function (el) {
+        io.observe(el);
+      });
+    })();
+  </script>
 
 </body>
 </html>
