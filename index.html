@@ -305,6 +305,18 @@
       .hero__title { letter-spacing: -0.02em; }
     }
 
+    /* ─── Section-level scroll-reveal ───────────────────────── */
+    section {
+      opacity   : 0;
+      transform : translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    section.visible {
+      opacity   : 1;
+      transform : translateY(0);
+    }
+
     /* ─── Scroll-reveal utility ──────────────────────────────── */
     .fade-up {
       opacity   : 0;
@@ -1495,7 +1507,7 @@
 
   </footer>
 
-  <!-- ─── Intersection Observer — scroll-reveal ─────────────── -->
+  <!-- ─── Intersection Observer — element scroll-reveal ───────── -->
   <script>
     (function () {
       var io = new IntersectionObserver(function (entries) {
@@ -1510,6 +1522,46 @@
       document.querySelectorAll('.fade-up').forEach(function (el) {
         io.observe(el);
       });
+    })();
+  </script>
+
+  <!-- ─── Section reveal + hero smooth-scroll ──────────────────── -->
+  <script>
+    (function () {
+      /* Section observer — fires at 5% visibility so tall sections
+         never miss their trigger; sections already in the viewport
+         on load receive 'visible' immediately to avoid a flash.    */
+      var sectionIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            sectionIO.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.05 });
+
+      document.querySelectorAll('section').forEach(function (s) {
+        var r = s.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) {
+          /* Already in the viewport — mark visible without observing */
+          s.classList.add('visible');
+        } else {
+          sectionIO.observe(s);
+        }
+      });
+
+      /* Hero CTA — smooth scroll to #form (JS fallback for any
+         browser that ignores CSS scroll-behavior on anchor clicks) */
+      var cta = document.querySelector('.hero__cta a[href="#form"]');
+      if (cta) {
+        cta.addEventListener('click', function (e) {
+          var target = document.getElementById('form');
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      }
     })();
   </script>
 
