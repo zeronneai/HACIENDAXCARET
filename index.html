@@ -785,11 +785,36 @@
       font-weight: 300; color: rgba(255,255,255,0.65);
       font-style: italic;
     }
-    .cgallery-hint {
-      text-align: center; margin-top: 1.4rem;
-      font-family: var(--font-sans); font-size: 0.68rem;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(244,239,228,0.3);
+    .cgallery-controls {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.75rem; margin-top: 1.6rem;
+    }
+    .cgallery-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 0.45rem;
+      padding: 0.55rem 1.5rem;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-family: var(--font-sans); font-size: 0.62rem;
+      font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(244,239,228,0.55);
+      cursor: pointer;
+      transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    }
+    .cgallery-btn svg { width: 10px; height: 10px; fill: currentColor; flex-shrink: 0; }
+    .cgallery-btn:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.3);
+      color: rgba(244,239,228,0.9);
+      transform: translateY(-1px);
+    }
+    .cgallery-btn.is-active {
+      background: rgba(196,118,58,0.18);
+      border-color: rgba(196,118,58,0.5);
+      color: rgba(196,118,58,0.95);
     }
     @media (max-width: 640px) {
       .cgallery-wrap { height: 380px; }
@@ -1628,7 +1653,16 @@
 
       </div>
     </div>
-    <p class="cgallery-hint fade-up" data-delay="4">Pasa el cursor para pausar · gira continuamente</p>
+    <div class="cgallery-controls fade-up" data-delay="4">
+      <button class="cgallery-btn" id="cgallery-pause" aria-label="Pausar carrusel" type="button">
+        <svg viewBox="0 0 10 12" aria-hidden="true"><rect x="0" y="0" width="3.5" height="12" rx="1"/><rect x="6.5" y="0" width="3.5" height="12" rx="1"/></svg>
+        Pausar
+      </button>
+      <button class="cgallery-btn is-active" id="cgallery-play" aria-label="Reanudar carrusel" type="button">
+        <svg viewBox="0 0 10 12" aria-hidden="true"><polygon points="0,0 10,6 0,12"/></svg>
+        Reproducir
+      </button>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
@@ -1927,12 +1961,31 @@
 
       raf = requestAnimationFrame(tick);
 
-      /* Pause on hover */
+      /* Pause on hover (hover-only, does not affect manual state) */
+      var manualPaused = false;
+      var hoverPaused  = false;
       var wrap = spinner.closest('.cgallery-wrap');
       if (wrap) {
-        wrap.addEventListener('mouseenter', function () { paused = true; });
-        wrap.addEventListener('mouseleave', function () { paused = false; });
+        wrap.addEventListener('mouseenter', function () { hoverPaused = true;  paused = manualPaused || hoverPaused; });
+        wrap.addEventListener('mouseleave', function () { hoverPaused = false; paused = manualPaused || hoverPaused; });
       }
+
+      /* Play / Pause buttons */
+      var btnPause = document.getElementById('cgallery-pause');
+      var btnPlay  = document.getElementById('cgallery-play');
+      function setManualPause(state) {
+        manualPaused = state;
+        paused = manualPaused || hoverPaused;
+        if (state) {
+          btnPause.classList.add('is-active');
+          btnPlay.classList.remove('is-active');
+        } else {
+          btnPlay.classList.add('is-active');
+          btnPause.classList.remove('is-active');
+        }
+      }
+      if (btnPause) btnPause.addEventListener('click', function () { setManualPause(true);  });
+      if (btnPlay)  btnPlay.addEventListener('click',  function () { setManualPause(false); });
 
       /* Recalculate radius on resize */
       window.addEventListener('resize', function () {
