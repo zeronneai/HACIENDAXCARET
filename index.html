@@ -432,25 +432,125 @@
       max-width: 760px;
     }
     .setting__stats {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; max-width: 740px; margin: 0 auto clamp(3rem, 6vw, 4.5rem);
-      background: rgba(28,58,42,0.12);
-      border: 1px solid rgba(28,58,42,0.12);
+      /* replaced by glow-cards */
+      display: none;
     }
-    .stat { background: var(--cream); padding: clamp(2rem, 4vw, 3rem) 1rem; }
-    .stat__number {
-      font-family: var(--font-display);
-      font-weight: 600;
-      font-size: clamp(3.4rem, 9vw, 6rem);
+    .stat, .stat__number, .stat__label { display: none; }
+
+    /* ── GlowCard — pointer-spotlight cards ─────────────────── */
+    .glow-cards {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; align-items: stretch;
+      gap: 1.4rem;
+      max-width: 880px; margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+    }
+    [data-glow] {
+      --base    : 120;
+      --spread  : 200;
+      --radius  : 14;
+      --border  : 2;
+      --size    : 220;
+      --outer   : 1;
+      --backdrop: rgba(20,39,28,0.07);
+      --backup-border: rgba(20,39,28,0.14);
+      --border-size   : calc(var(--border, 2) * 1px);
+      --spotlight-size: calc(var(--size, 150) * 1px);
+      --hue: calc(var(--base) + (var(--xp, 0.5) * var(--spread, 0)));
+
+      background-image: radial-gradient(
+        var(--spotlight-size) var(--spotlight-size) at
+        calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+        hsl(var(--hue, 210) 100% 65% / 0.12),
+        transparent
+      );
+      background-color   : var(--backdrop);
+      background-size    : calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
+      background-position: 50% 50%;
+      background-attachment: fixed;
+      border        : var(--border-size) solid var(--backup-border);
+      border-radius : calc(var(--radius) * 1px);
+      box-shadow    : 0 1rem 2rem -1rem rgba(0,0,0,0.25);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      position: relative;
+      touch-action: none;
+    }
+    [data-glow]::before,
+    [data-glow]::after {
+      pointer-events: none;
+      content: "";
+      position: absolute;
+      inset: calc(var(--border-size) * -1);
+      border: var(--border-size) solid transparent;
+      border-radius: calc(var(--radius) * 1px);
+      background-attachment: fixed;
+      background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      mask: linear-gradient(transparent, transparent),
+            linear-gradient(white, white);
+      mask-clip: padding-box, border-box;
+      mask-composite: intersect;
+      -webkit-mask: linear-gradient(transparent, transparent),
+                    linear-gradient(white, white);
+      -webkit-mask-clip: padding-box, border-box;
+      -webkit-mask-composite: source-in;
+    }
+    [data-glow]::before {
+      background-image: radial-gradient(
+        calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at
+        calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+        hsl(var(--hue, 210) 100% 50% / 1),
+        transparent 100%
+      );
+      filter: brightness(2);
+    }
+    [data-glow]::after {
+      background-image: radial-gradient(
+        calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at
+        calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+        hsl(0 100% 100% / 1),
+        transparent 100%
+      );
+    }
+    [data-glow] [data-glow] {
+      position: absolute; inset: 0;
+      will-change: filter; opacity: var(--outer, 1);
+      border-radius: calc(var(--radius) * 1px);
+      border-width: calc(var(--border-size) * 20);
+      filter: blur(calc(var(--border-size) * 10));
+      background: none; pointer-events: none; border: none;
+    }
+    [data-glow] > [data-glow]::before {
+      inset: -10px; border-width: 10px;
+    }
+    /* Card content */
+    .glow-card {
+      width: 240px; min-height: 300px;
+      padding: 2rem 1.8rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .glow-card__top { display: flex; flex-direction: column; }
+    .glow-card__num {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(4rem, 10vw, 5.5rem);
       line-height: 1; color: var(--gold);
-      display: block; margin-bottom: 0.6rem;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.04em;
+      display: block; margin-bottom: 0.4rem;
     }
-    .stat__label {
-      font-family: var(--font-sans);
-      font-size: 0.6rem; font-weight: 600;
-      letter-spacing: 0.22em; text-transform: uppercase;
-      color: rgba(20,20,15,0.45);
+    .glow-card__label {
+      font-family: var(--font-sans); font-size: 0.62rem;
+      font-weight: 600; letter-spacing: 0.28em;
+      text-transform: uppercase; color: rgba(20,20,15,0.45);
+    }
+    .glow-card__desc {
+      font-family: var(--font-sans); font-size: 0.85rem;
+      font-weight: 300; line-height: 1.7;
+      color: rgba(20,20,15,0.6); margin-top: 1.4rem;
+    }
+    @media (max-width: 600px) {
+      .glow-cards { gap: 1rem; }
+      .glow-card { width: calc(100vw - 5rem); min-height: 220px; }
     }
     .setting__desc {
       font-family: var(--font-sans);
@@ -640,28 +740,61 @@
       font-weight: 300; line-height: 1.75;
       color: rgba(244,239,228,0.55);
     }
-    .excursions__grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1px; max-width: 1100px; margin: 0 auto;
-      background: rgba(196,118,58,0.18);
-      border: 1px solid rgba(196,118,58,0.18);
+    /* ── CircularGallery ────────────────────────────────────── */
+    .cgallery-wrap {
+      position: relative;
+      width: 100%; height: 520px;
+      display: flex; align-items: center; justify-content: center;
+      perspective: 2000px;
+      overflow: hidden;
+      margin-top: 2rem;
     }
-    .excursion {
-      background: var(--dark-green);
-      padding: clamp(1.6rem, 3vw, 2.4rem) clamp(1.2rem, 2vw, 1.8rem);
-      transition: background 0.35s ease;
+    .cgallery__spinner {
+      position: relative;
+      width: 100%; height: 100%;
+      transform-style: preserve-3d;
     }
-    .excursion:hover { background: var(--green-mid); }
-    .excursion__name {
+    .cgallery__item {
+      position: absolute;
+      width: 260px; height: 360px;
+      left: 50%; top: 50%;
+      margin-left: -130px; margin-top: -180px;
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.55);
+      border: 1px solid rgba(196,118,58,0.2);
+      transition: opacity 0.3s linear;
+      cursor: default;
+    }
+    .cgallery__item img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .cgallery__item-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 1.2rem 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.82), transparent);
+    }
+    .cgallery__item-name {
       font-family: var(--font-display); font-weight: 600;
-      font-size: clamp(1rem, 1.7vw, 1.2rem);
-      color: var(--cream); margin-bottom: 0.5rem;
-      letter-spacing: -0.01em;
+      font-size: 1.15rem; color: #fff;
+      display: block; margin-bottom: 0.2rem;
     }
-    .excursion__note {
-      font-family: var(--font-sans); font-size: 0.78rem;
-      font-weight: 300; line-height: 1.55;
-      color: rgba(244,239,228,0.5);
+    .cgallery__item-note {
+      font-family: var(--font-sans); font-size: 0.75rem;
+      font-weight: 300; color: rgba(255,255,255,0.65);
+      font-style: italic;
+    }
+    .cgallery-hint {
+      text-align: center; margin-top: 1.4rem;
+      font-family: var(--font-sans); font-size: 0.68rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(244,239,228,0.3);
+    }
+    @media (max-width: 640px) {
+      .cgallery-wrap { height: 380px; }
+      .cgallery__item { width: 180px; height: 250px; margin-left: -90px; margin-top: -125px; }
+      .cgallery__item-name { font-size: 0.9rem; }
     }
 
     /* ─────────────────────────────────────────────────────────────
@@ -867,7 +1000,7 @@
       .g2, .g3 { grid-column: span 3; grid-row: span 1; }
       .g4 { grid-column: span 3; grid-row: span 2; }
       .g5, .g6, .g7, .g8 { grid-column: span 3; grid-row: span 1; }
-      .setting__stats { grid-template-columns: 1fr; }
+      /* .setting__stats replaced by glow-cards (flex-wrap handles mobile) */
     }
     @media (max-width: 540px) {
       #hx-subline { bottom: 8rem; }
@@ -1169,19 +1302,38 @@
       Una hacienda privada en el<br />corazón de la Riviera Maya.
     </h2>
 
-    <div class="setting__stats" aria-label="Cifras clave">
-      <div class="stat fade-up" data-delay="2">
-        <span class="stat__number">9</span>
-        <span class="stat__label">Suites Privadas</span>
+    <div class="glow-cards fade-up" data-delay="2" aria-label="Cifras clave">
+
+      <!-- Card 1 — green spotlight -->
+      <div class="glow-card" data-glow style="--base:120;--spread:180;">
+        <div data-glow></div>
+        <div class="glow-card__top">
+          <span class="glow-card__num">9</span>
+          <span class="glow-card__label">Suites Privadas</span>
+        </div>
+        <p class="glow-card__desc">Espacios coloniales de lujo con acceso directo a los jardines y la piscina-cenote privada de la hacienda.</p>
       </div>
-      <div class="stat fade-up" data-delay="3">
-        <span class="stat__number">18</span>
-        <span class="stat__label">Máximo Huéspedes</span>
+
+      <!-- Card 2 — gold spotlight -->
+      <div class="glow-card" data-glow style="--base:35;--spread:180;">
+        <div data-glow></div>
+        <div class="glow-card__top">
+          <span class="glow-card__num">18</span>
+          <span class="glow-card__label">Máximo Huéspedes</span>
+        </div>
+        <p class="glow-card__desc">Retiro completamente privado — sin extraños, sin interrupciones. Solo tu grupo y un equipo dedicado.</p>
       </div>
-      <div class="stat fade-up" data-delay="4">
-        <span class="stat__number">4</span>
-        <span class="stat__label">Días &amp; Noches</span>
+
+      <!-- Card 3 — blue spotlight -->
+      <div class="glow-card" data-glow style="--base:210;--spread:180;">
+        <div data-glow></div>
+        <div class="glow-card__top">
+          <span class="glow-card__num">4</span>
+          <span class="glow-card__label">Días &amp; Noches</span>
+        </div>
+        <p class="glow-card__desc">El tiempo justo para desconectar de verdad. Un arco completo de transformación — no solo un fin de semana de lujo.</p>
       </div>
+
     </div>
 
     <p class="setting__desc fade-up" data-delay="5">
@@ -1360,40 +1512,76 @@
       </p>
     </div>
 
-    <div class="excursions__grid">
-      <div class="excursion fade-up" data-delay="1">
-        <h3 class="excursion__name">Chichén Itzá</h3>
-        <p class="excursion__note">Una de las nuevas maravillas del mundo.</p>
-      </div>
-      <div class="excursion fade-up" data-delay="2">
-        <h3 class="excursion__name">Tulum</h3>
-        <p class="excursion__note">Ruinas mayas frente al mar turquesa.</p>
-      </div>
-      <div class="excursion fade-up" data-delay="3">
-        <h3 class="excursion__name">Cenotes</h3>
-        <p class="excursion__note">Jardín del Edén y ríos subterráneos.</p>
-      </div>
-      <div class="excursion fade-up" data-delay="4">
-        <h3 class="excursion__name">Cobá</h3>
-        <p class="excursion__note">Pirámides ocultas entre la selva.</p>
-      </div>
-      <div class="excursion fade-up" data-delay="1">
-        <h3 class="excursion__name">Isla Mujeres</h3>
-        <p class="excursion__note">Playas de arena blanca y aguas calmas.</p>
-      </div>
-      <div class="excursion fade-up" data-delay="2">
-        <h3 class="excursion__name">Holbox</h3>
-        <p class="excursion__note">Tiburón ballena (sep.) y bioluminiscencia.</p>
-      </div>
-      <div class="excursion fade-up" data-delay="3">
-        <h3 class="excursion__name">Río Lagartos</h3>
-        <p class="excursion__note">Flamencos rosados y manglares.</p>
-      </div>
-      <div class="excursion fade-up" data-delay="4">
-        <h3 class="excursion__name">Quinta Avenida</h3>
-        <p class="excursion__note">El pulso de Playa del Carmen.</p>
+    <div class="cgallery-wrap fade-up" data-delay="3">
+      <div class="cgallery__spinner" id="cgallery-spinner">
+
+        <div class="cgallery__item">
+          <img src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=600&q=80&fit=crop" alt="Chichén Itzá" />
+          <div class="cgallery__item-overlay">
+            <span class="cgallery__item-name">Chichén Itzá</span>
+            <span class="cgallery__item-note">Una de las nuevas maravillas del mundo.</span>
+          </div>
+        </div>
+
+        <div class="cgallery__item">
+          <img src="https://images.unsplash.com/photo-1516496636080-14fb876e029d?w=600&q=80&fit=crop" alt="Tulum" />
+          <div class="cgallery__item-overlay">
+            <span class="cgallery__item-name">Tulum</span>
+            <span class="cgallery__item-note">Ruinas mayas frente al mar turquesa.</span>
+          </div>
+        </div>
+
+        <div class="cgallery__item">
+          <img src="https://images.unsplash.com/photo-1552277451-3572d80a90fd?w=600&q=80&fit=crop" alt="Cenotes" />
+          <div class="cgallery__item-overlay">
+            <span class="cgallery__item-name">Cenotes</span>
+            <span class="cgallery__item-note">Jardín del Edén y ríos subterráneos.</span>
+          </div>
+        </div>
+
+        <div class="cgallery__item">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop" alt="Cobá" />
+          <div class="cgallery__item-overlay">
+            <span class="cgallery__item-name">Cobá</span>
+            <span class="cgallery__item-note">Pirámides ocultas entre la selva.</span>
+          </div>
+        </div>
+
+        <div class="cgallery__item">
+          <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&q=80&fit=crop" alt="Isla Mujeres" />
+          <div class="cgallery__item-overlay">
+            <span class="cgallery__item-name">Isla Mujeres</span>
+            <span class="cgallery__item-note">Playas de arena blanca y aguas calmas.</span>
+          </div>
+        </div>
+
+        <div class="cgallery__item">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80&fit=crop" alt="Holbox" />
+          <div class="cgallery__item-overlay">
+            <span class="cgallery__item-name">Holbox</span>
+            <span class="cgallery__item-note">Tiburón ballena y bioluminiscencia.</span>
+          </div>
+        </div>
+
+        <div class="cgallery__item">
+          <img src="https://images.unsplash.com/photo-1516822003754-cca485356ecb?w=600&q=80&fit=crop" alt="Río Lagartos" />
+          <div class="cgallery__item-overlay">
+            <span class="cgallery__item-name">Río Lagartos</span>
+            <span class="cgallery__item-note">Flamencos rosados y manglares.</span>
+          </div>
+        </div>
+
+        <div class="cgallery__item">
+          <img src="https://images.unsplash.com/photo-1473625247510-8cbe1d25d72f?w=600&q=80&fit=crop" alt="Quinta Avenida" />
+          <div class="cgallery__item-overlay">
+            <span class="cgallery__item-name">Quinta Avenida</span>
+            <span class="cgallery__item-note">El pulso de Playa del Carmen.</span>
+          </div>
+        </div>
+
       </div>
     </div>
+    <p class="cgallery-hint fade-up" data-delay="4">Pasa el cursor para pausar · gira continuamente</p>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
@@ -1631,6 +1819,81 @@
       window.addEventListener('resize', function () { mobile = window.innerWidth < 768; render(); });
 
       render();
+    })();
+  </script>
+
+  <!-- GlowCard — pointer spotlight tracking (El Lugar) -->
+  <script>
+    (function () {
+      var cards = document.querySelectorAll('[data-glow]');
+      if (!cards.length) return;
+      document.addEventListener('pointermove', function (e) {
+        var x  = e.clientX.toFixed(2);
+        var y  = e.clientY.toFixed(2);
+        var xp = (e.clientX / window.innerWidth).toFixed(2);
+        var yp = (e.clientY / window.innerHeight).toFixed(2);
+        cards.forEach(function (card) {
+          card.style.setProperty('--x',  x);
+          card.style.setProperty('--y',  y);
+          card.style.setProperty('--xp', xp);
+          card.style.setProperty('--yp', yp);
+        });
+      });
+    })();
+  </script>
+
+  <!-- CircularGallery — 3D auto-rotating carousel (Excursiones) -->
+  <script>
+    (function () {
+      var spinner = document.getElementById('cgallery-spinner');
+      if (!spinner) return;
+
+      var items     = Array.prototype.slice.call(spinner.querySelectorAll('.cgallery__item'));
+      var n         = items.length;
+      var angleStep = 360 / n;
+      var radius    = window.innerWidth < 640 ? 320 : 520; /* px */
+      var rotation  = 0;
+      var speed     = 0.18; /* deg / frame */
+      var paused    = false;
+      var raf       = null;
+
+      /* Place items in a circle */
+      items.forEach(function (item, i) {
+        item.style.transform = 'rotateY(' + (i * angleStep) + 'deg) translateZ(' + radius + 'px)';
+      });
+
+      function updateOpacity () {
+        items.forEach(function (item, i) {
+          var itemAngle = i * angleStep;
+          var rel       = ((itemAngle + rotation) % 360 + 360) % 360;
+          var norm      = rel > 180 ? 360 - rel : rel;
+          item.style.opacity = Math.max(0.25, 1 - (norm / 190));
+        });
+      }
+
+      function tick () {
+        if (!paused) rotation += speed;
+        spinner.style.transform = 'rotateY(' + rotation + 'deg)';
+        updateOpacity();
+        raf = requestAnimationFrame(tick);
+      }
+
+      raf = requestAnimationFrame(tick);
+
+      /* Pause on hover */
+      var wrap = spinner.closest('.cgallery-wrap');
+      if (wrap) {
+        wrap.addEventListener('mouseenter', function () { paused = true; });
+        wrap.addEventListener('mouseleave', function () { paused = false; });
+      }
+
+      /* Recalculate radius on resize */
+      window.addEventListener('resize', function () {
+        radius = window.innerWidth < 640 ? 320 : 520;
+        items.forEach(function (item, i) {
+          item.style.transform = 'rotateY(' + (i * angleStep) + 'deg) translateZ(' + radius + 'px)';
+        });
+      });
     })();
   </script>
 
