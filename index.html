@@ -98,7 +98,7 @@
       overflow   : hidden;
       will-change: opacity;
     }
-    #hx-bg img {
+    #hx-bg video {
       width: 100%; height: 100%;
       object-fit: cover; object-position: center;
       display: block;
@@ -766,17 +766,25 @@
   <section id="hero" aria-label="Hero">
 
     <div id="hx-bg">
-      <img
-        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80&fit=crop"
-        alt="Aguas turquesa de la Riviera Maya a la hora dorada"
-        loading="eager"
-      />
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-hidden="true"
+      >
+        <source
+          src="https://res.cloudinary.com/dsprn0ew4/video/upload/q_auto,f_auto/v1779507999/kling-3.0_Low_aerial_drone_shot_flying_forward_smoothly_just_above_the_turquoise_Caribbean-0_b910jx.mp4"
+          type="video/mp4"
+        />
+      </video>
     </div>
 
     <div id="hx-media">
       <img
-        src="https://images.unsplash.com/photo-1552083375-1447ce886485?w=1280&q=80&fit=crop"
-        alt="Cenote natural rodeado de roca caliza y palmeras tropicales en una hacienda privada"
+        src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_1280/v1779508077/Lush_tropical_garden_oasis_with_202605222147_gtrvir.jpg"
+        alt="Jardín tropical exuberante en la hacienda privada de Presencia Retreats"
         loading="eager"
       />
       <div id="hx-media-overlay"></div>
