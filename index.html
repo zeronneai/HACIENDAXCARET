@@ -299,21 +299,95 @@
       line-height: 1.1; letter-spacing: -0.02em;
       margin-top: 1.4rem;
     }
-    .pillars__grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      max-width: 1180px; margin: 0 auto;
-      background: rgba(196,118,58,0.18);
-      border: 1px solid rgba(196,118,58,0.18);
+    /* ── Skew Cards (Three Pillars) ────────────────────────── */
+    .skew-cards {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-bottom: 2rem;
     }
-    .pillar {
-      background: var(--dark-green);
-      padding: clamp(2.4rem, 4vw, 3.6rem) clamp(1.8rem, 3vw, 2.8rem);
+    .skew-card {
       position: relative;
-      transition: background 0.4s ease;
+      width: 300px;
+      height: 430px;
+      margin: 44px 28px;
+      transition: all 0.5s ease;
     }
-    .pillar:hover { background: var(--green-mid); }
+    /* Skewed gradient panels — solid + blurred glow */
+    .skew-card__grad {
+      position: absolute;
+      top: 0; left: 50px;
+      width: 50%; height: 100%;
+      border-radius: 10px;
+      transform: skewX(15deg);
+      transition: left 0.5s ease, width 0.5s ease, transform 0.5s ease;
+    }
+    .skew-card:hover .skew-card__grad {
+      transform: skewX(0deg);
+      left: 20px;
+      width: calc(100% - 90px);
+    }
+    .skew-card__grad--blur { filter: blur(30px); }
+    /* Blob animations in corners */
+    .skew-card__blobs {
+      pointer-events: none;
+      position: absolute; inset: 0; z-index: 10;
+    }
+    .skew-card__blob {
+      position: absolute;
+      width: 0; height: 0;
+      border-radius: 10px; opacity: 0;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: all 0.5s ease;
+    }
+    .skew-card__blob--tl { top: 0; left: 0; animation: skew-blob 2s ease-in-out infinite; }
+    .skew-card__blob--br { bottom: 0; right: 0; animation: skew-blob 2s ease-in-out infinite; animation-delay: -1s; }
+    .skew-card:hover .skew-card__blob--tl { top: -50px; left: 50px; width: 100px; height: 100px; opacity: 1; }
+    .skew-card:hover .skew-card__blob--br { bottom: -50px; right: 50px; width: 100px; height: 100px; opacity: 1; }
+    @keyframes skew-blob {
+      0%, 100% { transform: translateY(10px); }
+      50%       { transform: translateX(-10px); }
+    }
+    /* Glass content card */
+    .skew-card__content {
+      position: relative; z-index: 20;
+      left: 0; height: 100%;
+      padding: 1.8rem 2.4rem;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+      border-radius: 10px;
+      display: flex; flex-direction: column; justify-content: center;
+      transition: left 0.5s ease, padding 0.5s ease;
+    }
+    .skew-card:hover .skew-card__content {
+      left: -25px;
+      padding: 3.2rem 2.4rem;
+    }
+    .skew-card__cta {
+      display: inline-block; align-self: flex-start;
+      margin-top: 1.4rem;
+      font-family: var(--font-sans); font-size: 0.76rem;
+      font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--dark-green); background: var(--cream);
+      text-decoration: none; padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background 0.25s ease, box-shadow 0.25s ease;
+    }
+    .skew-card__cta:hover {
+      background: var(--gold-soft);
+      box-shadow: 0 4px 12px rgba(196,118,58,0.4);
+    }
+    @media (max-width: 680px) {
+      .skew-card { width: 280px; margin: 36px 16px; }
+    }
     .pillar__index {
       font-family: var(--font-sans);
       font-size: 0.66rem; font-weight: 600;
@@ -785,7 +859,7 @@
 
     /* ─── Responsive ─────────────────────────────────────────── */
     @media (max-width: 900px) {
-      .pillars__grid { grid-template-columns: 1fr; }
+      /* pillars use flex-wrap — no override needed */
     }
     @media (max-width: 768px) {
       .gallery__grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 130px; }
@@ -1024,36 +1098,65 @@
       <h2 class="pillars__title fade-up" data-delay="1">Health. Wealth. Adventure.</h2>
     </div>
 
-    <div class="pillars__grid">
-      <article class="pillar fade-up" data-delay="1">
-        <span class="pillar__index">01 — Health</span>
-        <h3 class="pillar__name">Salud</h3>
-        <p class="pillar__tag">Recupera el cuerpo que el trabajo te quitó.</p>
-        <p class="pillar__desc">
-          Temazcal, breathwork, sound healing y yoga al amanecer frente al Caribe.
-          Protocolos reales de recuperación, sueño y sistema nervioso — no clichés.
-        </p>
-      </article>
+    <div class="skew-cards">
 
-      <article class="pillar fade-up" data-delay="2">
-        <span class="pillar__index">02 — Wealth</span>
-        <h3 class="pillar__name">Riqueza</h3>
-        <p class="pillar__tag">La verdadera riqueza empieza cuando puedes detenerte.</p>
-        <p class="pillar__desc">
-          Workshops de longevidad y memoria diseñados para quienes ya tienen el éxito,
-          pero buscan el sentido. Claridad mental como activo, no como lujo.
-        </p>
-      </article>
+      <!-- 01 Health -->
+      <div class="skew-card fade-up" data-delay="1">
+        <span class="skew-card__grad"
+          style="background:linear-gradient(315deg,#22c55e,#0d9488)"></span>
+        <span class="skew-card__grad skew-card__grad--blur"
+          style="background:linear-gradient(315deg,#22c55e,#0d9488)"></span>
+        <span class="skew-card__blobs" aria-hidden="true">
+          <span class="skew-card__blob skew-card__blob--tl"></span>
+          <span class="skew-card__blob skew-card__blob--br"></span>
+        </span>
+        <div class="skew-card__content">
+          <span class="pillar__index">01 — Health</span>
+          <h3 class="pillar__name">Salud</h3>
+          <p class="pillar__tag">Recupera el cuerpo que el trabajo te quitó.</p>
+          <p class="pillar__desc">Temazcal, breathwork, sound healing y yoga al amanecer frente al Caribe. Protocolos reales de recuperación, sueño y sistema nervioso — no clichés.</p>
+          <a href="#program" class="skew-card__cta">Explorar</a>
+        </div>
+      </div>
 
-      <article class="pillar fade-up" data-delay="3">
-        <span class="pillar__index">03 — Adventure</span>
-        <h3 class="pillar__name">Aventura</h3>
-        <p class="pillar__tag">El asombro también cura.</p>
-        <p class="pillar__desc">
-          Cenotes, ruinas mayas, mar abierto. La selva como medicina y el océano
-          como reset. Lo que la rutina te ha hecho olvidar.
-        </p>
-      </article>
+      <!-- 02 Wealth -->
+      <div class="skew-card fade-up" data-delay="2">
+        <span class="skew-card__grad"
+          style="background:linear-gradient(315deg,#d97706,#c4763a)"></span>
+        <span class="skew-card__grad skew-card__grad--blur"
+          style="background:linear-gradient(315deg,#d97706,#c4763a)"></span>
+        <span class="skew-card__blobs" aria-hidden="true">
+          <span class="skew-card__blob skew-card__blob--tl"></span>
+          <span class="skew-card__blob skew-card__blob--br"></span>
+        </span>
+        <div class="skew-card__content">
+          <span class="pillar__index">02 — Wealth</span>
+          <h3 class="pillar__name">Riqueza</h3>
+          <p class="pillar__tag">La verdadera riqueza empieza cuando puedes detenerte.</p>
+          <p class="pillar__desc">Workshops de longevidad y memoria diseñados para quienes ya tienen el éxito, pero buscan el sentido. Claridad mental como activo, no como lujo.</p>
+          <a href="#pricing" class="skew-card__cta">Ver Inversión</a>
+        </div>
+      </div>
+
+      <!-- 03 Adventure -->
+      <div class="skew-card fade-up" data-delay="3">
+        <span class="skew-card__grad"
+          style="background:linear-gradient(315deg,#0ea5e9,#8b5cf6)"></span>
+        <span class="skew-card__grad skew-card__grad--blur"
+          style="background:linear-gradient(315deg,#0ea5e9,#8b5cf6)"></span>
+        <span class="skew-card__blobs" aria-hidden="true">
+          <span class="skew-card__blob skew-card__blob--tl"></span>
+          <span class="skew-card__blob skew-card__blob--br"></span>
+        </span>
+        <div class="skew-card__content">
+          <span class="pillar__index">03 — Adventure</span>
+          <h3 class="pillar__name">Aventura</h3>
+          <p class="pillar__tag">El asombro también cura.</p>
+          <p class="pillar__desc">Cenotes, ruinas mayas, mar abierto. La selva como medicina y el océano como reset. Lo que la rutina te ha hecho olvidar.</p>
+          <a href="#excursions" class="skew-card__cta">Explorar</a>
+        </div>
+      </div>
+
     </div>
   </section>
 
