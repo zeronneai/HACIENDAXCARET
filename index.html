@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hacienda Presencia — Riviera Maya</title>
+  <title>Presencia — Riviera Maya · Health · Wealth · Adventure</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Inter+Tight:wght@300;400;500;600&display=swap"
     rel="stylesheet"
   />
 
@@ -19,1084 +19,78 @@
 
     /* ─── Tokens ─────────────────────────────────────────────── */
     :root {
-      --dark-green : #1C3A2A;
+      --dark-green : #14271C;
+      --green-mid  : #1C3A2A;
       --cream      : #F4EFE4;
+      --cream-soft : #EDE6D6;
       --gold       : #C4763A;
+      --gold-soft  : #D69155;
       --sage       : #8FA68E;
-      --text-dark  : #1a1a1a;
+      --ink        : #14140F;
 
-      --font-serif : 'Cormorant Garamond', Georgia, serif;
-      --font-sans  : 'Inter', system-ui, sans-serif;
+      --font-display : 'Bricolage Grotesque', system-ui, sans-serif;
+      --font-serif   : 'Fraunces', Georgia, serif;
+      --font-sans    : 'Inter Tight', system-ui, sans-serif;
 
       --ease-out   : cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-soft  : cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     /* ─── Base ───────────────────────────────────────────────── */
     body {
       font-family : var(--font-sans);
       background  : var(--cream);
-      color       : var(--text-dark);
+      color       : var(--ink);
       overflow-x  : hidden;
       line-height : 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    ::selection { background: var(--gold); color: var(--cream); }
+
+    /* Reusable eyebrow */
+    .eyebrow {
+      font-family    : var(--font-sans);
+      font-size      : 0.66rem;
+      font-weight    : 500;
+      letter-spacing : 0.32em;
+      text-transform : uppercase;
+      color          : var(--sage);
+      display        : inline-flex;
+      align-items    : center;
+      gap            : 0.7rem;
+    }
+    .eyebrow::before {
+      content : '';
+      width   : 28px;
+      height  : 1px;
+      background: var(--gold);
+      display : inline-block;
+    }
+    .eyebrow.center::after {
+      content : '';
+      width   : 28px;
+      height  : 1px;
+      background: var(--gold);
+      display : inline-block;
     }
 
     /* ─────────────────────────────────────────────────────────────
-       §1  HERO
+       §1  HERO  — scroll-expansion engine (clean: PRESENCIA only)
     ───────────────────────────────────────────────────────────── */
     #hero {
       position        : relative;
       height          : 100dvh;
       min-height      : 600px;
       display         : flex;
-      flex-direction  : column;
       align-items     : center;
       justify-content : center;
       text-align      : center;
-      padding         : 2rem;
-
-      /* Image placeholder — swap url() when photos are ready */
-      background-color : var(--dark-green);
-      background-image : url('assets/hero.jpg');
-      background-size  : cover;
-      background-position : center;
-      overflow         : hidden;
-    }
-
-    /* Colour overlay */
-    #hero::before {
-      content    : '';
-      position   : absolute;
-      inset      : 0;
-      background : rgba(28, 58, 42, 0.72);
-      z-index    : 1;
-    }
-
-    /* Thin gold rule — purely decorative */
-    #hero::after {
-      content    : '';
-      position   : absolute;
-      bottom     : 0;
-      left       : 50%;
-      transform  : translateX(-50%);
-      width      : 1px;
-      height     : 80px;
-      background : linear-gradient(to bottom, var(--gold), transparent);
-      z-index    : 2;
-    }
-
-    .hero__inner {
-      position : relative;
-      z-index  : 2;
-      max-width: 780px;
-    }
-
-    /* Staggered fade-up — all children declared with individual delays */
-    .hero__eyebrow,
-    .hero__title,
-    .hero__body,
-    .hero__cta {
-      opacity   : 0;
-      transform : translateY(28px);
-      animation : fadeUp 0.9s var(--ease-out) both;
-    }
-
-    .hero__eyebrow { animation-delay: 0.15s; }
-    .hero__title   { animation-delay: 0.35s; }
-    .hero__body    { animation-delay: 0.55s; }
-    .hero__cta     { animation-delay: 0.75s; }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero__eyebrow {
-      font-family    : var(--font-sans);
-      font-size      : 0.68rem;
-      font-weight    : 400;
-      letter-spacing : 0.28em;
-      text-transform : uppercase;
-      color          : var(--sage);
-      margin-bottom  : 1.6rem;
-    }
-
-    .hero__title {
-      font-family : var(--font-serif);
-      font-weight : 300;
-      font-size   : clamp(3.2rem, 8.5vw, 7.2rem);
-      line-height : 1;
-      color       : var(--cream);
-      letter-spacing : -0.01em;
-      margin-bottom  : 1.8rem;
-    }
-
-    .hero__title em {
-      font-style : italic;
-      font-weight: 300;
-    }
-
-    .hero__body {
-      font-family : var(--font-sans);
-      font-size   : clamp(0.85rem, 1.8vw, 1rem);
-      font-weight : 300;
-      color       : rgba(244, 239, 228, 0.68);
-      line-height : 1.75;
-      max-width   : 480px;
-      margin      : 0 auto 2.8rem;
-      letter-spacing: 0.01em;
-    }
-
-    /* Gold CTA button */
-    .hero__cta a {
-      display        : inline-block;
-      padding        : 0.9rem 2.6rem;
-      background     : var(--gold);
-      color          : var(--cream);
-      font-family    : var(--font-sans);
-      font-size      : 0.72rem;
-      font-weight    : 500;
-      letter-spacing : 0.2em;
-      text-transform : uppercase;
-      text-decoration: none;
-      border         : 1px solid var(--gold);
-      transition     : background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    }
-
-    .hero__cta a:hover {
-      background   : transparent;
-      color        : var(--gold);
-      border-color : var(--gold);
-    }
-
-    /* Scroll indicator */
-    .hero__scroll {
-      position   : absolute;
-      bottom     : 2.2rem;
-      left       : 50%;
-      transform  : translateX(-50%);
-      z-index    : 2;
-      display    : flex;
-      flex-direction : column;
-      align-items    : center;
-      gap            : 0.5rem;
-      cursor         : pointer;
-      opacity        : 0;
-      animation      : fadeUp 0.9s var(--ease-out) 1.1s both;
-    }
-
-    .hero__scroll span {
-      font-family    : var(--font-sans);
-      font-size      : 0.58rem;
-      font-weight    : 400;
-      letter-spacing : 0.25em;
-      text-transform : uppercase;
-      color          : rgba(244, 239, 228, 0.38);
-    }
-
-    .scroll-arrow {
-      width  : 16px;
-      height : 16px;
-      border-right  : 1px solid rgba(244, 239, 228, 0.38);
-      border-bottom : 1px solid rgba(244, 239, 228, 0.38);
-      transform     : rotate(45deg);
-      animation     : arrowBounce 1.8s ease-in-out infinite;
-    }
-
-    @keyframes arrowBounce {
-      0%, 100% { transform: rotate(45deg) translateY(0);   opacity: 0.38; }
-      50%       { transform: rotate(45deg) translateY(5px); opacity: 0.75; }
-    }
-
-    /* ─────────────────────────────────────────────────────────────
-       §2  INVITATION
-    ───────────────────────────────────────────────────────────── */
-    #invitation {
-      display : grid;
-      grid-template-columns : 1fr 1fr;
-      min-height: 620px;
-    }
-
-    /* Left panel — dark green + quote */
-    .invitation__left {
-      background     : var(--dark-green);
-      display        : flex;
-      flex-direction : column;
-      justify-content: center;
-      padding        : clamp(3rem, 7vw, 6rem) clamp(2.5rem, 5vw, 5rem);
-    }
-
-    .invitation__label {
-      font-family    : var(--font-sans);
-      font-size      : 0.62rem;
-      font-weight    : 400;
-      letter-spacing : 0.28em;
-      text-transform : uppercase;
-      color          : var(--sage);
-      margin-bottom  : 2.2rem;
-    }
-
-    .invitation__quote {
-      font-family : var(--font-serif);
-      font-style  : italic;
-      font-weight : 300;
-      font-size   : clamp(2rem, 4vw, 3.2rem);
-      line-height : 1.2;
-      color       : var(--cream);
-      position    : relative;
-      padding-left: 1.6rem;
-    }
-
-    /* Vertical gold rule beside quote */
-    .invitation__quote::before {
-      content    : '';
-      position   : absolute;
-      left       : 0;
-      top        : 0.15em;
-      bottom     : 0.15em;
-      width      : 2px;
-      background : var(--gold);
-    }
-
-    /* Right panel — cream + prose */
-    .invitation__right {
-      background     : var(--cream);
-      display        : flex;
-      flex-direction : column;
-      justify-content: center;
-      padding        : clamp(3rem, 7vw, 6rem) clamp(2.5rem, 5vw, 5rem);
-      border-left    : 1px solid rgba(28, 58, 42, 0.08);
-    }
-
-    .invitation__heading {
-      font-family : var(--font-serif);
-      font-weight : 300;
-      font-size   : clamp(1.6rem, 3vw, 2.4rem);
-      line-height : 1.25;
-      color       : var(--dark-green);
-      margin-bottom: 1.8rem;
-    }
-
-    .invitation__body {
-      font-family : var(--font-sans);
-      font-size   : clamp(0.88rem, 1.5vw, 1rem);
-      font-weight : 300;
-      line-height : 1.8;
-      color       : rgba(26, 26, 26, 0.72);
-      max-width   : 460px;
-    }
-
-    /* ─── Responsive ─────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      #invitation {
-        grid-template-columns : 1fr;
-      }
-
-      .invitation__left,
-      .invitation__right {
-        min-height : 420px;
-      }
-
-      .invitation__right {
-        border-left : none;
-        border-top  : 1px solid rgba(28, 58, 42, 0.08);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero__title { letter-spacing: -0.02em; }
-    }
-
-    /* ─── Section-level scroll-reveal ───────────────────────── */
-    section {
-      opacity   : 0;
-      transform : translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    section.visible {
-      opacity   : 1;
-      transform : translateY(0);
-    }
-
-    /* ─── Scroll-reveal utility ──────────────────────────────── */
-    .fade-up {
-      opacity   : 0;
-      transform : translateY(32px);
-      transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
-    }
-    .fade-up.is-visible {
-      opacity   : 1;
-      transform : translateY(0);
-    }
-    .fade-up[data-delay="1"] { transition-delay: 0.10s; }
-    .fade-up[data-delay="2"] { transition-delay: 0.20s; }
-    .fade-up[data-delay="3"] { transition-delay: 0.30s; }
-    .fade-up[data-delay="4"] { transition-delay: 0.40s; }
-    .fade-up[data-delay="5"] { transition-delay: 0.50s; }
-    .fade-up[data-delay="6"] { transition-delay: 0.60s; }
-    .fade-up[data-delay="7"] { transition-delay: 0.70s; }
-    .fade-up[data-delay="8"] { transition-delay: 0.80s; }
-
-    /* ─────────────────────────────────────────────────────────────
-       §3  SETTING
-    ───────────────────────────────────────────────────────────── */
-    #setting {
-      background : var(--dark-green);
-      padding    : clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem);
-      text-align : center;
-    }
-
-    .setting__label {
-      font-family    : var(--font-sans);
-      font-size      : 0.62rem;
-      font-weight    : 400;
-      letter-spacing : 0.28em;
-      text-transform : uppercase;
-      color          : var(--sage);
-      display        : block;
-      margin-bottom  : 1.4rem;
-    }
-
-    .setting__title {
-      font-family  : var(--font-serif);
-      font-weight  : 300;
-      font-size    : clamp(2.2rem, 5vw, 4rem);
-      color        : var(--cream);
-      line-height  : 1.15;
-      margin-bottom: clamp(3.5rem, 7vw, 5.5rem);
-    }
-
-    /* 1 px gap grid achieved via background on the wrapper */
-    .setting__stats {
-      display              : grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap                  : 1px;
-      max-width            : 700px;
-      margin               : 0 auto clamp(3.5rem, 7vw, 5rem);
-      background           : rgba(196, 118, 58, 0.2);
-    }
-
-    .stat {
-      background  : var(--dark-green);
-      padding     : clamp(2rem, 4vw, 3.2rem) 1.5rem;
-    }
-
-    .stat__number {
-      font-family  : var(--font-serif);
-      font-weight  : 300;
-      font-size    : clamp(3.8rem, 9vw, 6.5rem);
-      line-height  : 1;
-      color        : var(--gold);
-      display      : block;
-      margin-bottom: 0.5rem;
-    }
-
-    .stat__label {
-      font-family    : var(--font-sans);
-      font-size      : 0.6rem;
-      font-weight    : 400;
-      letter-spacing : 0.22em;
-      text-transform : uppercase;
-      color          : rgba(244, 239, 228, 0.45);
-    }
-
-    .setting__desc {
-      font-family : var(--font-sans);
-      font-size   : clamp(0.88rem, 1.6vw, 1rem);
-      font-weight : 300;
-      line-height : 1.85;
-      color       : rgba(244, 239, 228, 0.55);
-      max-width   : 540px;
-      margin      : 0 auto;
-    }
-
-    /* ─────────────────────────────────────────────────────────────
-       §4  PROGRAM
-    ───────────────────────────────────────────────────────────── */
-    #program {
-      background : var(--cream);
-      padding    : clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem);
-    }
-
-    .program__header {
-      text-align   : center;
-      margin-bottom: clamp(3rem, 6vw, 5rem);
-    }
-
-    .program__label {
-      font-family    : var(--font-sans);
-      font-size      : 0.62rem;
-      font-weight    : 400;
-      letter-spacing : 0.28em;
-      text-transform : uppercase;
-      color          : var(--sage);
-      display        : block;
-      margin-bottom  : 1.4rem;
-    }
-
-    .program__title {
-      font-family : var(--font-serif);
-      font-weight : 300;
-      font-size   : clamp(2rem, 4.5vw, 3.6rem);
-      color       : var(--dark-green);
-      line-height : 1.15;
-    }
-
-    /* 1 px hairline gap grid */
-    .program__grid {
-      display              : grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap                  : 1px;
-      max-width            : 1200px;
-      margin               : 0 auto;
-      background           : rgba(28, 58, 42, 0.1);
-    }
-
-    .modality {
-      background : #fff;
-      padding    : clamp(1.8rem, 3vw, 2.6rem) clamp(1.4rem, 2.5vw, 2rem);
-      position   : relative;
-      overflow   : hidden;
-    }
-
-    /* Gold underline sweep on hover */
-    .modality::after {
-      content          : '';
-      position         : absolute;
-      bottom           : 0;
-      left             : 0;
-      right            : 0;
-      height           : 2px;
-      background       : var(--gold);
-      transform        : scaleX(0);
-      transform-origin : left center;
-      transition       : transform 0.4s var(--ease-out);
-    }
-
-    .modality:hover {
-      background: #fdfaf5;
-    }
-
-    .modality:hover::after {
-      transform: scaleX(1);
-    }
-
-    .modality__numeral {
-      font-family    : var(--font-serif);
-      font-style     : italic;
-      font-weight    : 300;
-      font-size      : 0.88rem;
-      color          : var(--gold);
-      display        : block;
-      margin-bottom  : 1rem;
-      letter-spacing : 0.06em;
-    }
-
-    .modality__name {
-      font-family  : var(--font-serif);
-      font-weight  : 400;
-      font-size    : clamp(1.1rem, 1.8vw, 1.35rem);
-      color        : var(--dark-green);
-      line-height  : 1.2;
-      margin-bottom: 0.7rem;
-    }
-
-    .modality__desc {
-      font-family : var(--font-sans);
-      font-size   : 0.78rem;
-      font-weight : 300;
-      line-height : 1.65;
-      color       : rgba(26, 26, 26, 0.55);
-    }
-
-    /* ─── §3 + §4 Responsive ─────────────────────────────────── */
-    @media (max-width: 900px) {
-      .program__grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 540px) {
-      .setting__stats {
-        grid-template-columns: 1fr;
-        max-width             : 220px;
-      }
-    }
-
-    /* ─────────────────────────────────────────────────────────────
-       §5  ITINERARY
-    ───────────────────────────────────────────────────────────── */
-    #itinerary {
-      background : var(--dark-green);
-      padding    : clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem);
-    }
-
-    .itinerary__header {
-      text-align   : center;
-      margin-bottom: clamp(3.5rem, 7vw, 5.5rem);
-    }
-
-    .itinerary__label {
-      font-family    : var(--font-sans);
-      font-size      : 0.62rem;
-      font-weight    : 400;
-      letter-spacing : 0.28em;
-      text-transform : uppercase;
-      color          : var(--sage);
-      display        : block;
-      margin-bottom  : 1.4rem;
-    }
-
-    .itinerary__title {
-      font-family : var(--font-serif);
-      font-weight : 300;
-      font-size   : clamp(2.2rem, 5vw, 4rem);
-      color       : var(--cream);
-      line-height : 1.15;
-    }
-
-    /* Gold spine down the center of the left marker column */
-    .itinerary__timeline {
-      position  : relative;
-      max-width : 700px;
-      margin    : 0 auto;
-    }
-
-    .itinerary__timeline::before {
-      content    : '';
-      position   : absolute;
-      left       : 44px;   /* center of 88px left column */
-      top        : 1.4rem;
-      bottom     : 1.4rem;
-      width      : 1px;
-      background : linear-gradient(
-        to bottom,
-        transparent  0%,
-        var(--gold)  6%,
-        var(--gold) 94%,
-        transparent 100%
-      );
-    }
-
-    .day {
-      display               : grid;
-      grid-template-columns : 88px 1fr;
-      gap                   : 0 2.5rem;
-      position              : relative;
-      padding-bottom        : 3.8rem;
+      background-color: var(--dark-green);
+      overflow        : hidden;
+      cursor          : default;
     }
-
-    .day:last-child { padding-bottom: 0; }
-
-    /* Left marker: large numeral + dot on spine */
-    .day__marker {
-      display        : flex;
-      flex-direction : column;
-      align-items    : center;
-      padding-top    : 0.1rem;
-      position       : relative;
-      z-index        : 1;
-    }
-
-    .day__num {
-      font-family   : var(--font-serif);
-      font-style    : italic;
-      font-weight   : 300;
-      font-size     : clamp(2.2rem, 5vw, 3.2rem);
-      color         : var(--gold);
-      line-height   : 1;
-      display       : block;
-      margin-bottom : 0.5rem;
-    }
-
-    /* Ring-dot sits on the spine */
-    .day__dot {
-      width         : 9px;
-      height        : 9px;
-      border-radius : 50%;
-      background    : var(--dark-green);
-      border        : 1px solid var(--gold);
-      box-shadow    : 0 0 0 3px rgba(196, 118, 58, 0.18);
-      flex-shrink   : 0;
-    }
-
-    /* Right content column */
-    .day__content { padding-top: 0.25rem; }
-
-    .day__title {
-      font-family  : var(--font-serif);
-      font-weight  : 400;
-      font-size    : clamp(1.25rem, 2.5vw, 1.7rem);
-      color        : var(--cream);
-      line-height  : 1.2;
-      margin-bottom: 1rem;
-    }
-
-    .day__acts {
-      list-style     : none;
-      display        : flex;
-      flex-direction : column;
-      gap            : 0.45rem;
-    }
-
-    .day__acts li {
-      font-family : var(--font-sans);
-      font-size   : 0.82rem;
-      font-weight : 300;
-      color       : rgba(143, 166, 142, 0.85);
-      line-height : 1.5;
-      display     : flex;
-      align-items : flex-start;
-      gap         : 0.65rem;
-    }
-
-    .day__acts li::before {
-      content     : '–';
-      color       : rgba(196, 118, 58, 0.45);
-      flex-shrink : 0;
-    }
-
-    /* Gold callout for Temazcal */
-    .act--highlight {
-      color          : var(--gold) !important;
-      font-weight    : 500 !important;
-      letter-spacing : 0.04em;
-    }
-
-    /* ─────────────────────────────────────────────────────────────
-       §6  INCLUSIONS
-    ───────────────────────────────────────────────────────────── */
-    #inclusions {
-      background : var(--cream);
-      padding    : clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem);
-    }
-
-    .inclusions__header {
-      max-width    : 680px;
-      margin       : 0 auto clamp(3rem, 6vw, 4.5rem);
-      text-align   : center;
-    }
-
-    .inclusions__label {
-      font-family    : var(--font-sans);
-      font-size      : 0.62rem;
-      font-weight    : 400;
-      letter-spacing : 0.28em;
-      text-transform : uppercase;
-      color          : var(--sage);
-      display        : block;
-      margin-bottom  : 1.4rem;
-    }
-
-    .inclusions__title {
-      font-family  : var(--font-serif);
-      font-weight  : 300;
-      font-size    : clamp(2rem, 4.5vw, 3.6rem);
-      color        : var(--dark-green);
-      line-height  : 1.15;
-      margin-bottom: 1.1rem;
-    }
-
-    .inclusions__subtitle {
-      font-family : var(--font-sans);
-      font-size   : clamp(0.85rem, 1.5vw, 0.95rem);
-      font-weight : 300;
-      line-height : 1.75;
-      color       : rgba(26, 26, 26, 0.52);
-    }
-
-    /* 2-col grid of inclusion rows */
-    .inclusions__list {
-      list-style            : none;
-      max-width             : 760px;
-      margin                : 0 auto;
-      display               : grid;
-      grid-template-columns : 1fr 1fr;
-    }
-
-    .inclusion {
-      display      : flex;
-      align-items  : flex-start;
-      gap          : 1rem;
-      padding      : 1.5rem 2rem 1.5rem 0;
-      border-bottom: 1px solid rgba(28, 58, 42, 0.09);
-    }
-
-    /* Even items: left divider line */
-    .inclusion:nth-child(even) {
-      padding-left : 2rem;
-      border-left  : 1px solid rgba(28, 58, 42, 0.09);
-    }
-
-    /* Remove bottom border from last two items */
-    .inclusion:nth-last-child(-n+2) { border-bottom: none; }
-
-    .inclusion__marker {
-      color       : var(--gold);
-      font-size   : 0.65rem;
-      flex-shrink : 0;
-      margin-top  : 0.18rem;
-      line-height : 1;
-    }
-
-    .inclusion__text {
-      font-family : var(--font-sans);
-      font-size   : clamp(0.82rem, 1.4vw, 0.92rem);
-      font-weight : 300;
-      line-height : 1.65;
-      color       : rgba(26, 26, 26, 0.7);
-    }
-
-    /* ─── §5 + §6 Responsive ─────────────────────────────────── */
-    @media (max-width: 640px) {
-      .day {
-        grid-template-columns : 60px 1fr;
-        gap                   : 0 1.5rem;
-      }
-
-      .itinerary__timeline::before { left: 30px; }
-
-      .inclusions__list {
-        grid-template-columns: 1fr;
-      }
-
-      .inclusion:nth-child(even) {
-        padding-left : 0;
-        border-left  : none;
-      }
-
-      .inclusion:nth-last-child(-n+2) { border-bottom: 1px solid rgba(28, 58, 42, 0.09); }
-      .inclusion:last-child           { border-bottom: none; }
-    }
-
-    /* ─────────────────────────────────────────────────────────────
-       §7  SIGNATURE QUOTE
-    ───────────────────────────────────────────────────────────── */
-    #signature-quote {
-      min-height      : 100vh;
-      background      : #0d1f16;
-      display         : flex;
-      align-items     : center;
-      justify-content : center;
-      padding         : 4rem 2rem;
-      text-align      : center;
-    }
-
-    .sq__inner {
-      max-width: 780px;
-    }
-
-    .sq__rule {
-      width      : 36px;
-      height     : 1px;
-      background : var(--gold);
-      margin     : 0 auto 3rem;
-      opacity    : 0.5;
-    }
-
-    .sq__text {
-      font-family : var(--font-serif);
-      font-style  : italic;
-      font-weight : 300;
-      font-size   : clamp(2rem, 5.5vw, 4.2rem);
-      color       : var(--cream);
-      line-height : 1.35;
-      margin-bottom: 3rem;
-    }
-
-    .sq__text span {
-      display : block;
-    }
-
-    /* Slow fade variant — just extends the base transition duration */
-    .fade-up--slow {
-      transition-duration: 1.6s;
-    }
-
-    /* ─────────────────────────────────────────────────────────────
-       §8  TESTIMONIAL
-    ───────────────────────────────────────────────────────────── */
-    #testimonial {
-      background : var(--cream);
-      padding    : clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem);
-      text-align : center;
-    }
-
-    .testimonial__card {
-      max-width : 660px;
-      margin    : 0 auto;
-      border    : 1px solid rgba(28, 58, 42, 0.16);
-      padding   : clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem) clamp(2rem, 4vw, 3rem);
-    }
-
-    .testimonial__mark {
-      font-family  : var(--font-serif);
-      font-weight  : 300;
-      font-size    : 5.5rem;
-      color        : var(--gold);
-      line-height  : 0.55;
-      display      : block;
-      margin-bottom: 2rem;
-      opacity      : 0.65;
-    }
-
-    .testimonial__text {
-      font-family  : var(--font-serif);
-      font-style   : italic;
-      font-weight  : 300;
-      font-size    : clamp(1.2rem, 2.5vw, 1.65rem);
-      color        : var(--dark-green);
-      line-height  : 1.55;
-      margin-bottom: 2.2rem;
-    }
-
-    .testimonial__author {
-      font-family    : var(--font-sans);
-      font-size      : 0.7rem;
-      font-weight    : 500;
-      letter-spacing : 0.16em;
-      text-transform : uppercase;
-      color          : var(--dark-green);
-    }
-
-    .testimonial__proof {
-      font-family : var(--font-sans);
-      font-size   : 0.72rem;
-      font-weight : 300;
-      color       : var(--sage);
-      letter-spacing: 0.06em;
-      margin-top  : 2rem;
-      padding-top : 1.8rem;
-      border-top  : 1px solid rgba(28, 58, 42, 0.09);
-    }
-
-    /* ─────────────────────────────────────────────────────────────
-       §9  FORM
-    ───────────────────────────────────────────────────────────── */
-    #form {
-      background : var(--dark-green);
-      padding    : clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem);
-    }
-
-    .form__header {
-      text-align   : center;
-      margin-bottom: clamp(3rem, 6vw, 4.5rem);
-    }
-
-    .form__eyebrow {
-      font-family    : var(--font-sans);
-      font-size      : 0.62rem;
-      font-weight    : 400;
-      letter-spacing : 0.28em;
-      text-transform : uppercase;
-      color          : var(--sage);
-      display        : block;
-      margin-bottom  : 1.4rem;
-    }
-
-    .form__title {
-      font-family  : var(--font-serif);
-      font-weight  : 300;
-      font-size    : clamp(2.2rem, 5vw, 4rem);
-      color        : var(--cream);
-      line-height  : 1.15;
-      margin-bottom: 0.9rem;
-    }
-
-    .form__subtitle {
-      font-family : var(--font-sans);
-      font-size   : 0.78rem;
-      font-weight : 300;
-      color       : rgba(244, 239, 228, 0.42);
-      letter-spacing: 0.1em;
-    }
-
-    .form__body {
-      max-width: 540px;
-      margin   : 0 auto;
-    }
-
-    .form__group {
-      margin-bottom: 1.8rem;
-    }
-
-    .form__field-label {
-      display        : block;
-      font-family    : var(--font-sans);
-      font-size      : 0.6rem;
-      font-weight    : 400;
-      letter-spacing : 0.24em;
-      text-transform : uppercase;
-      color          : rgba(244, 239, 228, 0.4);
-      margin-bottom  : 0.55rem;
-    }
-
-    .form__input,
-    .form__select,
-    .form__textarea {
-      width              : 100%;
-      background         : var(--cream);
-      border             : 2px solid transparent;
-      padding            : 0.85rem 1rem;
-      font-family        : var(--font-sans);
-      font-size          : 0.9rem;
-      font-weight        : 300;
-      color              : var(--text-dark);
-      outline            : none;
-      border-radius      : 0;
-      -webkit-appearance : none;
-      appearance         : none;
-      transition         : border-color 0.25s ease;
-    }
-
-    .form__input::placeholder,
-    .form__textarea::placeholder {
-      color: rgba(26, 26, 26, 0.32);
-    }
-
-    .form__input:focus,
-    .form__select:focus,
-    .form__textarea:focus {
-      border-color: var(--gold);
-    }
-
-    .form__textarea {
-      resize     : vertical;
-      min-height : 110px;
-      line-height: 1.6;
-    }
-
-    /* Custom select arrow */
-    .form__select-wrap {
-      position: relative;
-    }
-
-    .form__select-wrap::after {
-      content        : '';
-      position       : absolute;
-      right          : 1rem;
-      top            : 50%;
-      transform      : translateY(-50%) rotate(45deg);
-      width          : 6px;
-      height         : 6px;
-      border-right   : 1px solid var(--dark-green);
-      border-bottom  : 1px solid var(--dark-green);
-      pointer-events : none;
-    }
-
-    .form__submit {
-      width          : 100%;
-      background     : var(--gold);
-      border         : none;
-      padding        : 1.1rem 2rem;
-      color          : var(--cream);
-      font-family    : var(--font-sans);
-      font-size      : 0.75rem;
-      font-weight    : 500;
-      letter-spacing : 0.22em;
-      text-transform : uppercase;
-      cursor         : pointer;
-      margin-top     : 0.8rem;
-      transition     : background 0.25s ease;
-    }
-
-    .form__submit:hover  { background: #b06630; }
-    .form__submit:active { opacity: 0.9; }
-
-    /* ─────────────────────────────────────────────────────────────
-       §10  FOOTER
-    ───────────────────────────────────────────────────────────── */
-    footer {
-      background  : var(--dark-green);
-      padding     : clamp(4rem, 8vw, 6.5rem) clamp(1.5rem, 5vw, 4rem) 2.5rem;
-      text-align  : center;
-      border-top  : 1px solid rgba(196, 118, 58, 0.12);
-    }
-
-    .footer__monogram {
-      font-family   : var(--font-serif);
-      font-style    : italic;
-      font-weight   : 300;
-      font-size     : clamp(4rem, 9vw, 6.5rem);
-      color         : var(--gold);
-      line-height   : 1;
-      letter-spacing: 0.06em;
-      display       : block;
-      margin-bottom : 0.8rem;
-    }
-
-    .footer__name {
-      font-family    : var(--font-sans);
-      font-size      : 0.6rem;
-      font-weight    : 400;
-      letter-spacing : 0.38em;
-      text-transform : uppercase;
-      color          : rgba(244, 239, 228, 0.35);
-      display        : block;
-      margin-bottom  : 2.5rem;
-    }
-
-    .footer__divider {
-      width      : 32px;
-      height     : 1px;
-      background : rgba(196, 118, 58, 0.3);
-      margin     : 0 auto 2.5rem;
-    }
-
-    .footer__email {
-      display        : block;
-      font-family    : var(--font-sans);
-      font-size      : 0.82rem;
-      font-weight    : 300;
-      color          : rgba(244, 239, 228, 0.55);
-      text-decoration: none;
-      margin-bottom  : 0.8rem;
-      transition     : color 0.25s ease;
-    }
-
-    .footer__email:hover { color: var(--gold); }
-
-    .footer__location {
-      font-family : var(--font-sans);
-      font-size   : 0.75rem;
-      font-weight : 300;
-      color       : rgba(244, 239, 228, 0.35);
-      line-height : 1.7;
-    }
-
-    .footer__copyright {
-      margin-top     : 3rem;
-      padding-top    : 2rem;
-      border-top     : 1px solid rgba(244, 239, 228, 0.06);
-      font-family    : var(--font-sans);
-      font-size      : 0.6rem;
-      font-weight    : 300;
-      letter-spacing : 0.2em;
-      text-transform : uppercase;
-      color          : rgba(244, 239, 228, 0.18);
-    }
-
-    /* ─────────────────────────────────────────────────────────────
-       §1  HERO — Scroll-expansion overrides
-       Replaces static background/overlay with JS-driven expansion.
-    ───────────────────────────────────────────────────────────── */
-
-    /* Pin opacity & kill the section-level translateY for the hero —
-       it is always visible and runs its own entrance animation.     */
-    #hero {
-      background-color : var(--dark-green);
-      background-image : none;
-      padding          : 0;
-      opacity          : 1 !important;
-      transform        : none !important;
-      transition       : none !important;
-      cursor           : default;
-    }
-
-    /* Disable generated overlay/rule pseudo-elements */
-    #hero::before,
-    #hero::after { content: none; }
 
-    /* ── Background image (fades out as media expands) ─────────── */
     #hx-bg {
       position   : absolute;
       inset      : 0;
@@ -1104,16 +98,17 @@
       overflow   : hidden;
       will-change: opacity;
     }
-
     #hx-bg img {
-      width           : 100%;
-      height          : 100%;
-      object-fit      : cover;
-      object-position : center;
-      display         : block;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+    }
+    #hx-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(20,39,28,0.55) 0%, rgba(20,39,28,0.35) 45%, rgba(20,39,28,0.7) 100%);
     }
 
-    /* ── Expanding media card ──────────────────────────────────── */
+    /* Expanding media card */
     #hx-media {
       position      : absolute;
       top           : 50%;
@@ -1122,198 +117,771 @@
       z-index       : 1;
       border-radius : 14px;
       overflow      : hidden;
-      box-shadow    : 0 0 60px rgba(0,0,0,0.35);
+      box-shadow    : 0 30px 80px rgba(0,0,0,0.45);
       will-change   : width, height;
-      /* width/height driven by JS — no CSS transition on these */
     }
-
     #hx-media img {
-      width           : 100%;
-      height          : 100%;
-      object-fit      : cover;
-      object-position : center;
-      display         : block;
-      border-radius   : 14px;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block; border-radius: 14px;
     }
-
     #hx-media-overlay {
-      position       : absolute;
-      inset          : 0;
-      border-radius  : 14px;
-      background     : rgba(0,0,0,0.45);
-      pointer-events : none;
-      will-change    : opacity;
+      position: absolute; inset: 0;
+      border-radius: 14px;
+      background: rgba(0,0,0,0.45);
+      pointer-events: none; will-change: opacity;
     }
 
-    /* ── Split title (words slide apart) ───────────────────────── */
+    /* Split title */
     #hx-title {
-      position       : relative;
-      z-index        : 10;
-      display        : flex;
-      flex-direction : column;
-      align-items    : center;
-      gap            : 0.1rem;
-      pointer-events : none;
-      user-select    : none;
+      position: relative; z-index: 10;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 0.1rem;
+      pointer-events: none; user-select: none;
     }
-
     .hx-word {
-      font-family    : var(--font-serif);
-      font-weight    : 300;
-      font-size      : clamp(3.2rem, 9vw, 8rem);
-      line-height    : 1;
+      font-family    : var(--font-display);
+      font-weight    : 500;
+      font-size      : clamp(3.4rem, 13vw, 11rem);
+      line-height    : 0.92;
       color          : var(--cream);
-      letter-spacing : -0.01em;
+      letter-spacing : -0.03em;
       display        : block;
       will-change    : transform;
     }
 
-    #hx-word-2 { font-style: italic; }
+    /* Hero subline (the pain hook) — visible from the start, fades as expansion begins */
+    #hx-subline {
+      position   : absolute;
+      z-index    : 10;
+      left       : 50%;
+      bottom     : clamp(7rem, 16vh, 11rem);
+      transform  : translateX(-50%);
+      width      : min(90vw, 600px);
+      font-family: var(--font-serif);
+      font-style : italic;
+      font-weight: 300;
+      font-size  : clamp(1.05rem, 2.4vw, 1.5rem);
+      line-height: 1.5;
+      color      : rgba(244,239,228,0.85);
+      pointer-events: none;
+      will-change: opacity;
+    }
 
-    /* ── Bottom meta row (slides apart) ────────────────────────── */
+    /* Scroll hint — bottom center */
+    #hx-hint {
+      position : absolute;
+      z-index  : 10;
+      left     : 50%;
+      bottom   : 2.3rem;
+      transform: translateX(-50%);
+      display  : flex;
+      flex-direction: column;
+      align-items: center;
+      gap      : 0.6rem;
+      pointer-events: none;
+      will-change: opacity;
+    }
+    #hx-hint span {
+      font-family: var(--font-sans);
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(244,239,228,0.5);
+    }
+    .hint-arrow {
+      width: 14px; height: 14px;
+      border-right: 1px solid rgba(244,239,228,0.5);
+      border-bottom: 1px solid rgba(244,239,228,0.5);
+      transform: rotate(45deg);
+      animation: arrowBounce 1.8s ease-in-out infinite;
+    }
+    @keyframes arrowBounce {
+      0%,100% { transform: rotate(45deg) translateY(0);   opacity: 0.5; }
+      50%      { transform: rotate(45deg) translateY(5px); opacity: 0.9; }
+    }
+
+    /* Meta row — appears after expansion */
     #hx-sub {
-      position        : absolute;
-      bottom          : 2.5rem;
-      left            : 0;
-      right           : 0;
-      z-index         : 10;
-      display         : flex;
-      justify-content : space-between;
-      padding         : 0 clamp(2rem, 5vw, 4rem);
-      pointer-events  : none;
+      position: absolute; bottom: 2.5rem; left: 0; right: 0;
+      z-index: 10; display: flex; justify-content: space-between;
+      padding: 0 clamp(2rem, 5vw, 4rem);
+      pointer-events: none; opacity: 0;
+      transition: opacity 0.7s ease;
     }
-
-    #hx-sub-left,
-    #hx-sub-right {
-      font-family    : var(--font-sans);
-      font-size      : 0.65rem;
-      letter-spacing : 0.26em;
-      text-transform : uppercase;
-      will-change    : transform;
+    #hx-sub.show { opacity: 1; }
+    #hx-sub-left, #hx-sub-right {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
     }
-
     #hx-sub-left  { color: rgba(244,239,228,0.6); }
-    #hx-sub-right { color: var(--gold); }
+    #hx-sub-right { color: var(--gold-soft); }
 
-    /* ── CTA revealed after full expansion ─────────────────────── */
+    /* CTA revealed after full expansion */
     #hx-cta {
-      position       : absolute;
-      bottom         : clamp(4rem, 8vw, 6rem);
-      left           : 50%;
-      transform      : translateX(-50%);
-      z-index        : 20;
-      opacity        : 0;
-      transition     : opacity 0.7s ease;
-      pointer-events : none;
-      white-space    : nowrap;
+      position: absolute; bottom: clamp(4rem, 8vw, 6rem);
+      left: 50%; transform: translateX(-50%);
+      z-index: 20; opacity: 0;
+      transition: opacity 0.7s ease;
+      pointer-events: none; white-space: nowrap;
     }
-
-    #hx-cta.show {
-      opacity        : 1;
-      pointer-events : auto;
-    }
-
+    #hx-cta.show { opacity: 1; pointer-events: auto; }
     #hx-cta a {
-      display        : inline-block;
-      padding        : 0.9rem 2.8rem;
-      background     : var(--gold);
-      color          : var(--cream);
-      font-family    : var(--font-sans);
-      font-size      : 0.72rem;
-      font-weight    : 500;
-      letter-spacing : 0.22em;
-      text-transform : uppercase;
-      text-decoration: none;
-      transition     : background 0.25s ease;
+      display: inline-block; padding: 1rem 2.8rem;
+      background: var(--gold); color: var(--cream);
+      font-family: var(--font-sans);
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+    #hx-cta a:hover { background: #b06630; transform: translateY(-2px); }
+
+    /* ─── Section-level scroll-reveal ───────────────────────── */
+    section {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    section.visible { opacity: 1; transform: translateY(0); }
+    #hero { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+    /* ─── fade-up utility ──────────────────────────────────── */
+    .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out); }
+    .fade-up.is-visible { opacity: 1; transform: translateY(0); }
+    .fade-up[data-delay="1"] { transition-delay: 0.10s; }
+    .fade-up[data-delay="2"] { transition-delay: 0.20s; }
+    .fade-up[data-delay="3"] { transition-delay: 0.30s; }
+    .fade-up[data-delay="4"] { transition-delay: 0.40s; }
+    .fade-up[data-delay="5"] { transition-delay: 0.50s; }
+    .fade-up[data-delay="6"] { transition-delay: 0.60s; }
+
+    /* ─────────────────────────────────────────────────────────────
+       §2  THE PAIN  (the hook)
+    ───────────────────────────────────────────────────────────── */
+    #pain {
+      background: var(--cream);
+      padding: clamp(6rem, 14vw, 11rem) clamp(1.5rem, 6vw, 4rem);
+      text-align: center;
+    }
+    .pain__inner { max-width: 820px; margin: 0 auto; }
+    .pain__lead {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(1.6rem, 4.2vw, 3.1rem);
+      line-height: 1.32;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .pain__lead .muted { color: rgba(20,20,15,0.4); }
+    .pain__break {
+      width: 1px; height: clamp(40px, 7vw, 70px);
+      background: linear-gradient(var(--gold), transparent);
+      margin: clamp(2.2rem, 4vw, 3.4rem) auto;
+    }
+    .pain__turn {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(1.3rem, 3.2vw, 2.2rem);
+      line-height: 1.3;
+      color: var(--dark-green);
+      letter-spacing: -0.02em;
+      max-width: 640px; margin: 0 auto;
+    }
+    .pain__turn .gold { color: var(--gold); font-style: italic; font-family: var(--font-serif); font-weight: 400; }
+
+    /* ─────────────────────────────────────────────────────────────
+       §3  THE THREE PILLARS
+    ───────────────────────────────────────────────────────────── */
+    #pillars {
+      background: var(--dark-green);
+      padding: clamp(5rem, 11vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+    }
+    .pillars__header { text-align: center; margin-bottom: clamp(3.5rem, 7vw, 5.5rem); }
+    .pillars__title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      color: var(--cream);
+      line-height: 1.1; letter-spacing: -0.02em;
+      margin-top: 1.4rem;
+    }
+    .pillars__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      max-width: 1180px; margin: 0 auto;
+      background: rgba(196,118,58,0.18);
+      border: 1px solid rgba(196,118,58,0.18);
+    }
+    .pillar {
+      background: var(--dark-green);
+      padding: clamp(2.4rem, 4vw, 3.6rem) clamp(1.8rem, 3vw, 2.8rem);
+      position: relative;
+      transition: background 0.4s ease;
+    }
+    .pillar:hover { background: var(--green-mid); }
+    .pillar__index {
+      font-family: var(--font-sans);
+      font-size: 0.66rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); display: block; margin-bottom: 1.6rem;
+    }
+    .pillar__name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--cream); letter-spacing: -0.02em;
+      line-height: 1; margin-bottom: 1rem;
+    }
+    .pillar__tag {
+      font-family: var(--font-serif);
+      font-style: italic; font-weight: 300;
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      color: var(--gold-soft);
+      line-height: 1.4; margin-bottom: 1.4rem;
+    }
+    .pillar__desc {
+      font-family: var(--font-sans);
+      font-size: 0.92rem; font-weight: 300;
+      line-height: 1.75; color: rgba(244,239,228,0.6);
     }
 
-    #hx-cta a:hover { background: #b06630; }
+    /* ─────────────────────────────────────────────────────────────
+       §4  THE SETTING  (stats)
+    ───────────────────────────────────────────────────────────── */
+    #setting {
+      background: var(--cream);
+      padding: clamp(5rem, 11vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+      text-align: center;
+    }
+    .setting__title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      color: var(--dark-green);
+      line-height: 1.12; letter-spacing: -0.02em;
+      margin: 1.4rem auto clamp(3.5rem, 7vw, 5rem);
+      max-width: 760px;
+    }
+    .setting__stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; max-width: 740px; margin: 0 auto clamp(3rem, 6vw, 4.5rem);
+      background: rgba(28,58,42,0.12);
+      border: 1px solid rgba(28,58,42,0.12);
+    }
+    .stat { background: var(--cream); padding: clamp(2rem, 4vw, 3rem) 1rem; }
+    .stat__number {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(3.4rem, 9vw, 6rem);
+      line-height: 1; color: var(--gold);
+      display: block; margin-bottom: 0.6rem;
+      letter-spacing: -0.03em;
+    }
+    .stat__label {
+      font-family: var(--font-sans);
+      font-size: 0.6rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(20,20,15,0.45);
+    }
+    .setting__desc {
+      font-family: var(--font-sans);
+      font-size: clamp(0.92rem, 1.6vw, 1.05rem);
+      font-weight: 300; line-height: 1.85;
+      color: rgba(20,20,15,0.6);
+      max-width: 560px; margin: 0 auto;
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       §5  GALLERY  (the variety of images)
+    ───────────────────────────────────────────────────────────── */
+    #gallery {
+      background: var(--dark-green);
+      padding: clamp(5rem, 11vw, 9rem) clamp(1.5rem, 5vw, 4rem) clamp(4rem, 8vw, 6rem);
+    }
+    .gallery__header { text-align: center; margin-bottom: clamp(3rem, 6vw, 4.5rem); }
+    .gallery__title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(1.9rem, 4.5vw, 3.2rem);
+      color: var(--cream); line-height: 1.12;
+      letter-spacing: -0.02em; margin-top: 1.4rem;
+    }
+    .gallery__grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: clamp(120px, 18vw, 200px);
+      gap: 12px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .gallery__item {
+      overflow: hidden; border-radius: 6px;
+      position: relative;
+    }
+    .gallery__item img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.9s var(--ease-soft);
+    }
+    .gallery__item:hover img { transform: scale(1.06); }
+    .gallery__item::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(20,39,28,0.3));
+      opacity: 0; transition: opacity 0.4s ease;
+    }
+    .gallery__item:hover::after { opacity: 1; }
+    /* mosaic spans */
+    .g1 { grid-column: span 7; grid-row: span 2; }
+    .g2 { grid-column: span 5; grid-row: span 1; }
+    .g3 { grid-column: span 5; grid-row: span 1; }
+    .g4 { grid-column: span 4; grid-row: span 2; }
+    .g5 { grid-column: span 4; grid-row: span 1; }
+    .g6 { grid-column: span 4; grid-row: span 1; }
+    .g7 { grid-column: span 4; grid-row: span 1; }
+    .g8 { grid-column: span 4; grid-row: span 1; }
+
+    /* ─────────────────────────────────────────────────────────────
+       §6  PROGRAM  (8 modalities)
+    ───────────────────────────────────────────────────────────── */
+    #program {
+      background: var(--cream);
+      padding: clamp(5rem, 11vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+    }
+    .program__header { text-align: center; margin-bottom: clamp(3rem, 6vw, 5rem); }
+    .program__title {
+      font-family: var(--font-display); font-weight: 500;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      color: var(--dark-green); line-height: 1.12;
+      letter-spacing: -0.02em; margin-top: 1.4rem;
+    }
+    .program__grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1px; max-width: 1200px; margin: 0 auto;
+      background: rgba(28,58,42,0.1);
+      border: 1px solid rgba(28,58,42,0.1);
+    }
+    .modality {
+      background: #fff;
+      padding: clamp(1.8rem, 3vw, 2.6rem) clamp(1.4rem, 2.5vw, 2rem);
+      position: relative; overflow: hidden;
+      transition: background 0.35s ease;
+    }
+    .modality::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px; background: var(--gold);
+      transform: scaleY(0); transform-origin: top;
+      transition: transform 0.4s var(--ease-out);
+    }
+    .modality:hover::before { transform: scaleY(1); }
+    .modality:hover { background: #fffdf8; }
+    .modality__numeral {
+      font-family: var(--font-serif);
+      font-style: italic; font-size: 1rem;
+      color: var(--gold); display: block; margin-bottom: 1rem;
+    }
+    .modality__name {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+      color: var(--dark-green); margin-bottom: 0.7rem;
+      letter-spacing: -0.01em;
+    }
+    .modality__desc {
+      font-family: var(--font-sans); font-size: 0.86rem;
+      font-weight: 300; line-height: 1.6;
+      color: rgba(20,20,15,0.6);
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       §7  EXCURSIONS  (beyond the hacienda)
+    ───────────────────────────────────────────────────────────── */
+    #excursions {
+      background: var(--dark-green);
+      padding: clamp(5rem, 11vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+    }
+    .excursions__header { text-align: center; margin-bottom: clamp(3rem, 6vw, 4.5rem); max-width: 720px; margin-left: auto; margin-right: auto; }
+    .excursions__title {
+      font-family: var(--font-display); font-weight: 500;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      color: var(--cream); line-height: 1.12;
+      letter-spacing: -0.02em; margin: 1.4rem 0 1.2rem;
+    }
+    .excursions__sub {
+      font-family: var(--font-sans); font-size: 0.95rem;
+      font-weight: 300; line-height: 1.75;
+      color: rgba(244,239,228,0.55);
+    }
+    .excursions__grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1px; max-width: 1100px; margin: 0 auto;
+      background: rgba(196,118,58,0.18);
+      border: 1px solid rgba(196,118,58,0.18);
+    }
+    .excursion {
+      background: var(--dark-green);
+      padding: clamp(1.6rem, 3vw, 2.4rem) clamp(1.2rem, 2vw, 1.8rem);
+      transition: background 0.35s ease;
+    }
+    .excursion:hover { background: var(--green-mid); }
+    .excursion__name {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: clamp(1rem, 1.7vw, 1.2rem);
+      color: var(--cream); margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .excursion__note {
+      font-family: var(--font-sans); font-size: 0.78rem;
+      font-weight: 300; line-height: 1.55;
+      color: rgba(244,239,228,0.5);
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       §8  PRICING
+    ───────────────────────────────────────────────────────────── */
+    #pricing {
+      background: var(--cream);
+      padding: clamp(5rem, 11vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+      text-align: center;
+    }
+    .pricing__inner { max-width: 640px; margin: 0 auto; }
+    .pricing__title {
+      font-family: var(--font-display); font-weight: 500;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      color: var(--dark-green); line-height: 1.12;
+      letter-spacing: -0.02em; margin: 1.4rem 0 2.4rem;
+    }
+    .pricing__card {
+      background: var(--dark-green);
+      border-radius: 10px;
+      padding: clamp(2.6rem, 5vw, 3.8rem);
+      position: relative; overflow: hidden;
+    }
+    .pricing__from {
+      font-family: var(--font-sans); font-size: 0.66rem;
+      font-weight: 600; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--sage);
+      margin-bottom: 0.8rem;
+    }
+    .pricing__amount {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: clamp(3.4rem, 9vw, 5.5rem);
+      color: var(--cream); line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .pricing__amount span { font-size: 0.4em; color: var(--gold-soft); vertical-align: super; font-weight: 500; }
+    .pricing__per {
+      font-family: var(--font-serif); font-style: italic;
+      font-weight: 300; font-size: 1.05rem;
+      color: rgba(244,239,228,0.6); margin: 1rem 0 2rem;
+    }
+    .pricing__note {
+      font-family: var(--font-sans); font-size: 0.82rem;
+      font-weight: 300; line-height: 1.7;
+      color: rgba(244,239,228,0.5);
+      padding-top: 1.6rem; border-top: 1px solid rgba(196,118,58,0.2);
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       §9  SIGNATURE QUOTE
+    ───────────────────────────────────────────────────────────── */
+    #signature-quote {
+      background: var(--ink);
+      padding: clamp(6rem, 13vw, 11rem) clamp(1.5rem, 6vw, 4rem);
+      text-align: center;
+    }
+    .sq__inner { max-width: 800px; margin: 0 auto; }
+    .sq__rule { width: 40px; height: 1px; background: var(--gold); margin: 0 auto; }
+    .sq__text {
+      font-family: var(--font-serif); font-style: italic;
+      font-weight: 300; font-size: clamp(1.7rem, 4.5vw, 3rem);
+      line-height: 1.3; color: var(--cream);
+      margin: 2.5rem 0; letter-spacing: -0.01em;
+    }
+    .sq__text span { display: block; }
+
+    /* ─────────────────────────────────────────────────────────────
+       §10  TESTIMONIAL
+    ───────────────────────────────────────────────────────────── */
+    #testimonial {
+      background: var(--cream);
+      padding: clamp(5rem, 11vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+    }
+    .testimonial__card {
+      max-width: 720px; margin: 0 auto;
+      background: #fff; border-radius: 10px;
+      padding: clamp(2.6rem, 5vw, 4rem);
+      position: relative;
+      box-shadow: 0 30px 70px rgba(20,39,28,0.08);
+      text-align: center;
+    }
+    .testimonial__mark {
+      font-family: var(--font-serif);
+      font-size: 5rem; line-height: 0.5;
+      color: var(--gold); opacity: 0.25;
+      display: block; height: 2.2rem;
+    }
+    .testimonial__text {
+      font-family: var(--font-serif); font-style: italic;
+      font-weight: 300; font-size: clamp(1.2rem, 2.6vw, 1.7rem);
+      line-height: 1.5; color: var(--ink);
+      margin-bottom: 2rem;
+    }
+    .testimonial__author {
+      font-family: var(--font-display); font-weight: 600;
+      font-size: 0.95rem; color: var(--dark-green);
+      letter-spacing: -0.01em; margin-bottom: 0.4rem;
+    }
+    .testimonial__proof {
+      font-family: var(--font-sans); font-size: 0.72rem;
+      font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--gold);
+    }
+
+    /* ─────────────────────────────────────────────────────────────
+       §11  FORM
+    ───────────────────────────────────────────────────────────── */
+    #form {
+      background: var(--dark-green);
+      padding: clamp(5rem, 11vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+    }
+    .form__header { text-align: center; margin-bottom: clamp(2.6rem, 5vw, 4rem); }
+    .form__title {
+      font-family: var(--font-display); font-weight: 500;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      color: var(--cream); line-height: 1.1;
+      letter-spacing: -0.02em; margin: 1.4rem 0 1rem;
+    }
+    .form__subtitle {
+      font-family: var(--font-sans); font-size: 0.85rem;
+      font-weight: 300; letter-spacing: 0.05em;
+      color: rgba(244,239,228,0.5);
+    }
+    .form__body { max-width: 560px; margin: 0 auto; }
+    .form__group { margin-bottom: 1.6rem; }
+    .form__field-label {
+      display: block; font-family: var(--font-sans);
+      font-size: 0.68rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 0.7rem;
+    }
+    .form__input, .form__select, .form__textarea {
+      width: 100%; font-family: var(--font-sans);
+      font-size: 0.95rem; font-weight: 300;
+      color: var(--cream);
+      background: rgba(244,239,228,0.05);
+      border: 1px solid rgba(244,239,228,0.15);
+      border-radius: 4px;
+      padding: 0.9rem 1.1rem;
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+    .form__input::placeholder, .form__textarea::placeholder { color: rgba(244,239,228,0.3); }
+    .form__input:focus, .form__select:focus, .form__textarea:focus {
+      outline: none; border-color: var(--gold);
+      background: rgba(244,239,228,0.08);
+    }
+    .form__select-wrap { position: relative; }
+    .form__select { appearance: none; cursor: pointer; }
+    .form__select-wrap::after {
+      content: ''; position: absolute; right: 1.2rem; top: 50%;
+      width: 8px; height: 8px;
+      border-right: 1px solid var(--sage); border-bottom: 1px solid var(--sage);
+      transform: translateY(-65%) rotate(45deg); pointer-events: none;
+    }
+    .form__select option { background: var(--dark-green); color: var(--cream); }
+    .form__textarea { resize: vertical; min-height: 110px; }
+    .form__submit {
+      width: 100%; font-family: var(--font-sans);
+      font-size: 0.74rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--cream); background: var(--gold);
+      border: none; border-radius: 4px;
+      padding: 1.1rem; cursor: pointer; margin-top: 0.6rem;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+    .form__submit:hover { background: #b06630; transform: translateY(-2px); }
+
+    /* ─────────────────────────────────────────────────────────────
+       §12  FOOTER
+    ───────────────────────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      padding: clamp(3.5rem, 7vw, 5rem) 2rem;
+      text-align: center;
+    }
+    .footer__monogram {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 1.8rem; color: var(--gold);
+      letter-spacing: 0.05em; display: block; margin-bottom: 0.6rem;
+    }
+    .footer__name {
+      font-family: var(--font-display); font-weight: 400;
+      font-size: 1rem; color: var(--cream);
+      letter-spacing: 0.2em; text-transform: uppercase;
+    }
+    .footer__divider { width: 40px; height: 1px; background: rgba(196,118,58,0.4); margin: 2rem auto; }
+    .footer__email {
+      font-family: var(--font-sans); font-size: 0.9rem;
+      color: var(--cream); text-decoration: none;
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px; transition: color 0.3s ease;
+    }
+    .footer__email:hover { color: var(--gold-soft); }
+    .footer__location {
+      font-family: var(--font-sans); font-size: 0.78rem;
+      font-weight: 300; color: rgba(244,239,228,0.4);
+      margin-top: 1.2rem; letter-spacing: 0.04em;
+    }
+    .footer__copyright {
+      font-family: var(--font-sans); font-size: 0.68rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(244,239,228,0.3); margin-top: 2rem;
+    }
+
+    /* ─── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .pillars__grid { grid-template-columns: 1fr; }
+      .program__grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .gallery__grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 130px; }
+      .g1 { grid-column: span 6; grid-row: span 2; }
+      .g2, .g3 { grid-column: span 3; grid-row: span 1; }
+      .g4 { grid-column: span 3; grid-row: span 2; }
+      .g5, .g6, .g7, .g8 { grid-column: span 3; grid-row: span 1; }
+      .setting__stats { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      .program__grid { grid-template-columns: 1fr; }
+      #hx-subline { bottom: 8rem; }
+    }
   </style>
 </head>
 <body>
 
   <!-- ═══════════════════════════════════════════════════════
-       §1  HERO
+       §1  HERO — clean (PRESENCIA + pain subline only)
   ════════════════════════════════════════════════════════ -->
   <section id="hero" aria-label="Hero">
 
-    <!-- Background image — JS fades this out as the media card expands -->
     <div id="hx-bg">
       <img
         src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80&fit=crop"
-        alt="Aerial view of the Caribbean coastline and turquoise waters of the Riviera Maya at golden hour"
+        alt="Aguas turquesa de la Riviera Maya a la hora dorada"
         loading="eager"
       />
     </div>
 
-    <!-- Media card — starts small, expands to fill the viewport on scroll -->
     <div id="hx-media">
       <img
         src="https://images.unsplash.com/photo-1552083375-1447ce886485?w=1280&q=80&fit=crop"
-        alt="Natural cenote pool surrounded by limestone rock and tropical palms at a private hacienda estate"
+        alt="Cenote natural rodeado de roca caliza y palmeras tropicales en una hacienda privada"
         loading="eager"
       />
       <div id="hx-media-overlay"></div>
     </div>
 
-    <!-- Title — the two words slide apart as scrollProgress increases -->
+    <!-- Clean title — single word -->
     <div id="hx-title">
-      <span class="hx-word" id="hx-word-1">Hacienda</span>
-      <span class="hx-word" id="hx-word-2">Presencia</span>
+      <span class="hx-word" id="hx-word-1">Presencia</span>
     </div>
 
-    <!-- Meta row — eyebrow slides left, hint slides right -->
+    <!-- The pain hook — visible from the start -->
+    <p id="hx-subline">Lo construiste todo. ¿Cuándo fue la última vez que te detuviste?</p>
+
+    <!-- Scroll hint -->
+    <div id="hx-hint">
+      <span>Desliza para entrar</span>
+      <div class="hint-arrow" aria-hidden="true"></div>
+    </div>
+
+    <!-- Meta row — appears after expansion -->
     <div id="hx-sub">
       <p id="hx-sub-left">Riviera Maya · México</p>
-      <p id="hx-sub-right">Scroll to enter</p>
+      <p id="hx-sub-right">4 Días · 18 Lugares</p>
     </div>
 
-    <!-- CTA — fades in once the media is fully expanded -->
+    <!-- CTA — appears after full expansion -->
     <div id="hx-cta">
-      <a href="#form">Reserve your place</a>
+      <a href="#form">Reclama tu lugar</a>
     </div>
 
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       §2  INVITATION
+       §2  THE PAIN
   ════════════════════════════════════════════════════════ -->
-  <section id="invitation" aria-label="Invitation">
+  <section id="pain" aria-label="The invitation">
+    <div class="pain__inner">
+      <p class="pain__lead fade-up">
+        Respondes correos en la cena. Revisas el teléfono antes de abrir los ojos.
+        <span class="muted">Tu cuerpo está en la sala, pero tu mente está en tres lugares a la vez.</span>
+      </p>
 
-    <div class="invitation__left">
-      <p class="invitation__label">The Invitation</p>
-      <blockquote class="invitation__quote">
-        "A different kind<br />of retreat."
-      </blockquote>
-    </div>
+      <div class="pain__break fade-up" data-delay="1" aria-hidden="true"></div>
 
-    <div class="invitation__right">
-      <h2 class="invitation__heading">
-        Not a resort.<br />A return.
-      </h2>
-      <p class="invitation__body">
-        Hacienda Presencia is not a resort. It is a small, deliberate
-        program for guests who arrive overstimulated and depart
-        restored — held by a centuries-old hacienda tucked into the
-        jungle of Playa del Carmen.
+      <p class="pain__turn fade-up" data-delay="2">
+        Lo llamas "estar ocupado". Pero hace tiempo que dejaste de estar presente.
+        <br /><br />
+        <span class="gold">Presencia</span> no es otro retiro. Es el regreso — a tu cuerpo,
+        a tu atención, a la única vida que estás viviendo.
       </p>
     </div>
-
   </section>
 
+  <!-- ═══════════════════════════════════════════════════════
+       §3  THE THREE PILLARS
+  ════════════════════════════════════════════════════════ -->
+  <section id="pillars" aria-label="The three pillars">
+    <div class="pillars__header">
+      <span class="eyebrow center fade-up">Los Tres Pilares</span>
+      <h2 class="pillars__title fade-up" data-delay="1">Health. Wealth. Adventure.</h2>
+    </div>
+
+    <div class="pillars__grid">
+      <article class="pillar fade-up" data-delay="1">
+        <span class="pillar__index">01 — Health</span>
+        <h3 class="pillar__name">Salud</h3>
+        <p class="pillar__tag">Recupera el cuerpo que el trabajo te quitó.</p>
+        <p class="pillar__desc">
+          Temazcal, breathwork, sound healing y yoga al amanecer frente al Caribe.
+          Protocolos reales de recuperación, sueño y sistema nervioso — no clichés.
+        </p>
+      </article>
+
+      <article class="pillar fade-up" data-delay="2">
+        <span class="pillar__index">02 — Wealth</span>
+        <h3 class="pillar__name">Riqueza</h3>
+        <p class="pillar__tag">La verdadera riqueza empieza cuando puedes detenerte.</p>
+        <p class="pillar__desc">
+          Workshops de longevidad y memoria diseñados para quienes ya tienen el éxito,
+          pero buscan el sentido. Claridad mental como activo, no como lujo.
+        </p>
+      </article>
+
+      <article class="pillar fade-up" data-delay="3">
+        <span class="pillar__index">03 — Adventure</span>
+        <h3 class="pillar__name">Aventura</h3>
+        <p class="pillar__tag">El asombro también cura.</p>
+        <p class="pillar__desc">
+          Cenotes, ruinas mayas, mar abierto. La selva como medicina y el océano
+          como reset. Lo que la rutina te ha hecho olvidar.
+        </p>
+      </article>
+    </div>
+  </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       §3  SETTING
+       §4  THE SETTING
   ════════════════════════════════════════════════════════ -->
-  <section id="setting" aria-label="The Setting">
-
-    <span class="setting__label fade-up">The Setting</span>
-
+  <section id="setting" aria-label="The setting">
+    <span class="eyebrow center fade-up">El Lugar</span>
     <h2 class="setting__title fade-up" data-delay="1">
-      A private estate in the<br />heart of the Riviera Maya.
+      Una hacienda privada en el<br />corazón de la Riviera Maya.
     </h2>
 
-    <div class="setting__stats" aria-label="Key figures">
+    <div class="setting__stats" aria-label="Cifras clave">
       <div class="stat fade-up" data-delay="2">
         <span class="stat__number">9</span>
         <span class="stat__label">Suites Privadas</span>
@@ -1329,291 +897,230 @@
     </div>
 
     <p class="setting__desc fade-up" data-delay="5">
-      A private, gated colonial estate inside the Hacienda at Xcaret —
-      palms, stonework, a natural cenote-style pool. Walking distance to
-      Río Secreto, ten minutes from the Caribbean coast.
+      Una propiedad colonial privada dentro de Hacienda at Xcaret — palmeras, piedra,
+      una alberca estilo cenote. A distancia caminable de Río Secreto y a diez minutos
+      de la costa del Caribe.
     </p>
-
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       §4  PROGRAM
+       §5  GALLERY
+  ════════════════════════════════════════════════════════ -->
+  <section id="gallery" aria-label="Gallery">
+    <div class="gallery__header">
+      <span class="eyebrow center fade-up">El Escenario</span>
+      <h2 class="gallery__title fade-up" data-delay="1">Donde sucede el regreso.</h2>
+    </div>
+
+    <div class="gallery__grid">
+      <figure class="gallery__item g1 fade-up">
+        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&q=80&fit=crop" alt="Suite de la hacienda" loading="lazy" />
+      </figure>
+      <figure class="gallery__item g2 fade-up" data-delay="1">
+        <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=900&q=80&fit=crop" alt="Alberca estilo cenote" loading="lazy" />
+      </figure>
+      <figure class="gallery__item g3 fade-up" data-delay="2">
+        <img src="https://images.unsplash.com/photo-1545579133-99bb5ab189bd?w=900&q=80&fit=crop" alt="Yoga al amanecer" loading="lazy" />
+      </figure>
+      <figure class="gallery__item g4 fade-up" data-delay="1">
+        <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=900&q=80&fit=crop" alt="Detalle arquitectónico de la hacienda" loading="lazy" />
+      </figure>
+      <figure class="gallery__item g5 fade-up" data-delay="2">
+        <img src="https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=900&q=80&fit=crop" alt="Cenote subterráneo" loading="lazy" />
+      </figure>
+      <figure class="gallery__item g6 fade-up" data-delay="3">
+        <img src="https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=900&q=80&fit=crop" alt="Catamarán en aguas turquesa" loading="lazy" />
+      </figure>
+      <figure class="gallery__item g7 fade-up" data-delay="1">
+        <img src="https://images.unsplash.com/photo-1518002171953-a080ee817e1f?w=900&q=80&fit=crop" alt="Selva tropical" loading="lazy" />
+      </figure>
+      <figure class="gallery__item g8 fade-up" data-delay="2">
+        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=900&q=80&fit=crop" alt="Atardecer sobre la costa" loading="lazy" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §6  PROGRAM
   ════════════════════════════════════════════════════════ -->
   <section id="program" aria-label="Program">
-
     <div class="program__header">
-      <span class="program__label fade-up">The Program</span>
-      <h2 class="program__title fade-up" data-delay="1">Eight Modalities. One Arc.</h2>
+      <span class="eyebrow center fade-up">El Programa</span>
+      <h2 class="program__title fade-up" data-delay="1">Ocho modalidades. Un solo arco.</h2>
     </div>
 
     <div class="program__grid">
-
       <article class="modality fade-up" data-delay="1">
         <span class="modality__numeral">i</span>
         <h3 class="modality__name">Temazcal</h3>
-        <p class="modality__desc">A Mayan sweat-lodge ceremony led by a curandero.</p>
+        <p class="modality__desc">Ceremonia maya de vapor guiada por un curandero.</p>
       </article>
-
       <article class="modality fade-up" data-delay="2">
         <span class="modality__numeral">ii</span>
         <h3 class="modality__name">Sound Healing</h3>
-        <p class="modality__desc">Crystal bowls, gong, and voice. A nervous-system reset.</p>
+        <p class="modality__desc">Cuencos de cristal, gong y voz. Un reset del sistema nervioso.</p>
       </article>
-
       <article class="modality fade-up" data-delay="3">
         <span class="modality__numeral">iii</span>
         <h3 class="modality__name">Breathwork</h3>
-        <p class="modality__desc">The fastest route back to the body.</p>
+        <p class="modality__desc">La ruta más rápida de regreso al cuerpo.</p>
       </article>
-
       <article class="modality fade-up" data-delay="4">
         <span class="modality__numeral">iv</span>
         <h3 class="modality__name">Yoga</h3>
-        <p class="modality__desc">Daily morning practice in the jungle pavilion.</p>
+        <p class="modality__desc">Práctica diaria al amanecer en el pabellón de la selva.</p>
       </article>
-
       <article class="modality fade-up" data-delay="1">
         <span class="modality__numeral">v</span>
         <h3 class="modality__name">Memory Workshop</h3>
-        <p class="modality__desc">Evidence-based attention and recall frameworks.</p>
+        <p class="modality__desc">Marcos de atención y memoria basados en evidencia.</p>
       </article>
-
       <article class="modality fade-up" data-delay="2">
         <span class="modality__numeral">vi</span>
         <h3 class="modality__name">Longevity Workshop</h3>
-        <p class="modality__desc">Sleep, metabolic health, recovery protocols.</p>
+        <p class="modality__desc">Sueño, salud metabólica y protocolos de recuperación.</p>
       </article>
-
       <article class="modality fade-up" data-delay="3">
         <span class="modality__numeral">vii</span>
         <h3 class="modality__name">Stand-Up Paddle</h3>
-        <p class="modality__desc">Quiet morning paddles on the Caribbean.</p>
+        <p class="modality__desc">Remadas tranquilas al amanecer sobre el Caribe.</p>
       </article>
-
       <article class="modality fade-up" data-delay="4">
         <span class="modality__numeral">viii</span>
-        <h3 class="modality__name">Catamaran Sail</h3>
-        <p class="modality__desc">A private luxury sail on open turquoise water.</p>
+        <h3 class="modality__name">Catamarán</h3>
+        <p class="modality__desc">Una navegación privada de lujo sobre aguas turquesa.</p>
       </article>
-
     </div>
-
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       §5  ITINERARY
+       §7  EXCURSIONS
   ════════════════════════════════════════════════════════ -->
-  <section id="itinerary" aria-label="Itinerary">
-
-    <div class="itinerary__header">
-      <span class="itinerary__label fade-up">The Itinerary</span>
-      <h2 class="itinerary__title fade-up" data-delay="1">The Rhythm of Presence.</h2>
-    </div>
-
-    <div class="itinerary__timeline">
-
-      <!-- Day i -->
-      <div class="day fade-up" data-delay="1">
-        <div class="day__marker">
-          <span class="day__num">i</span>
-          <div class="day__dot" aria-hidden="true"></div>
-        </div>
-        <div class="day__content">
-          <h3 class="day__title">Arrival &amp; Grounding</h3>
-          <ul class="day__acts">
-            <li>Private transfers from Cancún or Playa del Carmen</li>
-            <li>Welcome circle with ceremonial cacao</li>
-            <li>Restorative yoga — opening the body after travel</li>
-            <li>Welcome dinner under the palms</li>
-            <li>Evening sound bath — crystal bowls and gong</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Day ii -->
-      <div class="day fade-up" data-delay="2">
-        <div class="day__marker">
-          <span class="day__num">ii</span>
-          <div class="day__dot" aria-hidden="true"></div>
-        </div>
-        <div class="day__content">
-          <h3 class="day__title">Earth, Body &amp; Ceremony</h3>
-          <ul class="day__acts">
-            <li>Sunrise yoga in the jungle pavilion</li>
-            <li>Longevity workshop — sleep, metabolic health, recovery</li>
-            <li>Excursion to Río Secreto — underground cenote river</li>
-            <li>Guided breathwork session</li>
-            <li class="act--highlight">Temazcal Ceremony — Mayan sweat lodge led by a curandero</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Day iii -->
-      <div class="day fade-up" data-delay="3">
-        <div class="day__marker">
-          <span class="day__num">iii</span>
-          <div class="day__dot" aria-hidden="true"></div>
-        </div>
-        <div class="day__content">
-          <h3 class="day__title">The Sea Day</h3>
-          <ul class="day__acts">
-            <li>Sunrise stand-up paddle on the Caribbean</li>
-            <li>Private catamaran — open water sailing</li>
-            <li>Reef swim and free time at sea</li>
-            <li>Sunset dinner poolside</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Day iv -->
-      <div class="day fade-up" data-delay="4">
-        <div class="day__marker">
-          <span class="day__num">iv</span>
-          <div class="day__dot" aria-hidden="true"></div>
-        </div>
-        <div class="day__content">
-          <h3 class="day__title">Integration &amp; Departure</h3>
-          <ul class="day__acts">
-            <li>Closing yoga — gentle movement and stillness</li>
-            <li>Farewell breakfast at the hacienda table</li>
-            <li>Memory workshop — attention and recall frameworks</li>
-            <li>Closing circle — intentions carried home</li>
-            <li>Private transfers to the airport</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       §6  INCLUSIONS
-  ════════════════════════════════════════════════════════ -->
-  <section id="inclusions" aria-label="Inclusions">
-
-    <div class="inclusions__header">
-      <span class="inclusions__label fade-up">What's Included</span>
-      <h2 class="inclusions__title fade-up" data-delay="1">Everything,<br />except the flight.</h2>
-      <p class="inclusions__subtitle fade-up" data-delay="2">
-        The program is fully integrated.<br />Nothing is unbundled or upsold.
+  <section id="excursions" aria-label="Excursions">
+    <div class="excursions__header">
+      <span class="eyebrow center fade-up">Más Allá de la Hacienda</span>
+      <h2 class="excursions__title fade-up" data-delay="1">Un mundo entero por explorar.</h2>
+      <p class="excursions__sub fade-up" data-delay="2">
+        La Riviera Maya es infinita. Estas son algunas de las experiencias que podemos
+        sumar a tu retiro — desde ruinas milenarias hasta nadar con tiburón ballena.
       </p>
     </div>
 
-    <ul class="inclusions__list">
-      <li class="inclusion fade-up" data-delay="1">
-        <span class="inclusion__marker" aria-hidden="true">✦</span>
-        <span class="inclusion__text">Suite accommodations for the full retreat</span>
-      </li>
-      <li class="inclusion fade-up" data-delay="2">
-        <span class="inclusion__marker" aria-hidden="true">✦</span>
-        <span class="inclusion__text">All meals — chef-prepared, locally sourced</span>
-      </li>
-      <li class="inclusion fade-up" data-delay="3">
-        <span class="inclusion__marker" aria-hidden="true">✦</span>
-        <span class="inclusion__text">Every wellness session — temazcal, sound, breath, yoga, workshops</span>
-      </li>
-      <li class="inclusion fade-up" data-delay="4">
-        <span class="inclusion__marker" aria-hidden="true">✦</span>
-        <span class="inclusion__text">Stand-up paddle and catamaran day — equipment and crew included</span>
-      </li>
-      <li class="inclusion fade-up" data-delay="5">
-        <span class="inclusion__marker" aria-hidden="true">✦</span>
-        <span class="inclusion__text">Ground transportation — airport transfers and all retreat movement</span>
-      </li>
-      <li class="inclusion fade-up" data-delay="6">
-        <span class="inclusion__marker" aria-hidden="true">✦</span>
-        <span class="inclusion__text">Welcome and integration sessions — arrival ritual and closing circle</span>
-      </li>
-    </ul>
-
+    <div class="excursions__grid">
+      <div class="excursion fade-up" data-delay="1">
+        <h3 class="excursion__name">Chichén Itzá</h3>
+        <p class="excursion__note">Una de las nuevas maravillas del mundo.</p>
+      </div>
+      <div class="excursion fade-up" data-delay="2">
+        <h3 class="excursion__name">Tulum</h3>
+        <p class="excursion__note">Ruinas mayas frente al mar turquesa.</p>
+      </div>
+      <div class="excursion fade-up" data-delay="3">
+        <h3 class="excursion__name">Cenotes</h3>
+        <p class="excursion__note">Jardín del Edén y ríos subterráneos.</p>
+      </div>
+      <div class="excursion fade-up" data-delay="4">
+        <h3 class="excursion__name">Cobá</h3>
+        <p class="excursion__note">Pirámides ocultas entre la selva.</p>
+      </div>
+      <div class="excursion fade-up" data-delay="1">
+        <h3 class="excursion__name">Isla Mujeres</h3>
+        <p class="excursion__note">Playas de arena blanca y aguas calmas.</p>
+      </div>
+      <div class="excursion fade-up" data-delay="2">
+        <h3 class="excursion__name">Holbox</h3>
+        <p class="excursion__note">Tiburón ballena (sep.) y bioluminiscencia.</p>
+      </div>
+      <div class="excursion fade-up" data-delay="3">
+        <h3 class="excursion__name">Río Lagartos</h3>
+        <p class="excursion__note">Flamencos rosados y manglares.</p>
+      </div>
+      <div class="excursion fade-up" data-delay="4">
+        <h3 class="excursion__name">Quinta Avenida</h3>
+        <p class="excursion__note">El pulso de Playa del Carmen.</p>
+      </div>
+    </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       §7  SIGNATURE QUOTE
+       §8  PRICING
+  ════════════════════════════════════════════════════════ -->
+  <section id="pricing" aria-label="Pricing">
+    <div class="pricing__inner">
+      <span class="eyebrow center fade-up">La Inversión</span>
+      <h2 class="pricing__title fade-up" data-delay="1">Cuatro días que reescriben tu relación con el tiempo.</h2>
+
+      <div class="pricing__card fade-up" data-delay="2">
+        <p class="pricing__from">Desde</p>
+        <p class="pricing__amount"><span>$</span>2,000<span style="font-size:0.3em; color:rgba(244,239,228,0.5);"> USD</span></p>
+        <p class="pricing__per">por persona · ocupación compartida</p>
+        <p class="pricing__note">
+          Todo incluido excepto tu vuelo — suite, todas las comidas, cada sesión de
+          bienestar, transportes y el día de mar. Sin sorpresas, sin upsells.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §9  SIGNATURE QUOTE
   ════════════════════════════════════════════════════════ -->
   <section id="signature-quote" aria-label="Signature quote">
-
     <div class="sq__inner">
       <div class="sq__rule fade-up"></div>
-      <blockquote class="sq__text fade-up--slow fade-up" data-delay="1">
-        <span>"The hacienda is the container.</span>
-        <span>The temazcal is the door."</span>
+      <blockquote class="sq__text fade-up" data-delay="1">
+        <span>"La hacienda es el contenedor.</span>
+        <span>El temazcal es la puerta."</span>
       </blockquote>
       <div class="sq__rule fade-up" data-delay="2"></div>
     </div>
-
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       §8  TESTIMONIAL
+       §10  TESTIMONIAL
   ════════════════════════════════════════════════════════ -->
   <section id="testimonial" aria-label="Testimonial">
-
     <div class="testimonial__card fade-up">
       <span class="testimonial__mark" aria-hidden="true">"</span>
       <p class="testimonial__text">
-        A truly transformative experience. The Hacienda is a magical place
-        for healing and reconnection.
+        Una experiencia verdaderamente transformadora. La hacienda es un lugar mágico
+        para sanar y reconectar.
       </p>
-      <p class="testimonial__author">Carolina — Colombian Actress &amp; Wellness Advocate</p>
-      <p class="testimonial__proof">3 Retreats booked in the last 2 months</p>
+      <p class="testimonial__author">Carolina — Actriz colombiana &amp; Wellness Advocate</p>
+      <p class="testimonial__proof">3 retiros reservados en los últimos 2 meses</p>
     </div>
-
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       §9  FORM
+       §11  FORM
   ════════════════════════════════════════════════════════ -->
   <section id="form" aria-label="Application form">
-
     <div class="form__header">
-      <span class="form__eyebrow fade-up">Cupos Limitados</span>
-      <h2 class="form__title fade-up" data-delay="1">Solicita tu Lugar</h2>
-      <p class="form__subtitle fade-up" data-delay="2">18 guests · By application · Cupos limitados</p>
+      <span class="eyebrow center fade-up">Cupos Limitados</span>
+      <h2 class="form__title fade-up" data-delay="1">Reclama tu lugar</h2>
+      <p class="form__subtitle fade-up" data-delay="2">18 huéspedes · Por aplicación · Cupos limitados</p>
     </div>
 
     <form
       class="form__body fade-up"
       data-delay="3"
-      action="mailto:hello@haciendapresencia.com"
+      action="mailto:hello@presenciaretreats.com"
       method="post"
       enctype="text/plain"
     >
-
       <div class="form__group">
         <label class="form__field-label" for="f-name">Nombre completo</label>
-        <input
-          class="form__input"
-          type="text"
-          id="f-name"
-          name="nombre"
-          placeholder="Tu nombre completo"
-          required
-        />
+        <input class="form__input" type="text" id="f-name" name="nombre" placeholder="Tu nombre completo" required />
       </div>
 
       <div class="form__group">
         <label class="form__field-label" for="f-email">Email</label>
-        <input
-          class="form__input"
-          type="email"
-          id="f-email"
-          name="email"
-          placeholder="tu@email.com"
-          required
-        />
+        <input class="form__input" type="email" id="f-email" name="email" placeholder="tu@email.com" required />
       </div>
 
       <div class="form__group">
         <label class="form__field-label" for="f-phone">WhatsApp / Teléfono</label>
-        <input
-          class="form__input"
-          type="tel"
-          id="f-phone"
-          name="telefono"
-          placeholder="+1 (000) 000 0000"
-        />
+        <input class="form__input" type="tel" id="f-phone" name="telefono" placeholder="+1 (000) 000 0000" />
       </div>
 
       <div class="form__group">
@@ -1631,94 +1138,57 @@
 
       <div class="form__group">
         <label class="form__field-label" for="f-intention">Tu intención para este retiro</label>
-        <textarea
-          class="form__textarea"
-          id="f-intention"
-          name="intencion"
-          rows="4"
-          placeholder="Comparte brevemente lo que buscas en esta experiencia…"
-        ></textarea>
+        <textarea class="form__textarea" id="f-intention" name="intencion" rows="4" placeholder="Comparte brevemente lo que buscas en esta experiencia…"></textarea>
       </div>
 
-      <button class="form__submit" type="submit">Enviar mi Solicitud</button>
-
+      <button class="form__submit" type="submit">Enviar mi solicitud</button>
     </form>
-
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       §10  FOOTER
+       §12  FOOTER
   ════════════════════════════════════════════════════════ -->
   <footer aria-label="Footer">
-
-    <span class="footer__monogram" aria-label="HP monogram">HP</span>
-    <span class="footer__name">Hacienda Presencia</span>
-
+    <span class="footer__monogram" aria-label="P monogram">P</span>
+    <span class="footer__name">Presencia Retreats</span>
     <div class="footer__divider" aria-hidden="true"></div>
-
-    <a class="footer__email" href="mailto:hello@haciendapresencia.com">
-      hello@haciendapresencia.com
-    </a>
-    <p class="footer__location">
-      Hacienda at Xcaret · Playa del Carmen, Q. Roo · México
-    </p>
-
-    <p class="footer__copyright">© MMXXVI Hacienda Presencia</p>
-
+    <a class="footer__email" href="mailto:hello@presenciaretreats.com">hello@presenciaretreats.com</a>
+    <p class="footer__location">Hacienda at Xcaret · Playa del Carmen, Q. Roo · México</p>
+    <p class="footer__copyright">© MMXXVI Presencia Retreats</p>
   </footer>
 
-  <!-- ─── Intersection Observer — element scroll-reveal ───────── -->
+  <!-- ─── Element scroll-reveal ───────── -->
   <script>
     (function () {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-visible');
-            io.unobserve(e.target);
-          }
+          if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
         });
       }, { threshold: 0.12 });
-
-      document.querySelectorAll('.fade-up').forEach(function (el) {
-        io.observe(el);
-      });
+      document.querySelectorAll('.fade-up').forEach(function (el) { io.observe(el); });
     })();
   </script>
 
-  <!-- ─── Section reveal + hero smooth-scroll ──────────────────── -->
+  <!-- ─── Section reveal + smooth-scroll ──────────────────── -->
   <script>
     (function () {
-      /* Section observer — fires at 5% visibility so tall sections
-         never miss their trigger; sections already in the viewport
-         on load receive 'visible' immediately to avoid a flash.    */
       var sectionIO = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible');
-            sectionIO.unobserve(e.target);
-          }
+          if (e.isIntersecting) { e.target.classList.add('visible'); sectionIO.unobserve(e.target); }
         });
       }, { threshold: 0.05 });
 
       document.querySelectorAll('section').forEach(function (s) {
         var r = s.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) {
-          /* Already in the viewport — mark visible without observing */
-          s.classList.add('visible');
-        } else {
-          sectionIO.observe(s);
-        }
+        if (r.top < window.innerHeight && r.bottom > 0) { s.classList.add('visible'); }
+        else { sectionIO.observe(s); }
       });
 
-      /* Hero CTA — selector updated for new expansion hero markup */
       var cta = document.querySelector('#hx-cta a[href="#form"]');
       if (cta) {
         cta.addEventListener('click', function (e) {
           var target = document.getElementById('form');
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+          if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
         });
       }
     })();
@@ -1727,28 +1197,25 @@
   <!-- ─── Hero scroll-expansion engine ─────────────────────────── -->
   <script>
     (function () {
-      var prog     = 0;         /* 0 → 1 expansion progress          */
-      var expanded = false;     /* true once prog reaches 1           */
+      var prog     = 0;
+      var expanded = false;
       var touchY0  = 0;
       var mobile   = window.innerWidth < 768;
 
-      /* DOM refs */
       var bg       = document.getElementById('hx-bg');
       var media    = document.getElementById('hx-media');
       var overlay  = document.getElementById('hx-media-overlay');
       var word1    = document.getElementById('hx-word-1');
-      var word2    = document.getElementById('hx-word-2');
-      var subLeft  = document.getElementById('hx-sub-left');
-      var subRight = document.getElementById('hx-sub-right');
+      var subline  = document.getElementById('hx-subline');
+      var hint     = document.getElementById('hx-hint');
+      var hxSub    = document.getElementById('hx-sub');
       var hxCta    = document.getElementById('hx-cta');
 
-      /* ── Render one frame ─────────────────────────────────────── */
       function render() {
-        var mw = 300 + prog * (mobile ? 650  : 1250);
-        var mh = 400 + prog * (mobile ? 200  : 400);
-        var tx = prog * (mobile ? 180  : 150);         /* vw units  */
+        var mw = 320 + prog * (mobile ? 640  : 1280);
+        var mh = 420 + prog * (mobile ? 220  : 420);
+        var tx = prog * (mobile ? 60 : 30);  /* word lifts slightly */
 
-        /* Clamp to viewport so it never overflows during expansion  */
         media.style.width     = mw + 'px';
         media.style.height    = mh + 'px';
         media.style.maxWidth  = '95vw';
@@ -1757,17 +1224,21 @@
         bg.style.opacity      = String(Math.max(0, 1 - prog));
         overlay.style.opacity = String(Math.max(0, 0.45 - prog * 0.25));
 
-        word1.style.transform   = 'translateX(-' + tx + 'vw)';
-        word2.style.transform   = 'translateX('  + tx + 'vw)';
-        subLeft.style.transform  = 'translateX(-' + tx + 'vw)';
-        subRight.style.transform = 'translateX('  + tx + 'vw)';
+        /* Single word lifts up subtly as the image grows */
+        word1.style.transform = 'translateY(-' + tx + 'px)';
 
-        /* Show CTA when nearly expanded */
-        if (prog >= 0.88) { hxCta.classList.add('show');    }
+        /* Pain subline + scroll hint fade out as expansion begins */
+        var fadeEarly = String(Math.max(0, 1 - prog * 2.2));
+        subline.style.opacity = fadeEarly;
+        hint.style.opacity    = fadeEarly;
+
+        /* Meta + CTA appear near full expansion */
+        if (prog >= 0.85) { hxSub.classList.add('show'); }
+        else              { hxSub.classList.remove('show'); }
+        if (prog >= 0.92) { hxCta.classList.add('show'); }
         else              { hxCta.classList.remove('show'); }
       }
 
-      /* ── Advance progress and re-render ──────────────────────── */
       function advance(delta) {
         prog = Math.min(Math.max(prog + delta, 0), 1);
         if (prog >= 1)   { expanded = true;  }
@@ -1775,61 +1246,33 @@
         render();
       }
 
-      /* ── Wheel ───────────────────────────────────────────────── */
       function onWheel(e) {
-        /* Allow collapsing when fully expanded + scrolling back up  */
-        if (expanded && e.deltaY < 0 && window.scrollY <= 5) {
-          expanded = false;
-          e.preventDefault();
-          return;
-        }
-        if (!expanded) {
-          e.preventDefault();
-          advance(e.deltaY * 0.0009);
-        }
+        if (expanded && e.deltaY < 0 && window.scrollY <= 5) { expanded = false; e.preventDefault(); return; }
+        if (!expanded) { e.preventDefault(); advance(e.deltaY * 0.0009); }
       }
 
-      /* ── Touch ───────────────────────────────────────────────── */
-      function onTouchStart(e) {
-        touchY0 = e.touches[0].clientY;
-      }
-
+      function onTouchStart(e) { touchY0 = e.touches[0].clientY; }
       function onTouchMove(e) {
         if (!touchY0) return;
         var dy = touchY0 - e.touches[0].clientY;
-
-        if (expanded && dy < -20 && window.scrollY <= 5) {
-          expanded = false;
-          e.preventDefault();
-          return;
-        }
+        if (expanded && dy < -20 && window.scrollY <= 5) { expanded = false; e.preventDefault(); return; }
         if (!expanded) {
           e.preventDefault();
-          /* Higher sensitivity when reversing (scrolling back up)   */
           advance(dy * (dy < 0 ? 0.008 : 0.005));
           touchY0 = e.touches[0].clientY;
         }
       }
-
       function onTouchEnd() { touchY0 = 0; }
-
-      /* ── Lock page scroll while hero is expanding ────────────── */
-      function onScroll() {
-        if (!expanded) window.scrollTo(0, 0);
-      }
+      function onScroll() { if (!expanded) window.scrollTo(0, 0); }
 
       window.addEventListener('wheel',      onWheel,      { passive: false });
       window.addEventListener('scroll',     onScroll);
       window.addEventListener('touchstart', onTouchStart, { passive: false });
       window.addEventListener('touchmove',  onTouchMove,  { passive: false });
       window.addEventListener('touchend',   onTouchEnd);
+      window.addEventListener('resize', function () { mobile = window.innerWidth < 768; render(); });
 
-      window.addEventListener('resize', function () {
-        mobile = window.innerWidth < 768;
-        render();
-      });
-
-      render(); /* paint initial state (300×400 card, full bg) */
+      render();
     })();
   </script>
 
