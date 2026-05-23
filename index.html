@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1153,6 +1153,32 @@
       display: flex;
       justify-content: center;
     }
+
+    /* ── Language toggle ──────────────────────────────────── */
+    #lang-toggle {
+      position: fixed;
+      top: 1.1rem;
+      right: 1.25rem;
+      z-index: 9999;
+      padding: 0.32rem 0.82rem;
+      border-radius: 100px;
+      border: 1px solid rgba(196,118,58,0.45);
+      background: rgba(14,28,20,0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-family: var(--font-sans);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(244,239,228,0.85);
+      cursor: pointer;
+      transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+    }
+    #lang-toggle:hover {
+      border-color: rgba(196,118,58,0.8);
+      color: #f4efe4;
+    }
   </style>
 </head>
 <body>
@@ -1177,10 +1203,13 @@
     </defs>
   </svg>
 
+  <!-- Language toggle — fixed top-right -->
+  <button id="lang-toggle" aria-label="Switch language">ES</button>
+
   <!-- Sticky button — always visible after hero, sends to #pricing -->
   <div id="sticky-pricing">
     <a href="#pricing" class="glass-btn">
-      <span>Ver Inversión</span>
+      <span data-en="See Pricing" data-es="Ver Inversión">See Pricing</span>
     </a>
   </div>
 
@@ -1220,23 +1249,23 @@
     </div>
 
     <!-- The pain hook — visible from the start -->
-    <p id="hx-subline">When were you last present?</p>
+    <p id="hx-subline" data-en="When were you last present?" data-es="¿Cuándo fue la última vez que estuviste presente?">When were you last present?</p>
 
     <!-- Scroll hint -->
     <div id="hx-hint">
-      <span>Scroll to enter</span>
+      <span data-en="Scroll to enter" data-es="Desliza para entrar">Scroll to enter</span>
       <div class="hint-arrow" aria-hidden="true"></div>
     </div>
 
     <!-- Meta row — appears after expansion -->
     <div id="hx-sub">
       <p id="hx-sub-left">Riviera Maya · México</p>
-      <p id="hx-sub-right">4 Días · 18 Lugares</p>
+      <p id="hx-sub-right" data-en="4 Days · 18 Experiences" data-es="4 Días · 18 Experiencias">4 Days · 18 Experiences</p>
     </div>
 
     <!-- CTA — appears after full expansion -->
     <div id="hx-cta">
-      <a href="#form" class="glass-btn"><span>Reclama tu lugar</span></a>
+      <a href="#form" class="glass-btn"><span data-en="Claim your spot" data-es="Reclama tu lugar">Claim your spot</span></a>
     </div>
 
   </section>
@@ -1246,19 +1275,11 @@
   ════════════════════════════════════════════════════════ -->
   <section id="pain" aria-label="The invitation">
     <div class="pain__inner">
-      <p class="pain__lead fade-up">
-        Respondes correos en la cena. Revisas el teléfono antes de abrir los ojos.
-        <span class="muted">Tu cuerpo está en la sala, pero tu mente está en tres lugares a la vez.</span>
-      </p>
+      <p class="pain__lead fade-up" data-en="You're always on. Always reachable. Always somewhere else." data-es="Siempre conectado. Siempre disponible. Siempre en otro lado.">You're always on. Always reachable. Always somewhere else.</p>
 
       <div class="pain__break fade-up" data-delay="1" aria-hidden="true"></div>
 
-      <p class="pain__turn fade-up" data-delay="2">
-        Lo llamas "estar ocupado". Pero hace tiempo que dejaste de estar presente.
-        <br /><br />
-        <span class="gold">Presencia</span> no es otro retiro. Es el regreso — a tu cuerpo,
-        a tu atención, a la única vida que estás viviendo.
-      </p>
+      <p class="pain__turn fade-up" data-delay="2"><span data-en="Somewhere between the noise and the next thing, you stopped being here. " data-es="En algún punto entre el ruido y lo que sigue, dejaste de estar aquí. ">Somewhere between the noise and the next thing, you stopped being here. </span><span class="gold">Presencia</span><span data-en=" is four days away from the world — to come back to the only life you're actually living." data-es=" son cuatro días lejos del mundo — para volver a la única vida que realmente estás viviendo."> is four days away from the world — to come back to the only life you're actually living.</span></p>
     </div>
   </section>
 
@@ -1267,7 +1288,7 @@
   ════════════════════════════════════════════════════════ -->
   <section id="pillars" aria-label="The three pillars">
     <div class="pillars__header">
-      <span class="eyebrow center fade-up">Los Tres Pilares</span>
+      <span class="eyebrow center fade-up" data-en="The Three Pillars" data-es="Los Tres Pilares">The Three Pillars</span>
       <h2 class="pillars__title fade-up" data-delay="1">Health. Wealth. Adventure.</h2>
     </div>
 
@@ -1285,10 +1306,10 @@
         </span>
         <div class="skew-card__content">
           <span class="pillar__index">01 — Health</span>
-          <h3 class="pillar__name">Salud</h3>
-          <p class="pillar__tag">Recupera el cuerpo que el trabajo te quitó.</p>
-          <p class="pillar__desc">Temazcal, breathwork, sound healing y yoga al amanecer frente al Caribe. Protocolos reales de recuperación, sueño y sistema nervioso — no clichés.</p>
-          <a href="#program" class="skew-card__cta">Explorar</a>
+          <h3 class="pillar__name" data-en="Health" data-es="Salud">Health</h3>
+          <p class="pillar__tag" data-en="Recover the body that work took from you." data-es="Recupera el cuerpo que el trabajo te quitó.">Recover the body that work took from you.</p>
+          <p class="pillar__desc" data-en="Breathwork, sound healing, and morning yoga by the Caribbean. Real protocols for recovery, sleep, and nervous system reset — not clichés." data-es="Breathwork, sound healing y yoga al amanecer frente al Caribe. Protocolos reales de recuperación, sueño y sistema nervioso — no clichés.">Breathwork, sound healing, and morning yoga by the Caribbean. Real protocols for recovery, sleep, and nervous system reset — not clichés.</p>
+          <a href="#program" class="skew-card__cta" data-en="Explore" data-es="Explorar">Explore</a>
         </div>
       </div>
 
@@ -1304,10 +1325,10 @@
         </span>
         <div class="skew-card__content">
           <span class="pillar__index">02 — Wealth</span>
-          <h3 class="pillar__name">Riqueza</h3>
-          <p class="pillar__tag">La verdadera riqueza empieza cuando puedes detenerte.</p>
-          <p class="pillar__desc">Workshops de longevidad y memoria diseñados para quienes ya tienen el éxito, pero buscan el sentido. Claridad mental como activo, no como lujo.</p>
-          <a href="#pricing" class="skew-card__cta">Ver Inversión</a>
+          <h3 class="pillar__name" data-en="Wealth" data-es="Riqueza">Wealth</h3>
+          <p class="pillar__tag" data-en="True wealth begins when you can stop." data-es="La verdadera riqueza empieza cuando puedes detenerte.">True wealth begins when you can stop.</p>
+          <p class="pillar__desc" data-en="Longevity and memory workshops designed for those who already have success but seek meaning. Mental clarity as an asset, not a luxury." data-es="Workshops de longevidad y memoria diseñados para quienes ya tienen el éxito, pero buscan el sentido. Claridad mental como activo, no como lujo.">Longevity and memory workshops designed for those who already have success but seek meaning. Mental clarity as an asset, not a luxury.</p>
+          <a href="#pricing" class="skew-card__cta" data-en="See Pricing" data-es="Ver Inversión">See Pricing</a>
         </div>
       </div>
 
@@ -1323,10 +1344,10 @@
         </span>
         <div class="skew-card__content">
           <span class="pillar__index">03 — Adventure</span>
-          <h3 class="pillar__name">Aventura</h3>
-          <p class="pillar__tag">El asombro también cura.</p>
-          <p class="pillar__desc">Cenotes, ruinas mayas, mar abierto. La selva como medicina y el océano como reset. Lo que la rutina te ha hecho olvidar.</p>
-          <a href="#excursions" class="skew-card__cta">Explorar</a>
+          <h3 class="pillar__name" data-en="Adventure" data-es="Aventura">Adventure</h3>
+          <p class="pillar__tag" data-en="Wonder heals too." data-es="El asombro también cura.">Wonder heals too.</p>
+          <p class="pillar__desc" data-en="Cenotes, Mayan ruins, open sea. The jungle as medicine and the ocean as reset. What routine has made you forget." data-es="Cenotes, ruinas mayas, mar abierto. La selva como medicina y el océano como reset. Lo que la rutina te ha hecho olvidar.">Cenotes, Mayan ruins, open sea. The jungle as medicine and the ocean as reset. What routine has made you forget.</p>
+          <a href="#excursions" class="skew-card__cta" data-en="Explore" data-es="Explorar">Explore</a>
         </div>
       </div>
 
@@ -1337,9 +1358,9 @@
        §4  THE SETTING
   ════════════════════════════════════════════════════════ -->
   <section id="setting" aria-label="The setting">
-    <span class="eyebrow center fade-up">El Lugar</span>
+    <span class="eyebrow center fade-up" data-en="The Place" data-es="El Lugar">The Place</span>
     <h2 class="setting__title fade-up" data-delay="1">
-      Una hacienda privada en el<br />corazón de la Riviera Maya.
+      <span data-en="A private hacienda in the" data-es="Una hacienda privada en el">A private hacienda in the</span><br /><span data-en="heart of the Riviera Maya." data-es="corazón de la Riviera Maya.">heart of the Riviera Maya.</span>
     </h2>
 
     <div class="glow-cards fade-up" data-delay="2" aria-label="Cifras clave">
@@ -1349,9 +1370,9 @@
         <div data-glow></div>
         <div class="glow-card__top">
           <span class="glow-card__num">9</span>
-          <span class="glow-card__label">Suites Privadas</span>
+          <span class="glow-card__label" data-en="Private Suites" data-es="Suites Privadas">Private Suites</span>
         </div>
-        <p class="glow-card__desc">Espacios coloniales de lujo con acceso directo a los jardines y la piscina-cenote privada de la hacienda.</p>
+        <p class="glow-card__desc" data-en="Luxury colonial spaces with direct access to the gardens and the hacienda's private cenote pool." data-es="Espacios coloniales de lujo con acceso directo a los jardines y la piscina-cenote privada de la hacienda.">Luxury colonial spaces with direct access to the gardens and the hacienda's private cenote pool.</p>
       </div>
 
       <!-- Card 2 — gold spotlight -->
@@ -1359,9 +1380,9 @@
         <div data-glow></div>
         <div class="glow-card__top">
           <span class="glow-card__num">18</span>
-          <span class="glow-card__label">Máximo Huéspedes</span>
+          <span class="glow-card__label" data-en="Maximum Guests" data-es="Máximo Huéspedes">Maximum Guests</span>
         </div>
-        <p class="glow-card__desc">Retiro completamente privado — sin extraños, sin interrupciones. Solo tu grupo y un equipo dedicado.</p>
+        <p class="glow-card__desc" data-en="Completely private retreat — no strangers, no interruptions. Just your group and a dedicated team." data-es="Retiro completamente privado — sin extraños, sin interrupciones. Solo tu grupo y un equipo dedicado.">Completely private retreat — no strangers, no interruptions. Just your group and a dedicated team.</p>
       </div>
 
       <!-- Card 3 — blue spotlight -->
@@ -1369,18 +1390,14 @@
         <div data-glow></div>
         <div class="glow-card__top">
           <span class="glow-card__num">4</span>
-          <span class="glow-card__label">Días &amp; Noches</span>
+          <span class="glow-card__label" data-en="Days &amp; Nights" data-es="Días &amp; Noches">Days &amp; Nights</span>
         </div>
-        <p class="glow-card__desc">El tiempo justo para desconectar de verdad. Un arco completo de transformación — no solo un fin de semana de lujo.</p>
+        <p class="glow-card__desc" data-en="Just enough time to truly disconnect. A complete arc of transformation — not just a luxury weekend." data-es="El tiempo justo para desconectar de verdad. Un arco completo de transformación — no solo un fin de semana de lujo.">Just enough time to truly disconnect. A complete arc of transformation — not just a luxury weekend.</p>
       </div>
 
     </div>
 
-    <p class="setting__desc fade-up" data-delay="5">
-      Una propiedad colonial privada dentro de Hacienda at Xcaret — palmeras, piedra,
-      una alberca estilo cenote. A distancia caminable de Río Secreto y a diez minutos
-      de la costa del Caribe.
-    </p>
+    <p class="setting__desc fade-up" data-delay="5" data-en="A private colonial property within Hacienda at Xcaret — palm trees, stone, a cenote-style pool. Walking distance to Río Secreto and ten minutes from the Caribbean coast." data-es="Una propiedad colonial privada dentro de Hacienda at Xcaret — palmeras, piedra, una alberca estilo cenote. A distancia caminable de Río Secreto y a diez minutos de la costa del Caribe.">A private colonial property within Hacienda at Xcaret — palm trees, stone, a cenote-style pool. Walking distance to Río Secreto and ten minutes from the Caribbean coast.</p>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
@@ -1388,8 +1405,8 @@
   ════════════════════════════════════════════════════════ -->
   <section id="gallery" aria-label="Gallery">
     <div class="gallery__header">
-      <span class="eyebrow center fade-up">El Escenario</span>
-      <h2 class="gallery__title fade-up" data-delay="1">Donde sucede el regreso.</h2>
+      <span class="eyebrow center fade-up" data-en="The Setting" data-es="El Escenario">The Setting</span>
+      <h2 class="gallery__title fade-up" data-delay="1" data-en="Where the return happens." data-es="Donde sucede el regreso.">Where the return happens.</h2>
     </div>
 
     <div class="gallery__grid">
@@ -1457,8 +1474,8 @@
   ════════════════════════════════════════════════════════ -->
   <section id="program" aria-label="Program">
     <div class="program__header">
-      <span class="eyebrow center fade-up">El Programa</span>
-      <h2 class="program__title fade-up" data-delay="1">Ocho modalidades. Un solo arco.</h2>
+      <span class="eyebrow center fade-up" data-en="The Program" data-es="El Programa">The Program</span>
+      <h2 class="program__title fade-up" data-delay="1" data-en="Eight modalities. One arc." data-es="Ocho modalidades. Un solo arco.">Eight modalities. One arc.</h2>
     </div>
 
     <div class="atabs fade-up" data-delay="2">
@@ -1473,7 +1490,7 @@
         <button class="atabs__tab"           role="tab" aria-selected="false" data-tab="memory">Memory</button>
         <button class="atabs__tab"           role="tab" aria-selected="false" data-tab="longevity">Longevity</button>
         <button class="atabs__tab"           role="tab" aria-selected="false" data-tab="sup">SUP</button>
-        <button class="atabs__tab"           role="tab" aria-selected="false" data-tab="catamaran">Catamarán</button>
+        <button class="atabs__tab"           role="tab" aria-selected="false" data-tab="catamaran" data-en="Catamaran" data-es="Catamarán">Catamaran</button>
       </div>
 
       <!-- Panel area -->
@@ -1486,7 +1503,7 @@
           <div class="atabs__meta">
             <span class="atabs__num">i</span>
             <h3 class="atabs__name">Temazcal</h3>
-            <p class="atabs__desc">Una cámara circular de piedra, un fuego sagrado, hierbas medicinales. El temazcal maya purifica el cuerpo y activa el sistema inmunológico a través del calor húmedo y el vapor aromático. Guiado por un curandero certificado.</p>
+            <p class="atabs__desc" data-en="A circular stone chamber, medicinal herbs, and therapeutic steam. The Maya temazcal purifies the body and activates the immune system through moist heat and aromatic vapor. Guided by a certified practitioner." data-es="Una cámara circular de piedra, un fuego sagrado, hierbas medicinales. El temazcal maya purifica el cuerpo y activa el sistema inmunológico a través del calor húmedo y el vapor aromático. Guiado por un curandero certificado.">A circular stone chamber, medicinal herbs, and therapeutic steam. The Maya temazcal purifies the body and activates the immune system through moist heat and aromatic vapor. Guided by a certified practitioner.</p>
           </div>
         </div>
 
@@ -1497,7 +1514,7 @@
           <div class="atabs__meta">
             <span class="atabs__num">ii</span>
             <h3 class="atabs__name">Sound Healing</h3>
-            <p class="atabs__desc">Cuencos tibetanos de cristal, gong y voz en capas. Las frecuencias vibratorias reducen cortisol, modulan el sistema nervioso autónomo y producen un estado de reposo profundo — en menos de veinte minutos.</p>
+            <p class="atabs__desc" data-en="Crystal singing bowls, gong, and layered voice. Vibratory frequencies reduce cortisol, modulate the autonomic nervous system, and produce deep rest — in under twenty minutes." data-es="Cuencos tibetanos de cristal, gong y voz en capas. Las frecuencias vibratorias reducen cortisol, modulan el sistema nervioso autónomo y producen un estado de reposo profundo — en menos de veinte minutos.">Crystal singing bowls, gong, and layered voice. Vibratory frequencies reduce cortisol, modulate the autonomic nervous system, and produce deep rest — in under twenty minutes.</p>
           </div>
         </div>
 
@@ -1508,7 +1525,7 @@
           <div class="atabs__meta">
             <span class="atabs__num">iii</span>
             <h3 class="atabs__name">Breathwork</h3>
-            <p class="atabs__desc">El trabajo de respiración consciente activa el sistema nervioso parasimpático, libera tensión somática acumulada y restaura la capacidad de autorregulación. La herramienta más directa que existe para cambiar cómo te sientes en segundos.</p>
+            <p class="atabs__desc" data-en="Conscious breathwork activates the parasympathetic nervous system, releases accumulated somatic tension, and restores the capacity for self-regulation. The most direct tool for changing how you feel — in seconds." data-es="El trabajo de respiración consciente activa el sistema nervioso parasimpático, libera tensión somática acumulada y restaura la capacidad de autorregulación. La herramienta más directa que existe para cambiar cómo te sientes en segundos.">Conscious breathwork activates the parasympathetic nervous system, releases accumulated somatic tension, and restores the capacity for self-regulation. The most direct tool for changing how you feel — in seconds.</p>
           </div>
         </div>
 
@@ -1519,7 +1536,7 @@
           <div class="atabs__meta">
             <span class="atabs__num">iv</span>
             <h3 class="atabs__name">Yoga</h3>
-            <p class="atabs__desc">Práctica diaria al amanecer en el pabellón abierto sobre la selva. Vinyasa suave para despertar el cuerpo, Yin para tejidos profundos y tensión acumulada, Nidra para el descanso activo. Adaptada a todos los niveles.</p>
+            <p class="atabs__desc" data-en="Daily practice at dawn in the open pavilion above the jungle. Gentle Vinyasa to awaken the body, Yin for deep tissue and accumulated tension, Nidra for active rest. Adapted to all levels." data-es="Práctica diaria al amanecer en el pabellón abierto sobre la selva. Vinyasa suave para despertar el cuerpo, Yin para tejidos profundos y tensión acumulada, Nidra para el descanso activo. Adaptada a todos los niveles.">Daily practice at dawn in the open pavilion above the jungle. Gentle Vinyasa to awaken the body, Yin for deep tissue and accumulated tension, Nidra for active rest. Adapted to all levels.</p>
           </div>
         </div>
 
@@ -1530,7 +1547,7 @@
           <div class="atabs__meta">
             <span class="atabs__num">v</span>
             <h3 class="atabs__name">Memory Workshop</h3>
-            <p class="atabs__desc">Aprende los marcos de atención, memoria y foco que usan los mejores ejecutivos, atletas y artistas del mundo. Técnicas validadas por neurociencia que puedes implementar desde el primer día de regreso a casa.</p>
+            <p class="atabs__desc" data-en="Learn the attention, memory, and focus frameworks used by the world's top executives, athletes, and artists. Neuroscience-validated techniques you can implement from day one back home." data-es="Aprende los marcos de atención, memoria y foco que usan los mejores ejecutivos, atletas y artistas del mundo. Técnicas validadas por neurociencia que puedes implementar desde el primer día de regreso a casa.">Learn the attention, memory, and focus frameworks used by the world's top executives, athletes, and artists. Neuroscience-validated techniques you can implement from day one back home.</p>
           </div>
         </div>
 
@@ -1541,7 +1558,7 @@
           <div class="atabs__meta">
             <span class="atabs__num">vi</span>
             <h3 class="atabs__name">Longevity Workshop</h3>
-            <p class="atabs__desc">Protocolos prácticos de sueño de alta calidad, salud metabólica, recuperación activa y marcadores de longevidad. Basados en investigación de Huberman, Attia y Sinclair. Tradúcelos en rutinas concretas desde el día uno.</p>
+            <p class="atabs__desc" data-en="Practical protocols for high-quality sleep, metabolic health, active recovery, and longevity markers. Based on research from Huberman, Attia, and Sinclair. Translate them into concrete routines from day one." data-es="Protocolos prácticos de sueño de alta calidad, salud metabólica, recuperación activa y marcadores de longevidad. Basados en investigación de Huberman, Attia y Sinclair. Tradúcelos en rutinas concretas desde el día uno.">Practical protocols for high-quality sleep, metabolic health, active recovery, and longevity markers. Based on research from Huberman, Attia, and Sinclair. Translate them into concrete routines from day one.</p>
           </div>
         </div>
 
@@ -1552,7 +1569,7 @@
           <div class="atabs__meta">
             <span class="atabs__num">vii</span>
             <h3 class="atabs__name">Stand-Up Paddle</h3>
-            <p class="atabs__desc">Remadas tranquilas al amanecer sobre el Caribe turquesa. El paddle es meditación en movimiento: equilibrio, respiración, presencia absoluta con el agua y el silencio de la mañana antes de que el mundo despierte.</p>
+            <p class="atabs__desc" data-en="Quiet paddles at dawn on the turquoise Caribbean. Paddling is meditation in motion: balance, breath, and total presence with the water and morning silence before the world wakes up." data-es="Remadas tranquilas al amanecer sobre el Caribe turquesa. El paddle es meditación en movimiento: equilibrio, respiración, presencia absoluta con el agua y el silencio de la mañana antes de que el mundo despierte.">Quiet paddles at dawn on the turquoise Caribbean. Paddling is meditation in motion: balance, breath, and total presence with the water and morning silence before the world wakes up.</p>
           </div>
         </div>
 
@@ -1562,8 +1579,8 @@
             alt="Catamarán — vista aérea de navegación privada en el Caribe" />
           <div class="atabs__meta">
             <span class="atabs__num">viii</span>
-            <h3 class="atabs__name">Catamarán</h3>
-            <p class="atabs__desc">Un día completo de navegación privada a bordo de un catamarán de lujo. Arrecifes de coral, snorkel, ceviche a bordo y el horizonte del Caribe como único límite. La aventura como práctica de presencia total.</p>
+            <h3 class="atabs__name" data-en="Catamaran" data-es="Catamarán">Catamaran</h3>
+            <p class="atabs__desc" data-en="A full day of private sailing aboard a luxury catamaran. Coral reefs, snorkeling, ceviche on board, and the Caribbean horizon as the only limit. Adventure as a practice of total presence." data-es="Un día completo de navegación privada a bordo de un catamarán de lujo. Arrecifes de coral, snorkel, ceviche a bordo y el horizonte del Caribe como único límite. La aventura como práctica de presencia total.">A full day of private sailing aboard a luxury catamaran. Coral reefs, snorkeling, ceviche on board, and the Caribbean horizon as the only limit. Adventure as a practice of total presence.</p>
           </div>
         </div>
 
@@ -1576,12 +1593,9 @@
   ════════════════════════════════════════════════════════ -->
   <section id="excursions" aria-label="Excursions">
     <div class="excursions__header">
-      <span class="eyebrow center fade-up">Más Allá de la Hacienda</span>
-      <h2 class="excursions__title fade-up" data-delay="1">Un mundo entero por explorar.</h2>
-      <p class="excursions__sub fade-up" data-delay="2">
-        La Riviera Maya es infinita. Estas son algunas de las experiencias que podemos
-        sumar a tu retiro — desde ruinas milenarias hasta nadar con tiburón ballena.
-      </p>
+      <span class="eyebrow center fade-up" data-en="Beyond the Hacienda" data-es="Más Allá de la Hacienda">Beyond the Hacienda</span>
+      <h2 class="excursions__title fade-up" data-delay="1" data-en="A whole world to explore." data-es="Un mundo entero por explorar.">A whole world to explore.</h2>
+      <p class="excursions__sub fade-up" data-delay="2" data-en="The Riviera Maya is infinite. These are some of the experiences we can add to your retreat — from ancient ruins to swimming with whale sharks." data-es="La Riviera Maya es infinita. Estas son algunas de las experiencias que podemos sumar a tu retiro — desde ruinas milenarias hasta nadar con tiburón ballena.">The Riviera Maya is infinite. These are some of the experiences we can add to your retreat — from ancient ruins to swimming with whale sharks.</p>
     </div>
 
     <div class="cgallery-wrap fade-up" data-delay="3">
@@ -1591,7 +1605,7 @@
           <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512212/The_Kukulc%C3%A1n_pyramid__El_Castillo__202605222251_soardz.jpg" alt="Chichén Itzá — Pirámide de Kukulcán" />
           <div class="cgallery__item-overlay">
             <span class="cgallery__item-name">Chichén Itzá</span>
-            <span class="cgallery__item-note">Una de las nuevas maravillas del mundo.</span>
+            <span class="cgallery__item-note" data-en="One of the new wonders of the world." data-es="Una de las nuevas maravillas del mundo.">One of the new wonders of the world.</span>
           </div>
         </div>
 
@@ -1599,7 +1613,7 @@
           <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512211/Mayan_ruins_of_Tulum_perched_202605222252_irmegm.jpg" alt="Tulum — Ruinas mayas sobre el acantilado" />
           <div class="cgallery__item-overlay">
             <span class="cgallery__item-name">Tulum</span>
-            <span class="cgallery__item-note">Ruinas mayas frente al mar turquesa.</span>
+            <span class="cgallery__item-note" data-en="Mayan ruins facing the turquoise sea." data-es="Ruinas mayas frente al mar turquesa.">Mayan ruins facing the turquoise sea.</span>
           </div>
         </div>
 
@@ -1607,7 +1621,7 @@
           <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512212/A_natural_open-air_cenote_in_202605222252_qqvese.jpg" alt="Cenote natural a cielo abierto" />
           <div class="cgallery__item-overlay">
             <span class="cgallery__item-name">Cenotes</span>
-            <span class="cgallery__item-note">Jardín del Edén y ríos subterráneos.</span>
+            <span class="cgallery__item-note" data-en="Garden of Eden and underground rivers." data-es="Jardín del Edén y ríos subterráneos.">Garden of Eden and underground rivers.</span>
           </div>
         </div>
 
@@ -1615,7 +1629,7 @@
           <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512211/The_ancient_Nohoch_Mul_pyramid_202605222253_acb6oe.jpg" alt="Cobá — Pirámide Nohoch Mul entre la selva" />
           <div class="cgallery__item-overlay">
             <span class="cgallery__item-name">Cobá</span>
-            <span class="cgallery__item-note">Pirámides ocultas entre la selva.</span>
+            <span class="cgallery__item-note" data-en="Pyramids hidden in the jungle." data-es="Pirámides ocultas entre la selva.">Pyramids hidden in the jungle.</span>
           </div>
         </div>
 
@@ -1623,7 +1637,7 @@
           <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512211/A_quiet_white-sand_beach_on_202605222253_oedamf.jpg" alt="Isla Mujeres — Playa de arena blanca" />
           <div class="cgallery__item-overlay">
             <span class="cgallery__item-name">Isla Mujeres</span>
-            <span class="cgallery__item-note">Playas de arena blanca y aguas calmas.</span>
+            <span class="cgallery__item-note" data-en="White sand beaches and calm waters." data-es="Playas de arena blanca y aguas calmas.">White sand beaches and calm waters.</span>
           </div>
         </div>
 
@@ -1631,7 +1645,7 @@
           <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512211/A_whale_shark_swimming_gently_202605222254_btfnob.jpg" alt="Holbox — Tiburón ballena en aguas cristalinas" />
           <div class="cgallery__item-overlay">
             <span class="cgallery__item-name">Holbox</span>
-            <span class="cgallery__item-note">Tiburón ballena y bioluminiscencia.</span>
+            <span class="cgallery__item-note" data-en="Whale sharks and bioluminescence." data-es="Tiburón ballena y bioluminiscencia.">Whale sharks and bioluminescence.</span>
           </div>
         </div>
 
@@ -1639,7 +1653,7 @@
           <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512210/A_flock_of_pink_flamingos_202605222255_r97pta.jpg" alt="Río Lagartos — Flamencos rosados en los manglares" />
           <div class="cgallery__item-overlay">
             <span class="cgallery__item-name">Río Lagartos</span>
-            <span class="cgallery__item-note">Flamencos rosados y manglares.</span>
+            <span class="cgallery__item-note" data-en="Pink flamingos and mangroves." data-es="Flamencos rosados y manglares.">Pink flamingos and mangroves.</span>
           </div>
         </div>
 
@@ -1647,20 +1661,20 @@
           <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512210/The_lively_pedestrian_street_of_202605222255_kx4lvi.jpg" alt="Quinta Avenida — Calle peatonal de Playa del Carmen" />
           <div class="cgallery__item-overlay">
             <span class="cgallery__item-name">Quinta Avenida</span>
-            <span class="cgallery__item-note">El pulso de Playa del Carmen.</span>
+            <span class="cgallery__item-note" data-en="The pulse of Playa del Carmen." data-es="El pulso de Playa del Carmen.">The pulse of Playa del Carmen.</span>
           </div>
         </div>
 
       </div>
     </div>
     <div class="cgallery-controls fade-up" data-delay="4">
-      <button class="cgallery-btn" id="cgallery-pause" aria-label="Pausar carrusel" type="button">
+      <button class="cgallery-btn" id="cgallery-pause" aria-label="Pause carousel" type="button">
         <svg viewBox="0 0 10 12" aria-hidden="true"><rect x="0" y="0" width="3.5" height="12" rx="1"/><rect x="6.5" y="0" width="3.5" height="12" rx="1"/></svg>
-        Pausar
+        <span data-en="Pause" data-es="Pausar">Pause</span>
       </button>
-      <button class="cgallery-btn is-active" id="cgallery-play" aria-label="Reanudar carrusel" type="button">
+      <button class="cgallery-btn is-active" id="cgallery-play" aria-label="Play carousel" type="button">
         <svg viewBox="0 0 10 12" aria-hidden="true"><polygon points="0,0 10,6 0,12"/></svg>
-        Reproducir
+        <span data-en="Play" data-es="Reproducir">Play</span>
       </button>
     </div>
   </section>
@@ -1670,21 +1684,18 @@
   ════════════════════════════════════════════════════════ -->
   <section id="pricing" aria-label="Pricing">
     <div class="pricing__inner">
-      <span class="eyebrow center fade-up">La Inversión</span>
-      <h2 class="pricing__title fade-up" data-delay="1">Cuatro días que reescriben tu relación con el tiempo.</h2>
+      <span class="eyebrow center fade-up" data-en="The Investment" data-es="La Inversión">The Investment</span>
+      <h2 class="pricing__title fade-up" data-delay="1" data-en="Four days that rewrite your relationship with time." data-es="Cuatro días que reescriben tu relación con el tiempo.">Four days that rewrite your relationship with time.</h2>
 
       <div class="pricing__card fade-up" data-delay="2">
-        <p class="pricing__from">Desde</p>
+        <p class="pricing__from" data-en="From" data-es="Desde">From</p>
         <p class="pricing__amount"><span>$</span>2,000<span style="font-size:0.3em; color:rgba(244,239,228,0.5);"> USD</span></p>
-        <p class="pricing__per">por persona · ocupación compartida</p>
-        <p class="pricing__note">
-          Todo incluido excepto tu vuelo — suite, todas las comidas, cada sesión de
-          bienestar, transportes y el día de mar. Sin sorpresas, sin upsells.
-        </p>
+        <p class="pricing__per" data-en="per person · shared occupancy" data-es="por persona · ocupación compartida">per person · shared occupancy</p>
+        <p class="pricing__note" data-en="All-inclusive except your flight — suite, all meals, every wellness session, transfers, and the day at sea. No surprises, no upsells." data-es="Todo incluido excepto tu vuelo — suite, todas las comidas, cada sesión de bienestar, transportes y el día de mar. Sin sorpresas, sin upsells.">All-inclusive except your flight — suite, all meals, every wellness session, transfers, and the day at sea. No surprises, no upsells.</p>
       </div>
 
       <div class="pricing__cta-wrap fade-up" data-delay="3">
-        <a href="#form" class="glass-btn"><span>Quiero mi lugar</span></a>
+        <a href="#form" class="glass-btn"><span data-en="I want my spot" data-es="Quiero mi lugar">I want my spot</span></a>
       </div>
     </div>
   </section>
@@ -1696,8 +1707,8 @@
     <div class="sq__inner">
       <div class="sq__rule fade-up"></div>
       <blockquote class="sq__text fade-up" data-delay="1">
-        <span>"La hacienda es el contenedor.</span>
-        <span>El temazcal es la puerta."</span>
+        <span data-en="&ldquo;Step away from everything." data-es="&ldquo;Aléjate de todo.">"Step away from everything.</span>
+        <span data-en="Return to yourself.&rdquo;" data-es="Vuelve a ti.&rdquo;">Return to yourself."</span>
       </blockquote>
       <div class="sq__rule fade-up" data-delay="2"></div>
     </div>
@@ -1709,12 +1720,9 @@
   <section id="testimonial" aria-label="Testimonial">
     <div class="testimonial__card fade-up">
       <span class="testimonial__mark" aria-hidden="true">"</span>
-      <p class="testimonial__text">
-        Una experiencia verdaderamente transformadora. La hacienda es un lugar mágico
-        para sanar y reconectar.
-      </p>
-      <p class="testimonial__author">Carolina — Actriz colombiana &amp; Wellness Advocate</p>
-      <p class="testimonial__proof">3 retiros reservados en los últimos 2 meses</p>
+      <p class="testimonial__text" data-en="A truly transformative experience. The hacienda is a magical place to heal and reconnect." data-es="Una experiencia verdaderamente transformadora. La hacienda es un lugar mágico para sanar y reconectar.">A truly transformative experience. The hacienda is a magical place to heal and reconnect.</p>
+      <p class="testimonial__author" data-en="Carolina — Colombian Actress &amp; Wellness Advocate" data-es="Carolina — Actriz colombiana &amp; Wellness Advocate">Carolina — Colombian Actress &amp; Wellness Advocate</p>
+      <p class="testimonial__proof" data-en="3 retreats booked in the last 2 months" data-es="3 retiros reservados en los últimos 2 meses">3 retreats booked in the last 2 months</p>
     </div>
   </section>
 
@@ -1723,9 +1731,9 @@
   ════════════════════════════════════════════════════════ -->
   <section id="form" aria-label="Application form">
     <div class="form__header">
-      <span class="eyebrow center fade-up">Cupos Limitados</span>
-      <h2 class="form__title fade-up" data-delay="1">Reclama tu lugar</h2>
-      <p class="form__subtitle fade-up" data-delay="2">18 huéspedes · Por aplicación · Cupos limitados</p>
+      <span class="eyebrow center fade-up" data-en="Limited Spots" data-es="Cupos Limitados">Limited Spots</span>
+      <h2 class="form__title fade-up" data-delay="1" data-en="Claim your spot" data-es="Reclama tu lugar">Claim your spot</h2>
+      <p class="form__subtitle fade-up" data-delay="2" data-en="18 guests · By application · Limited spots" data-es="18 huéspedes · Por aplicación · Cupos limitados">18 guests · By application · Limited spots</p>
     </div>
 
     <form
@@ -1736,8 +1744,8 @@
       enctype="text/plain"
     >
       <div class="form__group">
-        <label class="form__field-label" for="f-name">Nombre completo</label>
-        <input class="form__input" type="text" id="f-name" name="nombre" placeholder="Tu nombre completo" required />
+        <label class="form__field-label" for="f-name" data-en="Full name" data-es="Nombre completo">Full name</label>
+        <input class="form__input" type="text" id="f-name" name="nombre" placeholder="Your full name" data-en-ph="Your full name" data-es-ph="Tu nombre completo" required />
       </div>
 
       <div class="form__group">
@@ -1746,29 +1754,29 @@
       </div>
 
       <div class="form__group">
-        <label class="form__field-label" for="f-phone">WhatsApp / Teléfono</label>
+        <label class="form__field-label" for="f-phone" data-en="WhatsApp / Phone" data-es="WhatsApp / Teléfono">WhatsApp / Phone</label>
         <input class="form__input" type="tel" id="f-phone" name="telefono" placeholder="+1 (000) 000 0000" />
       </div>
 
       <div class="form__group">
-        <label class="form__field-label" for="f-source">¿Cómo nos encontraste?</label>
+        <label class="form__field-label" for="f-source" data-en="How did you find us?" data-es="¿Cómo nos encontraste?">How did you find us?</label>
         <div class="form__select-wrap">
           <select class="form__select" id="f-source" name="como_nos_encontraste">
-            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="" disabled selected data-en="Select an option" data-es="Selecciona una opción">Select an option</option>
             <option value="instagram">Instagram</option>
-            <option value="recomendacion">Recomendación</option>
+            <option value="recomendacion" data-en="Recommendation" data-es="Recomendación">Recommendation</option>
             <option value="google">Google</option>
-            <option value="otro">Otro</option>
+            <option value="otro" data-en="Other" data-es="Otro">Other</option>
           </select>
         </div>
       </div>
 
       <div class="form__group">
-        <label class="form__field-label" for="f-intention">Tu intención para este retiro</label>
-        <textarea class="form__textarea" id="f-intention" name="intencion" rows="4" placeholder="Comparte brevemente lo que buscas en esta experiencia…"></textarea>
+        <label class="form__field-label" for="f-intention" data-en="Your intention for this retreat" data-es="Tu intención para este retiro">Your intention for this retreat</label>
+        <textarea class="form__textarea" id="f-intention" name="intencion" rows="4" placeholder="Share briefly what you're looking for in this experience…" data-en-ph="Share briefly what you're looking for in this experience…" data-es-ph="Comparte brevemente lo que buscas en esta experiencia…"></textarea>
       </div>
 
-      <button class="form__submit glass-btn" type="submit"><span>Enviar mi solicitud</span></button>
+      <button class="form__submit glass-btn" type="submit"><span data-en="Send my application" data-es="Enviar mi solicitud">Send my application</span></button>
     </form>
   </section>
 
@@ -2082,6 +2090,34 @@
       }, { threshold: 0.08 });
 
       obs.observe(hero);
+    })();
+  </script>
+
+  <!-- ─── Language toggle ─────────────────────────────────── -->
+  <script>
+    (function () {
+      var lang = 'en';
+      var btn  = document.getElementById('lang-toggle');
+
+      function applyLang(l) {
+        lang = l;
+        document.documentElement.lang = l;
+        btn.textContent = l === 'en' ? 'ES' : 'EN';
+
+        /* Swap textContent for all tagged elements */
+        document.querySelectorAll('[data-en]').forEach(function (el) {
+          el.textContent = el.getAttribute('data-' + l);
+        });
+
+        /* Swap placeholders */
+        document.querySelectorAll('[data-en-ph]').forEach(function (el) {
+          el.placeholder = el.getAttribute('data-' + l + '-ph');
+        });
+      }
+
+      btn.addEventListener('click', function () {
+        applyLang(lang === 'en' ? 'es' : 'en');
+      });
     })();
   </script>
 
