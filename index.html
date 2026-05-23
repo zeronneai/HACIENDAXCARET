@@ -1074,6 +1074,160 @@
       text-transform : uppercase;
       color          : rgba(244, 239, 228, 0.18);
     }
+
+    /* ─────────────────────────────────────────────────────────────
+       §1  HERO — Scroll-expansion overrides
+       Replaces static background/overlay with JS-driven expansion.
+    ───────────────────────────────────────────────────────────── */
+
+    /* Pin opacity & kill the section-level translateY for the hero —
+       it is always visible and runs its own entrance animation.     */
+    #hero {
+      background-color : var(--dark-green);
+      background-image : none;
+      padding          : 0;
+      opacity          : 1 !important;
+      transform        : none !important;
+      transition       : none !important;
+      cursor           : default;
+    }
+
+    /* Disable generated overlay/rule pseudo-elements */
+    #hero::before,
+    #hero::after { content: none; }
+
+    /* ── Background image (fades out as media expands) ─────────── */
+    #hx-bg {
+      position   : absolute;
+      inset      : 0;
+      z-index    : 0;
+      overflow   : hidden;
+      will-change: opacity;
+    }
+
+    #hx-bg img {
+      width           : 100%;
+      height          : 100%;
+      object-fit      : cover;
+      object-position : center;
+      display         : block;
+    }
+
+    /* ── Expanding media card ──────────────────────────────────── */
+    #hx-media {
+      position      : absolute;
+      top           : 50%;
+      left          : 50%;
+      transform     : translate(-50%, -50%);
+      z-index       : 1;
+      border-radius : 14px;
+      overflow      : hidden;
+      box-shadow    : 0 0 60px rgba(0,0,0,0.35);
+      will-change   : width, height;
+      /* width/height driven by JS — no CSS transition on these */
+    }
+
+    #hx-media img {
+      width           : 100%;
+      height          : 100%;
+      object-fit      : cover;
+      object-position : center;
+      display         : block;
+      border-radius   : 14px;
+    }
+
+    #hx-media-overlay {
+      position       : absolute;
+      inset          : 0;
+      border-radius  : 14px;
+      background     : rgba(0,0,0,0.45);
+      pointer-events : none;
+      will-change    : opacity;
+    }
+
+    /* ── Split title (words slide apart) ───────────────────────── */
+    #hx-title {
+      position       : relative;
+      z-index        : 10;
+      display        : flex;
+      flex-direction : column;
+      align-items    : center;
+      gap            : 0.1rem;
+      pointer-events : none;
+      user-select    : none;
+    }
+
+    .hx-word {
+      font-family    : var(--font-serif);
+      font-weight    : 300;
+      font-size      : clamp(3.2rem, 9vw, 8rem);
+      line-height    : 1;
+      color          : var(--cream);
+      letter-spacing : -0.01em;
+      display        : block;
+      will-change    : transform;
+    }
+
+    #hx-word-2 { font-style: italic; }
+
+    /* ── Bottom meta row (slides apart) ────────────────────────── */
+    #hx-sub {
+      position        : absolute;
+      bottom          : 2.5rem;
+      left            : 0;
+      right           : 0;
+      z-index         : 10;
+      display         : flex;
+      justify-content : space-between;
+      padding         : 0 clamp(2rem, 5vw, 4rem);
+      pointer-events  : none;
+    }
+
+    #hx-sub-left,
+    #hx-sub-right {
+      font-family    : var(--font-sans);
+      font-size      : 0.65rem;
+      letter-spacing : 0.26em;
+      text-transform : uppercase;
+      will-change    : transform;
+    }
+
+    #hx-sub-left  { color: rgba(244,239,228,0.6); }
+    #hx-sub-right { color: var(--gold); }
+
+    /* ── CTA revealed after full expansion ─────────────────────── */
+    #hx-cta {
+      position       : absolute;
+      bottom         : clamp(4rem, 8vw, 6rem);
+      left           : 50%;
+      transform      : translateX(-50%);
+      z-index        : 20;
+      opacity        : 0;
+      transition     : opacity 0.7s ease;
+      pointer-events : none;
+      white-space    : nowrap;
+    }
+
+    #hx-cta.show {
+      opacity        : 1;
+      pointer-events : auto;
+    }
+
+    #hx-cta a {
+      display        : inline-block;
+      padding        : 0.9rem 2.8rem;
+      background     : var(--gold);
+      color          : var(--cream);
+      font-family    : var(--font-sans);
+      font-size      : 0.72rem;
+      font-weight    : 500;
+      letter-spacing : 0.22em;
+      text-transform : uppercase;
+      text-decoration: none;
+      transition     : background 0.25s ease;
+    }
+
+    #hx-cta a:hover { background: #b06630; }
   </style>
 </head>
 <body>
@@ -1083,34 +1237,40 @@
   ════════════════════════════════════════════════════════ -->
   <section id="hero" aria-label="Hero">
 
-    <div class="hero__inner">
-      <p class="hero__eyebrow">Riviera Maya · México · Est. MMXXVI</p>
-
-      <h1 class="hero__title">
-        Hacienda<br /><em>Presencia</em>
-      </h1>
-
-      <p class="hero__body">
-        The recovery of attention.<br />
-        The return to the body.<br />
-        The practice of presence.
-      </p>
-
-      <div class="hero__cta">
-        <a href="#form">Reserve your place</a>
-      </div>
+    <!-- Background image — JS fades this out as the media card expands -->
+    <div id="hx-bg">
+      <img
+        src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80&fit=crop"
+        alt="Aerial view of the Caribbean coastline and turquoise waters of the Riviera Maya at golden hour"
+        loading="eager"
+      />
     </div>
 
-    <div
-      class="hero__scroll"
-      role="button"
-      tabindex="0"
-      aria-label="Scroll down"
-      onclick="document.getElementById('invitation').scrollIntoView({behavior:'smooth'})"
-      onkeydown="if(event.key==='Enter')document.getElementById('invitation').scrollIntoView({behavior:'smooth'})"
-    >
-      <span>Scroll</span>
-      <div class="scroll-arrow" aria-hidden="true"></div>
+    <!-- Media card — starts small, expands to fill the viewport on scroll -->
+    <div id="hx-media">
+      <img
+        src="https://images.unsplash.com/photo-1552083375-1447ce886485?w=1280&q=80&fit=crop"
+        alt="Natural cenote pool surrounded by limestone rock and tropical palms at a private hacienda estate"
+        loading="eager"
+      />
+      <div id="hx-media-overlay"></div>
+    </div>
+
+    <!-- Title — the two words slide apart as scrollProgress increases -->
+    <div id="hx-title">
+      <span class="hx-word" id="hx-word-1">Hacienda</span>
+      <span class="hx-word" id="hx-word-2">Presencia</span>
+    </div>
+
+    <!-- Meta row — eyebrow slides left, hint slides right -->
+    <div id="hx-sub">
+      <p id="hx-sub-left">Riviera Maya · México</p>
+      <p id="hx-sub-right">Scroll to enter</p>
+    </div>
+
+    <!-- CTA — fades in once the media is fully expanded -->
+    <div id="hx-cta">
+      <a href="#form">Reserve your place</a>
     </div>
 
   </section>
@@ -1550,9 +1710,8 @@
         }
       });
 
-      /* Hero CTA — smooth scroll to #form (JS fallback for any
-         browser that ignores CSS scroll-behavior on anchor clicks) */
-      var cta = document.querySelector('.hero__cta a[href="#form"]');
+      /* Hero CTA — selector updated for new expansion hero markup */
+      var cta = document.querySelector('#hx-cta a[href="#form"]');
       if (cta) {
         cta.addEventListener('click', function (e) {
           var target = document.getElementById('form');
@@ -1562,6 +1721,115 @@
           }
         });
       }
+    })();
+  </script>
+
+  <!-- ─── Hero scroll-expansion engine ─────────────────────────── -->
+  <script>
+    (function () {
+      var prog     = 0;         /* 0 → 1 expansion progress          */
+      var expanded = false;     /* true once prog reaches 1           */
+      var touchY0  = 0;
+      var mobile   = window.innerWidth < 768;
+
+      /* DOM refs */
+      var bg       = document.getElementById('hx-bg');
+      var media    = document.getElementById('hx-media');
+      var overlay  = document.getElementById('hx-media-overlay');
+      var word1    = document.getElementById('hx-word-1');
+      var word2    = document.getElementById('hx-word-2');
+      var subLeft  = document.getElementById('hx-sub-left');
+      var subRight = document.getElementById('hx-sub-right');
+      var hxCta    = document.getElementById('hx-cta');
+
+      /* ── Render one frame ─────────────────────────────────────── */
+      function render() {
+        var mw = 300 + prog * (mobile ? 650  : 1250);
+        var mh = 400 + prog * (mobile ? 200  : 400);
+        var tx = prog * (mobile ? 180  : 150);         /* vw units  */
+
+        /* Clamp to viewport so it never overflows during expansion  */
+        media.style.width     = mw + 'px';
+        media.style.height    = mh + 'px';
+        media.style.maxWidth  = '95vw';
+        media.style.maxHeight = '92vh';
+
+        bg.style.opacity      = String(Math.max(0, 1 - prog));
+        overlay.style.opacity = String(Math.max(0, 0.45 - prog * 0.25));
+
+        word1.style.transform   = 'translateX(-' + tx + 'vw)';
+        word2.style.transform   = 'translateX('  + tx + 'vw)';
+        subLeft.style.transform  = 'translateX(-' + tx + 'vw)';
+        subRight.style.transform = 'translateX('  + tx + 'vw)';
+
+        /* Show CTA when nearly expanded */
+        if (prog >= 0.88) { hxCta.classList.add('show');    }
+        else              { hxCta.classList.remove('show'); }
+      }
+
+      /* ── Advance progress and re-render ──────────────────────── */
+      function advance(delta) {
+        prog = Math.min(Math.max(prog + delta, 0), 1);
+        if (prog >= 1)   { expanded = true;  }
+        if (prog <  0.8) { expanded = false; }
+        render();
+      }
+
+      /* ── Wheel ───────────────────────────────────────────────── */
+      function onWheel(e) {
+        /* Allow collapsing when fully expanded + scrolling back up  */
+        if (expanded && e.deltaY < 0 && window.scrollY <= 5) {
+          expanded = false;
+          e.preventDefault();
+          return;
+        }
+        if (!expanded) {
+          e.preventDefault();
+          advance(e.deltaY * 0.0009);
+        }
+      }
+
+      /* ── Touch ───────────────────────────────────────────────── */
+      function onTouchStart(e) {
+        touchY0 = e.touches[0].clientY;
+      }
+
+      function onTouchMove(e) {
+        if (!touchY0) return;
+        var dy = touchY0 - e.touches[0].clientY;
+
+        if (expanded && dy < -20 && window.scrollY <= 5) {
+          expanded = false;
+          e.preventDefault();
+          return;
+        }
+        if (!expanded) {
+          e.preventDefault();
+          /* Higher sensitivity when reversing (scrolling back up)   */
+          advance(dy * (dy < 0 ? 0.008 : 0.005));
+          touchY0 = e.touches[0].clientY;
+        }
+      }
+
+      function onTouchEnd() { touchY0 = 0; }
+
+      /* ── Lock page scroll while hero is expanding ────────────── */
+      function onScroll() {
+        if (!expanded) window.scrollTo(0, 0);
+      }
+
+      window.addEventListener('wheel',      onWheel,      { passive: false });
+      window.addEventListener('scroll',     onScroll);
+      window.addEventListener('touchstart', onTouchStart, { passive: false });
+      window.addEventListener('touchmove',  onTouchMove,  { passive: false });
+      window.addEventListener('touchend',   onTouchEnd);
+
+      window.addEventListener('resize', function () {
+        mobile = window.innerWidth < 768;
+        render();
+      });
+
+      render(); /* paint initial state (300×400 card, full bg) */
     })();
   </script>
 
