@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Presencia — Riviera Maya · Health · Wealth · Adventure</title>
+  <title>Presencia · Riviera Maya · Health · Wealth · Adventure</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -76,7 +76,7 @@
     }
 
     /* ─────────────────────────────────────────────────────────────
-       §1  HERO  — scroll-expansion engine (clean: PRESENCIA only)
+       §1  HERO ,scroll-expansion engine (clean: PRESENCIA only)
     ───────────────────────────────────────────────────────────── */
     #hero {
       position        : relative;
@@ -139,6 +139,13 @@
       align-items: center; gap: 0.1rem;
       pointer-events: none; user-select: none;
     }
+    #hx-logo {
+      display: block;
+      width: clamp(54px, 7vw, 82px);
+      margin-bottom: 0.5rem;
+      opacity: 0.88;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35));
+    }
     .hx-word {
       font-family    : var(--font-display);
       font-weight    : 500;
@@ -150,7 +157,7 @@
       will-change    : transform;
     }
 
-    /* Hero subline (the pain hook) — visible from the start, fades as expansion begins */
+    /* Hero subline (the pain hook),visible from the start, fades as expansion begins */
     #hx-subline {
       position   : absolute;
       z-index    : 10;
@@ -168,7 +175,7 @@
       will-change: opacity;
     }
 
-    /* Scroll hint — bottom center */
+    /* Scroll hint,bottom center */
     #hx-hint {
       position : absolute;
       z-index  : 10;
@@ -202,7 +209,7 @@
       50%      { transform: rotate(45deg) translateY(5px); opacity: 0.9; }
     }
 
-    /* Meta row — appears after expansion */
+    /* Meta row,appears after expansion */
     #hx-sub {
       position: absolute; bottom: 2.5rem; left: 0; right: 0;
       z-index: 10; display: flex; justify-content: space-between;
@@ -316,7 +323,7 @@
       margin: 44px 28px;
       transition: all 0.5s ease;
     }
-    /* Skewed gradient panels — solid + blurred glow */
+    /* Skewed gradient panels,solid + blurred glow */
     .skew-card__grad {
       position: absolute;
       top: 0; left: 50px;
@@ -437,7 +444,7 @@
     }
     .stat, .stat__number, .stat__label { display: none; }
 
-    /* ── GlowCard — pointer-spotlight cards ─────────────────── */
+    /* ── GlowCard,pointer-spotlight cards ─────────────────── */
     .glow-cards {
       display: flex; flex-wrap: wrap;
       justify-content: center; align-items: stretch;
@@ -1017,7 +1024,7 @@
 
     /* ─── Responsive ─────────────────────────────────────────── */
     @media (max-width: 900px) {
-      /* pillars use flex-wrap — no override needed */
+      /* pillars use flex-wrap,no override needed */
     }
     @media (max-width: 768px) {
       .gallery__grid { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 130px; }
@@ -1076,7 +1083,7 @@
         padding     0.6s cubic-bezier(0.175, 0.885, 0.32, 2.2),
         background  0.6s ease;
     }
-    /* Backdrop layer — blur + glass tint + SVG distortion */
+    /* Backdrop layer,blur + glass tint + SVG distortion */
     .glass-btn::before {
       content: '';
       position: absolute; inset: 0;
@@ -1203,10 +1210,10 @@
     </defs>
   </svg>
 
-  <!-- Language toggle — fixed top-right -->
+  <!-- Language toggle,fixed top-right -->
   <button id="lang-toggle" aria-label="Switch language">ES</button>
 
-  <!-- Sticky button — always visible after hero, sends to #pricing -->
+  <!-- Sticky button,always visible after hero, sends to #pricing -->
   <div id="sticky-pricing">
     <a href="#pricing" class="glass-btn">
       <span data-en="See Pricing" data-es="Ver Inversión">See Pricing</span>
@@ -1214,7 +1221,7 @@
   </div>
 
   <!-- ═══════════════════════════════════════════════════════
-       §1  HERO — clean (PRESENCIA + pain subline only)
+       §1  HERO,clean (PRESENCIA + pain subline only)
   ════════════════════════════════════════════════════════ -->
   <section id="hero" aria-label="Hero">
 
@@ -1243,12 +1250,13 @@
       <div id="hx-media-overlay"></div>
     </div>
 
-    <!-- Clean title — single word -->
+    <!-- Clean title,single word -->
     <div id="hx-title">
+      <img id="hx-logo" src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto/v1779811355/HACIENDA_c07wjm.png" alt="Presencia Retreats" />
       <span class="hx-word" id="hx-word-1">Presencia</span>
     </div>
 
-    <!-- The pain hook — visible from the start -->
+    <!-- The pain hook,visible from the start -->
     <p id="hx-subline" data-en="When were you last present?" data-es="¿Cuándo fue la última vez que estuviste presente?">When were you last present?</p>
 
     <!-- Scroll hint -->
@@ -1257,13 +1265,13 @@
       <div class="hint-arrow" aria-hidden="true"></div>
     </div>
 
-    <!-- Meta row — appears after expansion -->
+    <!-- Meta row,appears after expansion -->
     <div id="hx-sub">
       <p id="hx-sub-left">Riviera Maya · México</p>
       <p id="hx-sub-right" data-en="4 Days · 18 Experiences" data-es="4 Días · 18 Experiencias">4 Days · 18 Experiences</p>
     </div>
 
-    <!-- CTA — appears after full expansion -->
+    <!-- CTA,appears after full expansion -->
     <div id="hx-cta">
       <a href="#form" class="glass-btn"><span data-en="Claim your spot" data-es="Reclama tu lugar">Claim your spot</span></a>
     </div>
@@ -1279,7 +1287,7 @@
 
       <div class="pain__break fade-up" data-delay="1" aria-hidden="true"></div>
 
-      <p class="pain__turn fade-up" data-delay="2"><span data-en="Somewhere between the noise and the next thing, you stopped being here. " data-es="En algún punto entre el ruido y lo que sigue, dejaste de estar aquí. ">Somewhere between the noise and the next thing, you stopped being here. </span><span class="gold">Presencia</span><span data-en=" is four days away from the world — to come back to the only life you're actually living." data-es=" son cuatro días lejos del mundo — para volver a la única vida que realmente estás viviendo."> is four days away from the world — to come back to the only life you're actually living.</span></p>
+      <p class="pain__turn fade-up" data-delay="2"><span data-en="Somewhere between the noise and the next thing, you stopped being here. " data-es="En algún punto entre el ruido y lo que sigue, dejaste de estar aquí. ">Somewhere between the noise and the next thing, you stopped being here. </span><span class="gold">Presencia</span><span data-en=" is four days away from the world, to come back to the only life you're actually living." data-es=" son cuatro días lejos del mundo, para volver a la única vida que realmente estás viviendo."> is four days away from the world, to come back to the only life you're actually living.</span></p>
     </div>
   </section>
 
@@ -1305,10 +1313,10 @@
           <span class="skew-card__blob skew-card__blob--br"></span>
         </span>
         <div class="skew-card__content">
-          <span class="pillar__index">01 — Health</span>
+          <span class="pillar__index">01 · Health</span>
           <h3 class="pillar__name" data-en="Health" data-es="Salud">Health</h3>
           <p class="pillar__tag" data-en="Recover the body that work took from you." data-es="Recupera el cuerpo que el trabajo te quitó.">Recover the body that work took from you.</p>
-          <p class="pillar__desc" data-en="Breathwork, sound healing, and morning yoga by the Caribbean. Real protocols for recovery, sleep, and nervous system reset — not clichés." data-es="Breathwork, sound healing y yoga al amanecer frente al Caribe. Protocolos reales de recuperación, sueño y sistema nervioso — no clichés.">Breathwork, sound healing, and morning yoga by the Caribbean. Real protocols for recovery, sleep, and nervous system reset — not clichés.</p>
+          <p class="pillar__desc" data-en="Breathwork, sound healing, and morning yoga by the Caribbean. Real protocols for recovery, sleep, and nervous system reset, not clichés." data-es="Breathwork, sound healing y yoga al amanecer frente al Caribe. Protocolos reales de recuperación, sueño y sistema nervioso, no clichés.">Breathwork, sound healing, and morning yoga by the Caribbean. Real protocols for recovery, sleep, and nervous system reset, not clichés.</p>
           <a href="#program" class="skew-card__cta" data-en="Explore" data-es="Explorar">Explore</a>
         </div>
       </div>
@@ -1324,7 +1332,7 @@
           <span class="skew-card__blob skew-card__blob--br"></span>
         </span>
         <div class="skew-card__content">
-          <span class="pillar__index">02 — Wealth</span>
+          <span class="pillar__index">02 · Wealth</span>
           <h3 class="pillar__name" data-en="Wealth" data-es="Riqueza">Wealth</h3>
           <p class="pillar__tag" data-en="True wealth begins when you can stop." data-es="La verdadera riqueza empieza cuando puedes detenerte.">True wealth begins when you can stop.</p>
           <p class="pillar__desc" data-en="Longevity and memory workshops designed for those who already have success but seek meaning. Mental clarity as an asset, not a luxury." data-es="Workshops de longevidad y memoria diseñados para quienes ya tienen el éxito, pero buscan el sentido. Claridad mental como activo, no como lujo.">Longevity and memory workshops designed for those who already have success but seek meaning. Mental clarity as an asset, not a luxury.</p>
@@ -1343,7 +1351,7 @@
           <span class="skew-card__blob skew-card__blob--br"></span>
         </span>
         <div class="skew-card__content">
-          <span class="pillar__index">03 — Adventure</span>
+          <span class="pillar__index">03 · Adventure</span>
           <h3 class="pillar__name" data-en="Adventure" data-es="Aventura">Adventure</h3>
           <p class="pillar__tag" data-en="Wonder heals too." data-es="El asombro también cura.">Wonder heals too.</p>
           <p class="pillar__desc" data-en="Cenotes, Mayan ruins, open sea. The jungle as medicine and the ocean as reset. What routine has made you forget." data-es="Cenotes, ruinas mayas, mar abierto. La selva como medicina y el océano como reset. Lo que la rutina te ha hecho olvidar.">Cenotes, Mayan ruins, open sea. The jungle as medicine and the ocean as reset. What routine has made you forget.</p>
@@ -1365,7 +1373,7 @@
 
     <div class="glow-cards fade-up" data-delay="2" aria-label="Cifras clave">
 
-      <!-- Card 1 — green spotlight -->
+      <!-- Card 1,green spotlight -->
       <div class="glow-card" data-glow style="--base:120;--spread:180;">
         <div data-glow></div>
         <div class="glow-card__top">
@@ -1375,29 +1383,29 @@
         <p class="glow-card__desc" data-en="Luxury colonial spaces with direct access to the gardens and the hacienda's private cenote pool." data-es="Espacios coloniales de lujo con acceso directo a los jardines y la piscina-cenote privada de la hacienda.">Luxury colonial spaces with direct access to the gardens and the hacienda's private cenote pool.</p>
       </div>
 
-      <!-- Card 2 — gold spotlight -->
+      <!-- Card 2,gold spotlight -->
       <div class="glow-card" data-glow style="--base:35;--spread:180;">
         <div data-glow></div>
         <div class="glow-card__top">
           <span class="glow-card__num">18</span>
           <span class="glow-card__label" data-en="Maximum Guests" data-es="Máximo Huéspedes">Maximum Guests</span>
         </div>
-        <p class="glow-card__desc" data-en="Completely private retreat — no strangers, no interruptions. Just your group and a dedicated team." data-es="Retiro completamente privado — sin extraños, sin interrupciones. Solo tu grupo y un equipo dedicado.">Completely private retreat — no strangers, no interruptions. Just your group and a dedicated team.</p>
+        <p class="glow-card__desc" data-en="Fully exclusive. Your group, your pace, and a team dedicated entirely to you." data-es="Completamente exclusivo. Tu grupo, tu ritmo y un equipo dedicado enteramente a ti.">Fully exclusive. Your group, your pace, and a team dedicated entirely to you.</p>
       </div>
 
-      <!-- Card 3 — blue spotlight -->
+      <!-- Card 3,blue spotlight -->
       <div class="glow-card" data-glow style="--base:210;--spread:180;">
         <div data-glow></div>
         <div class="glow-card__top">
           <span class="glow-card__num">4</span>
           <span class="glow-card__label" data-en="Days &amp; Nights" data-es="Días &amp; Noches">Days &amp; Nights</span>
         </div>
-        <p class="glow-card__desc" data-en="Just enough time to truly disconnect. A complete arc of transformation — not just a luxury weekend." data-es="El tiempo justo para desconectar de verdad. Un arco completo de transformación — no solo un fin de semana de lujo.">Just enough time to truly disconnect. A complete arc of transformation — not just a luxury weekend.</p>
+        <p class="glow-card__desc" data-en="Just enough time to truly disconnect. A complete arc of transformation, not just a luxury weekend." data-es="El tiempo justo para desconectar de verdad. Un arco completo de transformación, no solo un fin de semana de lujo.">Just enough time to truly disconnect. A complete arc of transformation, not just a luxury weekend.</p>
       </div>
 
     </div>
 
-    <p class="setting__desc fade-up" data-delay="5" data-en="A private colonial property within Hacienda at Xcaret — palm trees, stone, a cenote-style pool. Walking distance to Río Secreto and ten minutes from the Caribbean coast." data-es="Una propiedad colonial privada dentro de Hacienda at Xcaret — palmeras, piedra, una alberca estilo cenote. A distancia caminable de Río Secreto y a diez minutos de la costa del Caribe.">A private colonial property within Hacienda at Xcaret — palm trees, stone, a cenote-style pool. Walking distance to Río Secreto and ten minutes from the Caribbean coast.</p>
+    <p class="setting__desc fade-up" data-delay="5" data-en="A private colonial property within Hacienda at Xcaret: palm trees, stone, a cenote-style pool. Walking distance to Río Secreto and ten minutes from the Caribbean coast." data-es="Una propiedad colonial privada dentro de Hacienda at Xcaret: palmeras, piedra, una alberca estilo cenote. A distancia caminable de Río Secreto y a diez minutos de la costa del Caribe.">A private colonial property within Hacienda at Xcaret: palm trees, stone, a cenote-style pool. Walking distance to Río Secreto and ten minutes from the Caribbean coast.</p>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
@@ -1410,56 +1418,56 @@
     </div>
 
     <div class="gallery__grid">
-      <!-- g1 — 7col × 2row — hero slot: aerial drone, widest/tallest -->
+      <!-- g1,7col × 2row,hero slot: aerial drone, widest/tallest -->
       <figure class="gallery__item g1 fade-up">
         <img
           src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_1400,c_fill/v1779511465/Aerial_drone_view_of_a_202605222241_hpyhsd.jpg"
           alt="Vista aérea de la hacienda privada en la Riviera Maya"
           loading="lazy" />
       </figure>
-      <!-- g2 — 5col × 1row -->
+      <!-- g2,5col × 1row -->
       <figure class="gallery__item g2 fade-up" data-delay="1">
         <img
           src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_800,c_fill/v1779511465/Natural_lagoon-style_swimming_pool_in_202605222241_whb9x5.jpg"
           alt="Alberca estilo laguna natural entre la selva tropical"
           loading="lazy" />
       </figure>
-      <!-- g3 — 5col × 1row -->
+      <!-- g3,5col × 1row -->
       <figure class="gallery__item g3 fade-up" data-delay="2">
         <img
           src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_800,c_fill/v1779511465/Cinematic_view_of_a_luxury_202605222241_iksz83.jpg"
           alt="Espacio de lujo en la hacienda privada"
           loading="lazy" />
       </figure>
-      <!-- g4 — 4col × 2row — tall slot: vertical hallway image -->
+      <!-- g4,4col × 2row,tall slot: vertical hallway image -->
       <figure class="gallery__item g4 fade-up" data-delay="1">
         <img
           src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_800,c_fill/v1779511465/Mexican_colonial_hacienda_hallway_with_202605222241_pvfkrz.jpg"
           alt="Corredor colonial mexicano con arcos de piedra"
           loading="lazy" />
       </figure>
-      <!-- g5 — 4col × 1row -->
+      <!-- g5,4col × 1row -->
       <figure class="gallery__item g5 fade-up" data-delay="2">
         <img
           src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_700,c_fill/v1779511466/Stone_pathway_winding_through_a_202605222242_ky6i7v.jpg"
           alt="Sendero de piedra entre jardines tropicales"
           loading="lazy" />
       </figure>
-      <!-- g6 — 4col × 1row -->
+      <!-- g6,4col × 1row -->
       <figure class="gallery__item g6 fade-up" data-delay="3">
         <img
           src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_700,c_fill/v1779511466/Curved_stone_staircase_in_a_202605222243_uet8fx.jpg"
           alt="Escalera de piedra curva en la hacienda"
           loading="lazy" />
       </figure>
-      <!-- g7 — 4col × 1row -->
+      <!-- g7,4col × 1row -->
       <figure class="gallery__item g7 fade-up" data-delay="1">
         <img
           src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_700,c_fill/v1779511466/Cinematic_interior_of_an_elegant_202605222242_dga7o1.jpg"
           alt="Interior cinematográfico de la hacienda"
           loading="lazy" />
       </figure>
-      <!-- g8 — 4col × 1row -->
+      <!-- g8,4col × 1row -->
       <figure class="gallery__item g8 fade-up" data-delay="2">
         <img
           src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_700,c_fill/v1779511465/Cinematic_close-up_of_an_elegant_202605222241_e0zzy4.jpg"
@@ -1514,7 +1522,7 @@
           <div class="atabs__meta">
             <span class="atabs__num">ii</span>
             <h3 class="atabs__name">Sound Healing</h3>
-            <p class="atabs__desc" data-en="Crystal singing bowls, gong, and layered voice. Vibratory frequencies reduce cortisol, modulate the autonomic nervous system, and produce deep rest — in under twenty minutes." data-es="Cuencos tibetanos de cristal, gong y voz en capas. Las frecuencias vibratorias reducen cortisol, modulan el sistema nervioso autónomo y producen un estado de reposo profundo — en menos de veinte minutos.">Crystal singing bowls, gong, and layered voice. Vibratory frequencies reduce cortisol, modulate the autonomic nervous system, and produce deep rest — in under twenty minutes.</p>
+            <p class="atabs__desc" data-en="Crystal singing bowls, gong, and layered voice. Vibratory frequencies reduce cortisol, modulate the autonomic nervous system, and produce deep rest, in under twenty minutes." data-es="Cuencos tibetanos de cristal, gong y voz en capas. Las frecuencias vibratorias reducen cortisol, modulan el sistema nervioso autónomo y producen un estado de reposo profundo, en menos de veinte minutos.">Crystal singing bowls, gong, and layered voice. Vibratory frequencies reduce cortisol, modulate the autonomic nervous system, and produce deep rest, in under twenty minutes.</p>
           </div>
         </div>
 
@@ -1525,7 +1533,7 @@
           <div class="atabs__meta">
             <span class="atabs__num">iii</span>
             <h3 class="atabs__name">Breathwork</h3>
-            <p class="atabs__desc" data-en="Conscious breathwork activates the parasympathetic nervous system, releases accumulated somatic tension, and restores the capacity for self-regulation. The most direct tool for changing how you feel — in seconds." data-es="El trabajo de respiración consciente activa el sistema nervioso parasimpático, libera tensión somática acumulada y restaura la capacidad de autorregulación. La herramienta más directa que existe para cambiar cómo te sientes en segundos.">Conscious breathwork activates the parasympathetic nervous system, releases accumulated somatic tension, and restores the capacity for self-regulation. The most direct tool for changing how you feel — in seconds.</p>
+            <p class="atabs__desc" data-en="Conscious breathwork activates the parasympathetic nervous system, releases accumulated somatic tension, and restores the capacity for self-regulation. The most direct tool for changing how you feel, in seconds." data-es="El trabajo de respiración consciente activa el sistema nervioso parasimpático, libera tensión somática acumulada y restaura la capacidad de autorregulación. La herramienta más directa que existe para cambiar cómo te sientes en segundos.">Conscious breathwork activates the parasympathetic nervous system, releases accumulated somatic tension, and restores the capacity for self-regulation. The most direct tool for changing how you feel, in seconds.</p>
           </div>
         </div>
 
@@ -1595,7 +1603,7 @@
     <div class="excursions__header">
       <span class="eyebrow center fade-up" data-en="Beyond the Hacienda" data-es="Más Allá de la Hacienda">Beyond the Hacienda</span>
       <h2 class="excursions__title fade-up" data-delay="1" data-en="A whole world to explore." data-es="Un mundo entero por explorar.">A whole world to explore.</h2>
-      <p class="excursions__sub fade-up" data-delay="2" data-en="The Riviera Maya is infinite. These are some of the experiences we can add to your retreat — from ancient ruins to swimming with whale sharks." data-es="La Riviera Maya es infinita. Estas son algunas de las experiencias que podemos sumar a tu retiro — desde ruinas milenarias hasta nadar con tiburón ballena.">The Riviera Maya is infinite. These are some of the experiences we can add to your retreat — from ancient ruins to swimming with whale sharks.</p>
+      <p class="excursions__sub fade-up" data-delay="2" data-en="The Riviera Maya is infinite. These are some of the experiences we can add to your retreat, from ancient ruins to swimming with whale sharks." data-es="La Riviera Maya es infinita. Estas son algunas de las experiencias que podemos sumar a tu retiro, desde ruinas milenarias hasta nadar con tiburón ballena.">The Riviera Maya is infinite. These are some of the experiences we can add to your retreat, from ancient ruins to swimming with whale sharks.</p>
     </div>
 
     <div class="cgallery-wrap fade-up" data-delay="3">
@@ -1642,7 +1650,7 @@
         </div>
 
         <div class="cgallery__item">
-          <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512211/A_whale_shark_swimming_gently_202605222254_btfnob.jpg" alt="Holbox — Tiburón ballena en aguas cristalinas" />
+          <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512211/A_whale_shark_swimming_gently_202605222254_btfnob.jpg" alt="Holbox,Tiburón ballena en aguas cristalinas" />
           <div class="cgallery__item-overlay">
             <span class="cgallery__item-name">Holbox</span>
             <span class="cgallery__item-note" data-en="Whale sharks and bioluminescence." data-es="Tiburón ballena y bioluminiscencia.">Whale sharks and bioluminescence.</span>
@@ -1650,7 +1658,7 @@
         </div>
 
         <div class="cgallery__item">
-          <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512210/A_flock_of_pink_flamingos_202605222255_r97pta.jpg" alt="Río Lagartos — Flamencos rosados en los manglares" />
+          <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512210/A_flock_of_pink_flamingos_202605222255_r97pta.jpg" alt="Río Lagartos,Flamencos rosados en los manglares" />
           <div class="cgallery__item-overlay">
             <span class="cgallery__item-name">Río Lagartos</span>
             <span class="cgallery__item-note" data-en="Pink flamingos and mangroves." data-es="Flamencos rosados y manglares.">Pink flamingos and mangroves.</span>
@@ -1658,7 +1666,7 @@
         </div>
 
         <div class="cgallery__item">
-          <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512210/The_lively_pedestrian_street_of_202605222255_kx4lvi.jpg" alt="Quinta Avenida — Calle peatonal de Playa del Carmen" />
+          <img src="https://res.cloudinary.com/dsprn0ew4/image/upload/q_auto,f_auto,w_600,c_fill/v1779512210/The_lively_pedestrian_street_of_202605222255_kx4lvi.jpg" alt="Quinta Avenida,Calle peatonal de Playa del Carmen" />
           <div class="cgallery__item-overlay">
             <span class="cgallery__item-name">Quinta Avenida</span>
             <span class="cgallery__item-note" data-en="The pulse of Playa del Carmen." data-es="El pulso de Playa del Carmen.">The pulse of Playa del Carmen.</span>
@@ -1685,13 +1693,13 @@
   <section id="pricing" aria-label="Pricing">
     <div class="pricing__inner">
       <span class="eyebrow center fade-up" data-en="The Investment" data-es="La Inversión">The Investment</span>
-      <h2 class="pricing__title fade-up" data-delay="1" data-en="Four days that rewrite your relationship with time." data-es="Cuatro días que reescriben tu relación con el tiempo.">Four days that rewrite your relationship with time.</h2>
+      <h2 class="pricing__title fade-up" data-delay="1" data-en="Four days that bring you back to the present and to true health, wealth, and adventure." data-es="Cuatro días que te devuelven al presente y a la salud, la riqueza y la aventura reales.">Four days that bring you back to the present and to true health, wealth, and adventure.</h2>
 
       <div class="pricing__card fade-up" data-delay="2">
         <p class="pricing__from" data-en="From" data-es="Desde">From</p>
-        <p class="pricing__amount"><span>$</span>2,000<span style="font-size:0.3em; color:rgba(244,239,228,0.5);"> USD</span></p>
+        <p class="pricing__amount"><span>$</span>2,300<span style="font-size:0.3em; color:rgba(244,239,228,0.5);"> USD</span></p>
         <p class="pricing__per" data-en="per person · shared occupancy" data-es="por persona · ocupación compartida">per person · shared occupancy</p>
-        <p class="pricing__note" data-en="All-inclusive except your flight — suite, all meals, every wellness session, transfers, and the day at sea. No surprises, no upsells." data-es="Todo incluido excepto tu vuelo — suite, todas las comidas, cada sesión de bienestar, transportes y el día de mar. Sin sorpresas, sin upsells.">All-inclusive except your flight — suite, all meals, every wellness session, transfers, and the day at sea. No surprises, no upsells.</p>
+        <p class="pricing__note" data-en="All-inclusive except your flight: suite, all meals, every wellness session, transfers, and the day at sea. No surprises, no upsells." data-es="Todo incluido excepto tu vuelo: suite, todas las comidas, cada sesión de bienestar, transportes y el día de mar. Sin sorpresas, sin upsells.">All-inclusive except your flight: suite, all meals, every wellness session, transfers, and the day at sea. No surprises, no upsells.</p>
       </div>
 
       <div class="pricing__cta-wrap fade-up" data-delay="3">
@@ -1721,7 +1729,7 @@
     <div class="testimonial__card fade-up">
       <span class="testimonial__mark" aria-hidden="true">"</span>
       <p class="testimonial__text" data-en="A truly transformative experience. The hacienda is a magical place to heal and reconnect." data-es="Una experiencia verdaderamente transformadora. La hacienda es un lugar mágico para sanar y reconectar.">A truly transformative experience. The hacienda is a magical place to heal and reconnect.</p>
-      <p class="testimonial__author" data-en="Carolina — Colombian Actress &amp; Wellness Advocate" data-es="Carolina — Actriz colombiana &amp; Wellness Advocate">Carolina — Colombian Actress &amp; Wellness Advocate</p>
+      <p class="testimonial__author" data-en="Carolina, Colombian Actress &amp; Wellness Advocate" data-es="Carolina, Actriz colombiana &amp; Wellness Advocate">Carolina, Colombian Actress &amp; Wellness Advocate</p>
       <p class="testimonial__proof" data-en="3 retreats booked in the last 2 months" data-es="3 retiros reservados en los últimos 2 meses">3 retreats booked in the last 2 months</p>
     </div>
   </section>
@@ -1911,7 +1919,7 @@
     })();
   </script>
 
-  <!-- GlowCard — pointer spotlight tracking (El Lugar) -->
+  <!-- GlowCard,pointer spotlight tracking (El Lugar) -->
   <script>
     (function () {
       var cards = document.querySelectorAll('[data-glow]');
@@ -1931,7 +1939,7 @@
     })();
   </script>
 
-  <!-- CircularGallery — 3D auto-rotating carousel (Excursiones) -->
+  <!-- CircularGallery,3D auto-rotating carousel (Excursiones) -->
   <script>
     (function () {
       var spinner = document.getElementById('cgallery-spinner');
@@ -2005,7 +2013,7 @@
     })();
   </script>
 
-  <!-- Animated Tabs — Program section -->
+  <!-- Animated Tabs,Program section -->
   <script>
     (function () {
       var bar  = document.querySelector('.atabs__bar');
@@ -2056,7 +2064,7 @@
         btn.addEventListener('click', function () { switchTab(btn); });
       });
 
-      /* Init indicator on first (active) tab — no animation */
+      /* Init indicator on first (active) tab,no animation */
       var firstActive = bar.querySelector('.atabs__tab.is-active') || tabs[0];
       if (firstActive) placeIndicator(firstActive, false);
 
