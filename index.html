@@ -2135,6 +2135,12 @@
   <script>
     const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYlg9uznjbHL8Iz1SphhhKnKlBRDWP0GUpbrkc7T31TFuiseuGLbqCl6dTjd2rgMQ3xg/exec";
     const retreatForm = document.getElementById("retreat-form");
+
+    const successMsg = document.createElement("div");
+    successMsg.textContent = "✓ Thank you! We'll contact you within 24 hours.";
+    successMsg.style.cssText = "display:none;margin-top:16px;padding:14px 18px;border-radius:8px;background:rgba(214,145,85,0.15);border:1px solid rgba(214,145,85,0.4);color:#D69155;font-weight:600;text-align:center;";
+    retreatForm.appendChild(successMsg);
+
     retreatForm.addEventListener("submit", async function(e){
       e.preventDefault();
       const payload = {
@@ -2144,9 +2150,9 @@
         source:    document.getElementById("como_nos_encontraste").value,
         intention: document.getElementById("intencion").value
       };
-      const btn = retreatForm.querySelector('[type="submit"], button');
-      const original = btn ? btn.textContent : "";
-      if(btn){ btn.disabled = true; btn.textContent = "Sending..."; }
+      const btn = retreatForm.querySelector('button[type="submit"]');
+      const original = btn ? btn.innerHTML : "";
+      if(btn){ btn.disabled = true; btn.innerHTML = "<span>Sending…</span>"; }
       try {
         await fetch(FORM_ENDPOINT, {
           method: "POST",
@@ -2154,9 +2160,11 @@
           body: new URLSearchParams({ data: JSON.stringify(payload) })
         });
         retreatForm.reset();
-        if(btn){ btn.textContent = "✓ Sent — we'll contact you soon"; }
+        successMsg.style.display = "block";
+        if(btn){ btn.innerHTML = "<span>✓ Sent</span>"; }
+        successMsg.scrollIntoView({ behavior: "smooth", block: "center" });
       } catch(err) {
-        if(btn){ btn.disabled = false; btn.textContent = original; }
+        if(btn){ btn.disabled = false; btn.innerHTML = original; }
         alert("There was an error, please try again.");
       }
     });
