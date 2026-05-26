@@ -1748,31 +1748,29 @@
     </div>
 
     <form
+      id="retreat-form"
       class="form__body fade-up"
       data-delay="3"
-      action="mailto:hello@presenciaretreats.com"
-      method="post"
-      enctype="text/plain"
     >
       <div class="form__group">
-        <label class="form__field-label" for="f-name" data-en="Full name" data-es="Nombre completo">Full name</label>
-        <input class="form__input" type="text" id="f-name" name="nombre" placeholder="Your full name" data-en-ph="Your full name" data-es-ph="Tu nombre completo" required />
+        <label class="form__field-label" for="nombre" data-en="Full name" data-es="Nombre completo">Full name</label>
+        <input class="form__input" type="text" id="nombre" name="nombre" placeholder="Your full name" data-en-ph="Your full name" data-es-ph="Tu nombre completo" required />
       </div>
 
       <div class="form__group">
-        <label class="form__field-label" for="f-email">Email</label>
-        <input class="form__input" type="email" id="f-email" name="email" placeholder="tu@email.com" required />
+        <label class="form__field-label" for="email">Email</label>
+        <input class="form__input" type="email" id="email" name="email" placeholder="tu@email.com" required />
       </div>
 
       <div class="form__group">
-        <label class="form__field-label" for="f-phone" data-en="WhatsApp / Phone" data-es="WhatsApp / Teléfono">WhatsApp / Phone</label>
-        <input class="form__input" type="tel" id="f-phone" name="telefono" placeholder="+1 (000) 000 0000" />
+        <label class="form__field-label" for="telefono" data-en="WhatsApp / Phone" data-es="WhatsApp / Teléfono">WhatsApp / Phone</label>
+        <input class="form__input" type="tel" id="telefono" name="telefono" placeholder="+1 (000) 000 0000" />
       </div>
 
       <div class="form__group">
-        <label class="form__field-label" for="f-source" data-en="How did you find us?" data-es="¿Cómo nos encontraste?">How did you find us?</label>
+        <label class="form__field-label" for="como_nos_encontraste" data-en="How did you find us?" data-es="¿Cómo nos encontraste?">How did you find us?</label>
         <div class="form__select-wrap">
-          <select class="form__select" id="f-source" name="como_nos_encontraste">
+          <select class="form__select" id="como_nos_encontraste" name="como_nos_encontraste">
             <option value="" disabled selected data-en="Select an option" data-es="Selecciona una opción">Select an option</option>
             <option value="instagram">Instagram</option>
             <option value="recomendacion" data-en="Recommendation" data-es="Recomendación">Recommendation</option>
@@ -1783,8 +1781,8 @@
       </div>
 
       <div class="form__group">
-        <label class="form__field-label" for="f-intention" data-en="Your intention for this retreat" data-es="Tu intención para este retiro">Your intention for this retreat</label>
-        <textarea class="form__textarea" id="f-intention" name="intencion" rows="4" placeholder="Share briefly what you're looking for in this experience…" data-en-ph="Share briefly what you're looking for in this experience…" data-es-ph="Comparte brevemente lo que buscas en esta experiencia…"></textarea>
+        <label class="form__field-label" for="intencion" data-en="Your intention for this retreat" data-es="Tu intención para este retiro">Your intention for this retreat</label>
+        <textarea class="form__textarea" id="intencion" name="intencion" rows="4" placeholder="Share briefly what you're looking for in this experience…" data-en-ph="Share briefly what you're looking for in this experience…" data-es-ph="Comparte brevemente lo que buscas en esta experiencia…"></textarea>
       </div>
 
       <button class="form__submit glass-btn" type="submit"><span data-en="Send my application" data-es="Enviar mi solicitud">Send my application</span></button>
@@ -2130,6 +2128,37 @@
         applyLang(lang === 'en' ? 'es' : 'en');
       });
     })();
+  </script>
+
+  <!-- ─── Form submission ─────────────────────────────────── -->
+  <script>
+    const FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwYlg9uznjbHL8Iz1SphhhKnKlBRDWP0GUpbrkc7T31TFuiseuGLbqCl6dTjd2rgMQ3xg/exec";
+    const retreatForm = document.getElementById("retreat-form");
+    retreatForm.addEventListener("submit", async function(e){
+      e.preventDefault();
+      const payload = {
+        name:      document.getElementById("nombre").value,
+        email:     document.getElementById("email").value,
+        phone:     document.getElementById("telefono").value,
+        source:    document.getElementById("como_nos_encontraste").value,
+        intention: document.getElementById("intencion").value
+      };
+      const btn = retreatForm.querySelector('[type="submit"], button');
+      const original = btn ? btn.textContent : "";
+      if(btn){ btn.disabled = true; btn.textContent = "Sending..."; }
+      try {
+        await fetch(FORM_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors",
+          body: new URLSearchParams({ data: JSON.stringify(payload) })
+        });
+        retreatForm.reset();
+        if(btn){ btn.textContent = "✓ Sent — we'll contact you soon"; }
+      } catch(err) {
+        if(btn){ btn.disabled = false; btn.textContent = original; }
+        alert("There was an error, please try again.");
+      }
+    });
   </script>
 
 </body>
